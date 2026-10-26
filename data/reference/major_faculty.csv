@@ -1,0 +1,55 @@
+major_id,major_name,faculty_id,faculty_name
+1,Biology,1,Khoa học Tự nhiên & Kỹ thuật
+2,Chemistry,1,Khoa học Tự nhiên & Kỹ thuật
+3,Mathematics,1,Khoa học Tự nhiên & Kỹ thuật
+4,Engineering Studies,1,Khoa học Tự nhiên & Kỹ thuật
+5,Pre-Engineering/RETP,1,Khoa học Tự nhiên & Kỹ thuật
+6,Geology,1,Khoa học Tự nhiên & Kỹ thuật
+7,Earth and Space Science,1,Khoa học Tự nhiên & Kỹ thuật
+8,Computer Science - Systems,2,Công nghệ Thông tin
+9,Computer Science - Games,2,Công nghệ Thông tin
+10,Applied Computer Science,2,Công nghệ Thông tin
+11,Management Information Systems,2,Công nghệ Thông tin
+12,Information Technology,2,Công nghệ Thông tin
+13,Pre-Nursing,3,Khoa học Sức khỏe
+14,Nursing,3,Khoa học Sức khỏe
+15,Health Science,3,Khoa học Sức khỏe
+16,Exercise Science,3,Khoa học Sức khỏe
+17,Health and Physical Education,3,Khoa học Sức khỏe
+18,Pre-Business,4,Kinh doanh
+19,General Business,4,Kinh doanh
+20,Management,4,Kinh doanh
+21,Marketing,4,Kinh doanh
+22,Accounting,4,Kinh doanh
+23,Finance,4,Kinh doanh
+24,Early Childhood Education,5,Sư phạm
+25,Music Education,5,Sư phạm
+26,Theatre Education,5,Sư phạm
+27,English and Secondary Ed,5,Sư phạm
+28,History and Secondary Ed,5,Sư phạm
+29,Middle Grades Education,5,Sư phạm
+30,Spec Ed: Gen. Curr. - Reading,5,Sư phạm
+31,Mathematics and Secondary Ed,5,Sư phạm
+32,Art Education,5,Sư phạm
+33,Biology and Secondary Ed,5,Sư phạm
+34,French with Teacher Cert,5,Sư phạm
+35,Spanish with Teacher Cert,5,Sư phạm
+36,Chemistry and Secondary Ed,5,Sư phạm
+37,Theatre Arts,6,Nghệ thuật
+38,Music Performance,6,Nghệ thuật
+39,Art,6,Nghệ thuật
+40,Music,6,Nghệ thuật
+41,Psychology,7,Khoa học Xã hội & Nhân văn
+42,Criminal Justice,7,Khoa học Xã hội & Nhân văn
+43,Communication,7,Khoa học Xã hội & Nhân văn
+44,Political Science,7,Khoa học Xã hội & Nhân văn
+45,English Language/Literature,7,Khoa học Xã hội & Nhân văn
+46,History,7,Khoa học Xã hội & Nhân văn
+47,Sociology,7,Khoa học Xã hội & Nhân văn
+48,Spanish,7,Khoa học Xã hội & Nhân văn
+49,French,7,Khoa học Xã hội & Nhân văn
+50,Liberal Arts,7,Khoa học Xã hội & Nhân văn
+51,Undeclared,8,Chương trình chung (chưa chọn ngành)
+52,Joint Enrollment - Accel,8,Chương trình chung (chưa chọn ngành)
+53,General Studies/AS,8,Chương trình chung (chưa chọn ngành)
+54,Early Admission - Accel,8,Chương trình chung (chưa chọn ngành)
