@@ -1,2 +1,12 @@
 out/
 *.xlsx
+
+# ML (thành viên 2)
+ml/data/
+ml/config.json
+ml/downloads/
+ml/figures/bench_laptop.csv
+.venv/
+__pycache__/
+outputs/
+out_*/
