@@ -111,6 +111,7 @@ SELECT s.student_id, s.age,
        CAST(CASE s.international WHEN 'Y' THEN 1 WHEN 'N' THEN 0 END AS BIT) AS international,
        CAST(CASE s.housing WHEN 'On Campus' THEN 1 WHEN 'Off Campus' THEN 0 END AS BIT) AS on_campus,
        s.distance_from_home, s.high_school_gpa, s.entrance_comb,
+       CAST(CASE WHEN s.entrance_comb IS NULL THEN 1 ELSE 0 END AS BIT) AS entrance_missing,
        CAST(s.father_edu_cd AS INT) AS father_edu_cd, CAST(s.mother_edu_cd AS INT) AS mother_edu_cd,
        m.faculty_id, m.major_id,
        CAST(CASE WHEN m.faculty_id = 8 THEN 1 ELSE 0 END AS BIT)      AS is_undeclared,
@@ -127,7 +128,11 @@ SELECT s.student_id, s.age,
        s.second_term_earned_hrs / NULLIF(s.second_term_attempt_hrs, 0) AS earned_ratio_t2,
        g.gpa_t2,
        COALESCE(g.n_df_t2, 0)                                         AS n_df_t2,
-       s.gross_fin_need, s.unmet_need,
+       g.gpa_t2 - g.gpa_t1                                            AS gpa_change,
+       -- COST_OF_ATTEND = 0 nghĩa là không có hồ sơ tài chính (feature_spec.md), không phải học phí 0 đồng
+       CAST(CASE WHEN ISNULL(s.cost_of_attend, 0) = 0 THEN 1 ELSE 0 END AS BIT) AS fin_data_missing,
+       CASE WHEN ISNULL(s.cost_of_attend, 0) = 0 THEN NULL ELSE s.gross_fin_need END AS gross_fin_need,
+       CASE WHEN ISNULL(s.cost_of_attend, 0) = 0 THEN NULL ELSE s.unmet_need END     AS unmet_need,
        s.est_fam_contribution / NULLIF(s.cost_of_attend, 0)           AS fam_contribution_ratio,
        CAST(1 - s.returned_2nd_yr AS BIT)                             AS dropout,
        s.is_synthetic, s.block
@@ -135,7 +140,7 @@ FROM dbo.v_students s
 JOIN dbo.v_major_faculty m ON m.major_name = s.major_name
 LEFT JOIN (SELECT student_id,
                   AVG(CASE WHEN term_seq = 1 THEN grade_points END)                 AS gpa_t1,
-                  SUM(CASE WHEN term_seq = 1 THEN 1 ELSE 0 END)                      AS n_courses_t1,
+                  SUM(CASE WHEN term_seq = 1 AND grade_points IS NOT NULL THEN 1 ELSE 0 END) AS n_courses_t1,  -- chỉ môn có điểm A–F
                   SUM(CASE WHEN term_seq = 1 AND grade IN ('D', 'F') THEN 1 ELSE 0 END) AS n_df_t1,
                   AVG(CASE WHEN term_seq = 2 THEN grade_points END)                 AS gpa_t2,
                   SUM(CASE WHEN term_seq = 2 AND grade IN ('D', 'F') THEN 1 ELSE 0 END) AS n_df_t2

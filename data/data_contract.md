@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | Người phụ trách | TV1 – Data Platform |
-| Phiên bản | 1.0 (tuần 1) – cần TV2, TV3, TV4 xác nhận ở mục 9 |
+| Phiên bản | 1.1 (28/10) – cập nhật mục 8 theo feature_spec.md v1.0 của TV2 |
 | Nguồn | Kaggle "Students' Early Attrition Analysis" (vijaysimhan/student-admissions-data-for-a-university), file `UnivData1.xlsx`, giấy phép CDLA-Sharing 1.0 |
 
 Mọi thay đổi tên cột, kiểu dữ liệu hay quy tắc trong file này phải báo cả nhóm và tăng số phiên bản.
@@ -131,17 +131,19 @@ Xem `etl/sql/ddl.sql`. Các bảng chi tiết chỉ chứa dữ liệu thật + 
 | rls_user_scope | 1 người dùng × 1 phạm vi | Power BI RLS (TV4) |
 | etl_log | 1 lần chạy pipeline | TV1 theo dõi |
 
-## 8. Feature (bản nháp, TV2 chốt trong feature_spec.md)
+## 8. Feature (đã chốt theo feature_spec.md v1.0 của TV2)
+
+Định nghĩa chi tiết và các quyết định (feature nào model không dùng, cách xử lý giá trị thiếu) nằm trong `feature_spec.md`. Bảng `student_features` trên lake và SQL chứa đủ các cột dưới đây; giá trị thiếu để NULL, không điền ở ETL.
 
 | Feature | Công thức |
 |---|---|
-| age, is_female, background, in_state, international, on_campus, distance_from_home | Từ cột nhân khẩu |
-| high_school_gpa, entrance_comb, father_edu_cd, mother_edu_cd | Học vấn đầu vào, gia đình |
-| faculty_id, major_id, is_undeclared, has_minor | Chương trình học |
-| first_term_attempt_hrs, first_term_earned_hrs, earned_ratio_t1 | Tín chỉ học kỳ 1, tỉ lệ đạt |
-| gpa_t1, n_courses_t1, n_df_t1 | GPA các môn cốt lõi học kỳ 1, số môn, số môn D/F |
-| has_second_term, second_term_*_hrs, earned_ratio_t2, gpa_t2, n_df_t2 | Tương tự cho học kỳ 2 |
-| gross_fin_need, unmet_need, fam_contribution_ratio | Tài chính; tỉ lệ = đóng góp gia đình / học phí |
+| age, is_female, background, in_state, international, on_campus, distance_from_home | Từ cột nhân khẩu (`is_female`, `background` giữ cho Power BI, model chính thức không dùng) |
+| high_school_gpa, entrance_comb, entrance_missing, father_edu_cd, mother_edu_cd | Học vấn đầu vào, gia đình; `entrance_missing` = 1 khi `entrance_comb` NULL |
+| faculty_id, major_id, is_undeclared, has_minor | Chương trình học (model dùng `faculty_id`, không dùng `major_id`) |
+| first_term_attempt_hrs, first_term_earned_hrs, earned_ratio_t1 | Tín chỉ học kỳ 1, tỉ lệ đạt (số thực, NULL khi đăng ký 0 tín chỉ) |
+| gpa_t1, n_courses_t1, n_df_t1 | GPA và số môn **có điểm A–F** học kỳ 1, số môn D/F (`NOT REP`, `INCOMPL`, `Unknown` không tính) |
+| has_second_term, second_term_*_hrs, earned_ratio_t2, gpa_t2, n_df_t2, gpa_change | Tương tự cho học kỳ 2; `gpa_change` = `gpa_t2 − gpa_t1` |
+| fin_data_missing, gross_fin_need, unmet_need, fam_contribution_ratio | `fin_data_missing` = 1 khi `COST_OF_ATTEND` = 0 hoặc NULL (không có hồ sơ tài chính); khi đó `gross_fin_need`, `unmet_need` để NULL |
 
 ## 9. Xác nhận
 
