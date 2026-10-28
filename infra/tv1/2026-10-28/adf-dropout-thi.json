@@ -1,5 +1,5 @@
-﻿{
-  "eTag": "\"030016f6-0000-1900-0000-6ae177100000\"",
+{
+  "eTag": "\"0800765c-0000-1900-0000-6ae1a3c10000\"",
   "extendedLocation": null,
   "id": "/subscriptions/89f280fd-0758-4210-b24d-5879434f606a/resourceGroups/rg-dropout-data/providers/Microsoft.DataFactory/factories/adf-dropout-thi",
   "identity": {
@@ -28,7 +28,7 @@
       "collaborationBranch": "main",
       "disablePublish": false,
       "hostName": "https://github.com",
-      "lastCommitId": "e142d5cec57d3d5e118fdcc7d68e3f65c9e95fc7",
+      "lastCommitId": "1a14f7b8ef4e369824f3995d19f3e91c98847cf1",
       "repositoryName": "IS402.R11",
       "rootFolder": "/adf",
       "type": "FactoryGitHubConfiguration"
