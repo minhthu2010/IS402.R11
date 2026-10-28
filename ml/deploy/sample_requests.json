@@ -1,0 +1,108 @@
+{
+  "rui_ro_thap": {
+    "data": [
+      {
+        "STUDENT_IDENTIFIER": 9000001,
+        "STDNT_AGE": 18,
+        "STDNT_GENDER": "F",
+        "STDNT_BACKGROUND": "BGD 1",
+        "IN_STATE_FLAG": "Y",
+        "INTERNATIONAL_STS": "N",
+        "STDNT_MAJOR": "Nursing",
+        "STDNT_MINOR": "N",
+        "HIGH_SCHL_GPA": 3.6,
+        "STDNT_TEST_ENTRANCE_COMB": 1180,
+        "FATHER_HI_EDU_CD": 3,
+        "MOTHER_HI_EDU_CD": 3,
+        "HOUSING_STS": "On Campus",
+        "DISTANCE_FROM_HOME": 40,
+        "FIRST_TERM": 200908,
+        "FIRST_TERM_ATTEMPT_HRS": 15,
+        "FIRST_TERM_EARNED_HRS": 15,
+        "SECOND_TERM": 201002,
+        "SECOND_TERM_ATTEMPT_HRS": 15,
+        "SECOND_TERM_EARNED_HRS": 15,
+        "GROSS_FIN_NEED": 8000,
+        "COST_OF_ATTEND": 18000,
+        "EST_FAM_CONTRIBUTION": 9000,
+        "UNMET_NEED": 1000,
+        "CORE_COURSE_GRADE_1_F": "A",
+        "CORE_COURSE_GRADE_2_F": "B",
+        "CORE_COURSE_GRADE_3_F": "A",
+        "CORE_COURSE_GRADE_4_F": "B",
+        "CORE_COURSE_GRADE_1_S": "A",
+        "CORE_COURSE_GRADE_2_S": "A",
+        "CORE_COURSE_GRADE_3_S": "B"
+      }
+    ]
+  },
+  "rui_ro_cao": {
+    "data": [
+      {
+        "STUDENT_IDENTIFIER": 9000002,
+        "STDNT_AGE": 18,
+        "STDNT_GENDER": "M",
+        "STDNT_BACKGROUND": "BGD 1",
+        "IN_STATE_FLAG": "Y",
+        "INTERNATIONAL_STS": "N",
+        "STDNT_MAJOR": "Undeclared",
+        "STDNT_MINOR": "N",
+        "HIGH_SCHL_GPA": 2.4,
+        "STDNT_TEST_ENTRANCE_COMB": 1180,
+        "FATHER_HI_EDU_CD": 3,
+        "MOTHER_HI_EDU_CD": 3,
+        "HOUSING_STS": "Off Campus",
+        "DISTANCE_FROM_HOME": 180,
+        "FIRST_TERM": 200908,
+        "FIRST_TERM_ATTEMPT_HRS": 15,
+        "FIRST_TERM_EARNED_HRS": 6,
+        "SECOND_TERM": 201002,
+        "SECOND_TERM_ATTEMPT_HRS": null,
+        "SECOND_TERM_EARNED_HRS": null,
+        "GROSS_FIN_NEED": 8000,
+        "COST_OF_ATTEND": 18000,
+        "EST_FAM_CONTRIBUTION": 9000,
+        "UNMET_NEED": 9000,
+        "CORE_COURSE_GRADE_1_F": "D",
+        "CORE_COURSE_GRADE_2_F": "F",
+        "CORE_COURSE_GRADE_3_F": "C",
+        "CORE_COURSE_GRADE_4_F": "F"
+      }
+    ]
+  },
+  "thieu_diem_dau_vao": {
+    "data": [
+      {
+        "STUDENT_IDENTIFIER": 9000003,
+        "STDNT_AGE": 18,
+        "STDNT_GENDER": "F",
+        "STDNT_BACKGROUND": "BGD 1",
+        "IN_STATE_FLAG": "Y",
+        "INTERNATIONAL_STS": "N",
+        "STDNT_MAJOR": "General Business",
+        "STDNT_MINOR": "N",
+        "HIGH_SCHL_GPA": 3.0,
+        "STDNT_TEST_ENTRANCE_COMB": null,
+        "FATHER_HI_EDU_CD": 3,
+        "MOTHER_HI_EDU_CD": 3,
+        "HOUSING_STS": "On Campus",
+        "DISTANCE_FROM_HOME": 40,
+        "FIRST_TERM": 200908,
+        "FIRST_TERM_ATTEMPT_HRS": 15,
+        "FIRST_TERM_EARNED_HRS": 15,
+        "SECOND_TERM": 201002,
+        "SECOND_TERM_ATTEMPT_HRS": 15,
+        "SECOND_TERM_EARNED_HRS": 15,
+        "GROSS_FIN_NEED": 8000,
+        "COST_OF_ATTEND": 18000,
+        "EST_FAM_CONTRIBUTION": 9000,
+        "UNMET_NEED": 1000,
+        "CORE_COURSE_GRADE_1_F": "B",
+        "CORE_COURSE_GRADE_2_F": "C",
+        "CORE_COURSE_GRADE_3_F": "C",
+        "CORE_COURSE_GRADE_1_S": "C",
+        "CORE_COURSE_GRADE_2_S": "D"
+      }
+    ]
+  }
+}
