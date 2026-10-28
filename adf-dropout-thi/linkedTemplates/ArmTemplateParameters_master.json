@@ -1,0 +1,36 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "adf-dropout-thi"
+		},
+		"ls_sql_password": {
+			"value": ""
+		},
+		"ls_lake_properties_typeProperties_url": {
+			"value": "https://stdropoutthi1.dfs.core.windows.net/"
+		},
+		"ls_sql_properties_typeProperties_server": {
+			"value": "sql-dropout-thi.database.windows.net"
+		},
+		"ls_sql_properties_typeProperties_database": {
+			"value": "dropoutdb"
+		},
+		"ls_sql_properties_typeProperties_userName": {
+			"value": "sqladmin"
+		},
+		"ls_synapse_properties_typeProperties_server": {
+			"value": "syn-dropout-thi-ondemand.sql.azuresynapse.net"
+		},
+		"ls_synapse_properties_typeProperties_database": {
+			"value": "dropout_lake"
+		},
+		"containerUri": {
+			"value": ""
+		},
+		"containerSasToken": {
+			"value": ""
+		}
+	}
+}
