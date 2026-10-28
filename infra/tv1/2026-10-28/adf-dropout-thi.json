@@ -1,0 +1,46 @@
+﻿{
+  "eTag": "\"030016f6-0000-1900-0000-6ae177100000\"",
+  "extendedLocation": null,
+  "id": "/subscriptions/89f280fd-0758-4210-b24d-5879434f606a/resourceGroups/rg-dropout-data/providers/Microsoft.DataFactory/factories/adf-dropout-thi",
+  "identity": {
+    "principalId": "cabb6584-cd0e-4bcd-9b2c-d72c8e891e37",
+    "tenantId": "2dff09ac-2b3b-4182-9953-2b548e0d0b39",
+    "type": "SystemAssigned",
+    "userAssignedIdentities": null
+  },
+  "kind": null,
+  "location": "eastasia",
+  "managedBy": null,
+  "name": "adf-dropout-thi",
+  "plan": null,
+  "properties": {
+    "createTime": "2026-10-28T04:07:08.8814509Z",
+    "factoryStatistics": {
+      "factorySizeInGbUnits": 0,
+      "maxAllowedFactorySizeInGbUnits": 0,
+      "maxAllowedResourceCount": 0,
+      "totalResourceCount": 0
+    },
+    "provisioningState": "Succeeded",
+    "publicNetworkAccess": "Enabled",
+    "repoConfiguration": {
+      "accountName": "minhthu2010",
+      "collaborationBranch": "main",
+      "disablePublish": false,
+      "hostName": "https://github.com",
+      "lastCommitId": "e142d5cec57d3d5e118fdcc7d68e3f65c9e95fc7",
+      "repositoryName": "IS402.R11",
+      "rootFolder": "/adf",
+      "type": "FactoryGitHubConfiguration"
+    },
+    "trustModeClaimForMi": {
+      "editable": true,
+      "value": "Disabled"
+    },
+    "version": "2018-06-01"
+  },
+  "resourceGroup": "rg-dropout-data",
+  "sku": null,
+  "tags": {},
+  "type": "Microsoft.DataFactory/factories"
+}
