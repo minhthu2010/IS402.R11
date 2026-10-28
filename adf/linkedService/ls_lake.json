@@ -1,0 +1,10 @@
+{
+	"name": "ls_lake",
+	"properties": {
+		"annotations": [],
+		"type": "AzureBlobFS",
+		"typeProperties": {
+			"url": "https://stdropoutthi1.dfs.core.windows.net/"
+		}
+	}
+}
