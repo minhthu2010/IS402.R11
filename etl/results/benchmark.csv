@@ -1,2 +1,4 @@
-﻿ngay,phep_do,cong_cu,du_lieu,so_file,dung_luong_GB,thoi_gian_giay,toc_do_MB_s
-10/28/2026,upload,Azure CLI upload-batch (8 ket noi),raw/synthetic/students,80,4.36,2051,2.2
+﻿ngay,phep_do,cong_cu,du_lieu,so_file,dung_luong_GB,thoi_gian_giay,toc_do_MB_s,ghi_chu
+2026-10-28,upload,Azure CLI upload-batch (8 ket noi),raw/synthetic/students,80,4.36,2051,2.2,Tinh tu Last Modified cua blob; mang nha
+2026-10-28,nen CSV sang Parquet,ADF Copy (pl_raw_to_processed),processed/synthetic/students,80,1.58,~124,~36,CSV 4.36GB -> Parquet snappy 1.58GB (giam 64%); thoi gian tinh tu Last Modified file dau-cuoi
+2026-10-28,doc Parquet,Synapse serverless,processed/*/students (2 cot),81,1.58,16.3,,COUNT + AVG tren 17.6 trieu dong
