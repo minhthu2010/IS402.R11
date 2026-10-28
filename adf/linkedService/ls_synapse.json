@@ -1,0 +1,14 @@
+{
+	"name": "ls_synapse",
+	"properties": {
+		"annotations": [],
+		"type": "AzureSqlDW",
+		"typeProperties": {
+			"server": "syn-dropout-thi-ondemand.sql.azuresynapse.net",
+			"database": "dropout_lake",
+			"encrypt": "mandatory",
+			"trustServerCertificate": false,
+			"authenticationType": "SystemAssignedManagedIdentity"
+		}
+	}
+}
