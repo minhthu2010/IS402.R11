@@ -20,13 +20,24 @@ NUM_FEATURES = [
     "first_term_attempt_hrs", "first_term_earned_hrs", "earned_ratio_t1", "gpa_t1", "n_courses_t1", "n_df_t1",
     "has_second_term", "second_term_attempt_hrs", "second_term_earned_hrs", "earned_ratio_t2", "gpa_t2", "n_df_t2",
     "gpa_change",
-    "gross_fin_need", "unmet_need", "fam_contribution_ratio",
+    "fin_data_missing", "gross_fin_need", "unmet_need", "fam_contribution_ratio",
 ]
 CAT_FEATURES = ["background", "faculty_id"]
 FEATURES = NUM_FEATURES + CAT_FEATURES
+# Đặc điểm nhân khẩu nhạy cảm: model gắn cờ sinh viên không nên đối xử khác nhau chỉ vì xuất thân/giới tính.
+# Bỏ bằng --drop-sensitive 1 (mặc định) trong train.py.
+SENSITIVE_FEATURES = ["background", "is_female"]
+# Cột lệch phải mạnh (vd khoảng cách: trung vị ~70, tối đa ~5.900) -> lấy log1p trong pipeline
+LOG_FEATURES = ["distance_from_home"]
 # Các cột học kỳ 2: bỏ đi nếu muốn dự đoán sớm hơn (cuối học kỳ 1)
 TERM2_FEATURES = ["has_second_term", "second_term_attempt_hrs", "second_term_earned_hrs",
                   "earned_ratio_t2", "gpa_t2", "n_df_t2", "gpa_change"]
+
+
+def log1p_nonneg(x):
+    """log(1 + x), giá trị âm coi là 0. Đặt ở module này (không phải train.py) để model.pkl
+    load được ở mọi nơi có features.py, kể cả endpoint."""
+    return np.log1p(np.clip(x, 0, None))
 
 
 def _obj(s):
@@ -85,9 +96,13 @@ def build_features(raw: pd.DataFrame, major_faculty: pd.DataFrame) -> pd.DataFra
     out["gpa_t2"], _, out["n_df_t2"] = _term_grades(df, "S")
     out["gpa_change"] = out["gpa_t2"] - out["gpa_t1"]                                   # TV2
 
-    out["gross_fin_need"] = df["GROSS_FIN_NEED"]
-    out["unmet_need"] = df["UNMET_NEED"]
+    # COST_OF_ATTEND = 0 ở hơn 1/4 sinh viên: đây là "không có hồ sơ tài chính", không phải "học phí 0".
+    # Khi đó các cột tài chính còn lại cũng toàn 0 giả -> đặt thành thiếu, và đánh cờ riêng.        # TV2
     out["fam_contribution_ratio"] = df["EST_FAM_CONTRIBUTION"] / df["COST_OF_ATTEND"].replace(0, np.nan)
+    out["fin_data_missing"] = out["fam_contribution_ratio"].isna().astype(int)
+    no_fin = out["fin_data_missing"] == 1
+    out["gross_fin_need"] = df["GROSS_FIN_NEED"].mask(no_fin)
+    out["unmet_need"] = df["UNMET_NEED"].mask(no_fin)
 
     if "RETURNED_2ND_YR" in df:
         out["dropout"] = 1 - df["RETURNED_2ND_YR"]
@@ -102,9 +117,15 @@ def add_missing_tv2_columns(feat: pd.DataFrame) -> pd.DataFrame:
         feat["entrance_missing"] = feat["entrance_comb"].isna().astype(int)
     if "gpa_change" not in feat:
         feat["gpa_change"] = feat["gpa_t2"] - feat["gpa_t1"]
+    if "fin_data_missing" not in feat:       # bảng TV1: fam_contribution_ratio = NULL khi COST_OF_ATTEND = 0
+        feat["fin_data_missing"] = feat["fam_contribution_ratio"].isna().astype(int)
+        no_fin = feat["fin_data_missing"] == 1
+        feat["gross_fin_need"] = feat["gross_fin_need"].mask(no_fin)
+        feat["unmet_need"] = feat["unmet_need"].mask(no_fin)
     for c in ["is_female", "in_state", "international", "on_campus", "is_undeclared", "has_minor",
               "has_second_term", "dropout"]:
         if c in feat:
             feat[c] = feat[c].astype(float)
-    feat["background"] = _obj(feat["background"])
+    if "background" in feat:
+        feat["background"] = _obj(feat["background"])
     return feat

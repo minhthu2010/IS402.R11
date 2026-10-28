@@ -80,9 +80,9 @@ def train(ml, a):
 SPACES = {   # vùng tìm tham số cho sweep
     "lgbm": ("--n-estimators ${{inputs.n_estimators}} --learning-rate ${{inputs.learning_rate}} "
              "--num-leaves ${{inputs.num_leaves}} --min-samples-leaf ${{inputs.min_samples_leaf}}",
-             {"n_estimators": 300, "learning_rate": 0.05, "num_leaves": 31, "min_samples_leaf": 20},
-             dict(n_estimators=Choice([100, 200, 400, 600]), learning_rate=Uniform(min_value=0.01, max_value=0.2),
-                  num_leaves=Choice([7, 15, 31, 63]), min_samples_leaf=Choice([10, 20, 40, 80]))),
+             {"n_estimators": 300, "learning_rate": 0.03, "num_leaves": 15, "min_samples_leaf": 20},
+             dict(n_estimators=Choice([100, 200, 400, 800]), learning_rate=Uniform(min_value=0.005, max_value=0.1),
+                  num_leaves=Choice([4, 7, 15, 31]), min_samples_leaf=Choice([10, 20, 40, 80]))),
     "rf": ("--n-estimators ${{inputs.n_estimators}} --max-depth ${{inputs.max_depth}} "
            "--min-samples-leaf ${{inputs.min_samples_leaf}}",
            {"n_estimators": 300, "max_depth": 0, "min_samples_leaf": 20},
@@ -100,7 +100,7 @@ def sweep(ml, a):
         inputs={**inputs, **defaults}, environment=f"{ENV_NAME}@latest", compute=COMPUTE,
     )
     job = base(**space).sweep(compute=COMPUTE, sampling_algorithm="random",
-                              primary_metric="val_auc", goal="Maximize")
+                              primary_metric="cv_auc", goal="Maximize")
     job.set_limits(max_total_trials=a.trials, max_concurrent_trials=1, timeout=7200)
     job.experiment_name = "dropout-sweep"
     job.display_name = f"sweep-{a.model}"
