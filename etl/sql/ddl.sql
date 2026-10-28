@@ -125,6 +125,7 @@ CREATE TABLE student_features (
     distance_from_home      FLOAT      NULL,
     high_school_gpa         FLOAT      NULL,
     entrance_comb           FLOAT      NULL,
+    entrance_missing        BIT        NULL,       -- 1 khi entrance_comb NULL
     father_edu_cd           INT        NULL,
     mother_edu_cd           INT        NULL,
     faculty_id              INT        NOT NULL,
@@ -135,7 +136,7 @@ CREATE TABLE student_features (
     first_term_earned_hrs   INT        NULL,
     earned_ratio_t1         FLOAT      NULL,
     gpa_t1                  FLOAT      NULL,
-    n_courses_t1            INT        NOT NULL,
+    n_courses_t1            INT        NOT NULL,   -- số môn có điểm A–F học kỳ 1
     n_df_t1                 INT        NOT NULL,   -- số môn điểm D/F học kỳ 1
     has_second_term         BIT        NOT NULL,
     second_term_attempt_hrs INT        NULL,
@@ -143,8 +144,10 @@ CREATE TABLE student_features (
     earned_ratio_t2         FLOAT      NULL,
     gpa_t2                  FLOAT      NULL,
     n_df_t2                 INT        NOT NULL,
-    gross_fin_need          FLOAT      NULL,
-    unmet_need              FLOAT      NULL,
+    gpa_change              FLOAT      NULL,       -- gpa_t2 − gpa_t1
+    fin_data_missing        BIT        NULL,       -- 1 khi COST_OF_ATTEND = 0/NULL (không có hồ sơ tài chính)
+    gross_fin_need          FLOAT      NULL,       -- NULL khi fin_data_missing = 1
+    unmet_need              FLOAT      NULL,       -- NULL khi fin_data_missing = 1
     fam_contribution_ratio  FLOAT      NULL,       -- est_fam_contribution / cost_of_attend
     dropout                 BIT        NOT NULL,
     is_synthetic            BIT        NOT NULL,
