@@ -73,7 +73,8 @@
 										"folder": {
 											"value": "@{item()}",
 											"type": "Expression"
-										}
+										},
+										"file": "*.csv"
 									}
 								}
 							],
