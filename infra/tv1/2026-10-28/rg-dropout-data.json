@@ -1,0 +1,949 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {},
+  "resources": [
+    {
+      "apiVersion": "2026-08-01-preview",
+      "kind": "v12.0",
+      "location": "eastasia",
+      "name": "sql-dropout-thi",
+      "properties": {
+        "administratorLogin": "sqladmin",
+        "administrators": {
+          "administratorType": "ActiveDirectory",
+          "azureADOnlyAuthentication": false,
+          "login": "23521474@ms.uit.edu.vn",
+          "principalType": "User",
+          "sid": "b7f420e4-8a50-4779-b7f2-e3364d6fe108",
+          "tenantId": "2dff09ac-2b3b-4182-9953-2b548e0d0b39"
+        },
+        "minimalTlsVersion": "1.2",
+        "publicNetworkAccess": "Enabled",
+        "restrictOutboundNetworkAccess": "Disabled",
+        "retentionDays": -1,
+        "version": "12.0"
+      },
+      "type": "Microsoft.Sql/servers"
+    },
+    {
+      "apiVersion": "2026-06-01",
+      "kind": "StorageV2",
+      "location": "eastasia",
+      "name": "stdropoutthi1",
+      "properties": {
+        "accessTier": "Hot",
+        "allowBlobPublicAccess": false,
+        "allowCrossTenantDelegationSas": false,
+        "allowCrossTenantReplication": false,
+        "allowSharedKeyAccess": true,
+        "defaultToOAuthAuthentication": false,
+        "dnsEndpointType": "Standard",
+        "dualStackEndpointPreference": {
+          "publishIpv6Endpoint": false
+        },
+        "encryption": {
+          "keySource": "Microsoft.Storage",
+          "requireInfrastructureEncryption": false,
+          "services": {
+            "blob": {
+              "enabled": true,
+              "keyType": "Account"
+            },
+            "file": {
+              "enabled": true,
+              "keyType": "Account"
+            }
+          }
+        },
+        "isHnsEnabled": true,
+        "isSftpEnabled": false,
+        "minimumTlsVersion": "TLS1_2",
+        "networkAcls": {
+          "bypass": "AzureServices",
+          "defaultAction": "Allow",
+          "ipRules": [],
+          "ipv6Rules": [],
+          "virtualNetworkRules": []
+        },
+        "publicNetworkAccess": "Enabled",
+        "supportsHttpsTrafficOnly": true
+      },
+      "sku": {
+        "name": "Standard_LRS",
+        "tier": "Standard"
+      },
+      "tags": {
+        "module": "data",
+        "owner": "TV1"
+      },
+      "type": "Microsoft.Storage/storageAccounts"
+    },
+    {
+      "apiVersion": "2026-08-01-preview",
+      "dependsOn": [
+        "[resourceId('Microsoft.Sql/servers', 'sql-dropout-thi')]"
+      ],
+      "name": "sql-dropout-thi/ActiveDirectory",
+      "properties": {
+        "administratorType": "ActiveDirectory",
+        "login": "23521474@ms.uit.edu.vn",
+        "sid": "b7f420e4-8a50-4779-b7f2-e3364d6fe108",
+        "tenantId": "2dff09ac-2b3b-4182-9953-2b548e0d0b39"
+      },
+      "type": "Microsoft.Sql/servers/administrators"
+    },
+    {
+      "apiVersion": "2026-08-01-preview",
+      "dependsOn": [
+        "[resourceId('Microsoft.Sql/servers', 'sql-dropout-thi')]"
+      ],
+      "name": "sql-dropout-thi/Default",
+      "properties": {
+        "state": "Disabled"
+      },
+      "type": "Microsoft.Sql/servers/advancedThreatProtectionSettings"
+    },
+    {
+      "apiVersion": "2014-04-01",
+      "dependsOn": [
+        "[resourceId('Microsoft.Sql/servers', 'sql-dropout-thi')]"
+      ],
+      "name": "sql-dropout-thi/CreateIndex",
+      "properties": {
+        "autoExecuteValue": "Disabled"
+      },
+      "type": "Microsoft.Sql/servers/advisors"
+    },
+    {
+      "apiVersion": "2014-04-01",
+      "dependsOn": [
+        "[resourceId('Microsoft.Sql/servers', 'sql-dropout-thi')]"
+      ],
+      "name": "sql-dropout-thi/DbParameterization",
+      "properties": {
+        "autoExecuteValue": "Disabled"
+      },
+      "type": "Microsoft.Sql/servers/advisors"
+    },
+    {
+      "apiVersion": "2014-04-01",
+      "dependsOn": [
+        "[resourceId('Microsoft.Sql/servers', 'sql-dropout-thi')]"
+      ],
+      "name": "sql-dropout-thi/DefragmentIndex",
+      "properties": {
+        "autoExecuteValue": "Disabled"
+      },
+      "type": "Microsoft.Sql/servers/advisors"
+    },
+    {
+      "apiVersion": "2014-04-01",
+      "dependsOn": [
+        "[resourceId('Microsoft.Sql/servers', 'sql-dropout-thi')]"
+      ],
+      "name": "sql-dropout-thi/DropIndex",
+      "properties": {
+        "autoExecuteValue": "Disabled"
+      },
+      "type": "Microsoft.Sql/servers/advisors"
+    },
+    {
+      "apiVersion": "2014-04-01",
+      "dependsOn": [
+        "[resourceId('Microsoft.Sql/servers', 'sql-dropout-thi')]"
+      ],
+      "name": "sql-dropout-thi/ForceLastGoodPlan",
+      "properties": {
+        "autoExecuteValue": "Enabled"
+      },
+      "type": "Microsoft.Sql/servers/advisors"
+    },
+    {
+      "apiVersion": "2014-04-01",
+      "dependsOn": [
+        "[resourceId('Microsoft.Sql/servers', 'sql-dropout-thi')]"
+      ],
+      "location": "East Asia",
+      "name": "sql-dropout-thi/Default",
+      "properties": {
+        "auditingState": "Disabled"
+      },
+      "type": "Microsoft.Sql/servers/auditingPolicies"
+    },
+    {
+      "apiVersion": "2026-08-01-preview",
+      "dependsOn": [
+        "[resourceId('Microsoft.Sql/servers', 'sql-dropout-thi')]"
+      ],
+      "name": "sql-dropout-thi/Default",
+      "properties": {
+        "auditActionsAndGroups": [],
+        "isAzureMonitorTargetEnabled": false,
+        "isManagedIdentityInUse": false,
+        "isStorageSecondaryKeyInUse": false,
+        "retentionDays": 0,
+        "state": "Disabled",
+        "storageAccountSubscriptionId": "00000000-0000-0000-0000-000000000000"
+      },
+      "type": "Microsoft.Sql/servers/auditingSettings"
+    },
+    {
+      "apiVersion": "2026-08-01-preview",
+      "dependsOn": [
+        "[resourceId('Microsoft.Sql/servers', 'sql-dropout-thi')]"
+      ],
+      "name": "sql-dropout-thi/Default",
+      "properties": {
+        "azureADOnlyAuthentication": false
+      },
+      "type": "Microsoft.Sql/servers/azureADOnlyAuthentications"
+    },
+    {
+      "apiVersion": "2026-08-01-preview",
+      "dependsOn": [
+        "[resourceId('Microsoft.Sql/servers', 'sql-dropout-thi')]"
+      ],
+      "location": "eastasia",
+      "name": "sql-dropout-thi/default",
+      "properties": {
+        "connectionType": "Default"
+      },
+      "type": "Microsoft.Sql/servers/connectionPolicies"
+    },
+    {
+      "apiVersion": "2026-08-01-preview",
+      "dependsOn": [
+        "[resourceId('Microsoft.Sql/servers', 'sql-dropout-thi')]"
+      ],
+      "kind": "v12.0,user,vcore,serverless,freelimit",
+      "location": "eastasia",
+      "name": "sql-dropout-thi/dropoutdb",
+      "properties": {
+        "autoPauseDelay": 60,
+        "availabilityZone": "NoPreference",
+        "catalogCollation": "SQL_Latin1_General_CP1_CI_AS",
+        "collation": "SQL_Latin1_General_CP1_CI_AS",
+        "freeLimitExhaustionBehavior": "AutoPause",
+        "isLedgerOn": false,
+        "maintenanceConfigurationId": "/subscriptions/89f280fd-0758-4210-b24d-5879434f606a/providers/Microsoft.Maintenance/publicMaintenanceConfigurations/SQL_Default",
+        "maxSizeBytes": 34359738368,
+        "minCapacity": 0.5,
+        "readScale": "Disabled",
+        "requestedBackupStorageRedundancy": "Local",
+        "useFreeLimit": true,
+        "zoneRedundant": false
+      },
+      "sku": {
+        "capacity": 2,
+        "family": "Gen5",
+        "name": "GP_S_Gen5_2",
+        "tier": "GeneralPurpose"
+      },
+      "type": "Microsoft.Sql/servers/databases"
+    },
+    {
+      "apiVersion": "2026-08-01-preview",
+      "dependsOn": [
+        "[resourceId('Microsoft.Sql/servers', 'sql-dropout-thi')]"
+      ],
+      "name": "sql-dropout-thi/master/Default",
+      "properties": {
+        "state": "Disabled"
+      },
+      "type": "Microsoft.Sql/servers/databases/advancedThreatProtectionSettings"
+    },
+    {
+      "apiVersion": "2014-04-01",
+      "dependsOn": [
+        "[resourceId('Microsoft.Sql/servers', 'sql-dropout-thi')]"
+      ],
+      "location": "East Asia",
+      "name": "sql-dropout-thi/master/Default",
+      "properties": {
+        "auditingState": "Disabled"
+      },
+      "type": "Microsoft.Sql/servers/databases/auditingPolicies"
+    },
+    {
+      "apiVersion": "2026-08-01-preview",
+      "dependsOn": [
+        "[resourceId('Microsoft.Sql/servers', 'sql-dropout-thi')]"
+      ],
+      "name": "sql-dropout-thi/master/Default",
+      "properties": {
+        "isAzureMonitorTargetEnabled": false,
+        "retentionDays": 0,
+        "state": "Disabled",
+        "storageAccountSubscriptionId": "00000000-0000-0000-0000-000000000000"
+      },
+      "type": "Microsoft.Sql/servers/databases/auditingSettings"
+    },
+    {
+      "apiVersion": "2026-08-01-preview",
+      "dependsOn": [
+        "[resourceId('Microsoft.Sql/servers', 'sql-dropout-thi')]"
+      ],
+      "name": "sql-dropout-thi/master/Default",
+      "properties": {
+        "isAzureMonitorTargetEnabled": false,
+        "retentionDays": 0,
+        "state": "Disabled",
+        "storageAccountSubscriptionId": "00000000-0000-0000-0000-000000000000"
+      },
+      "type": "Microsoft.Sql/servers/databases/extendedAuditingSettings"
+    },
+    {
+      "apiVersion": "2026-08-01-preview",
+      "dependsOn": [
+        "[resourceId('Microsoft.Sql/servers', 'sql-dropout-thi')]"
+      ],
+      "name": "sql-dropout-thi/master/Default",
+      "properties": {
+        "state": "Disabled"
+      },
+      "type": "Microsoft.Sql/servers/databases/geoBackupPolicies"
+    },
+    {
+      "apiVersion": "2026-08-01-preview",
+      "dependsOn": [
+        "[resourceId('Microsoft.Sql/servers', 'sql-dropout-thi')]"
+      ],
+      "name": "sql-dropout-thi/master/Current",
+      "properties": {},
+      "type": "Microsoft.Sql/servers/databases/ledgerDigestUploads"
+    },
+    {
+      "apiVersion": "2026-08-01-preview",
+      "dependsOn": [
+        "[resourceId('Microsoft.Sql/servers', 'sql-dropout-thi')]"
+      ],
+      "name": "sql-dropout-thi/master/Default",
+      "properties": {
+        "disabledAlerts": [
+          ""
+        ],
+        "emailAccountAdmins": false,
+        "emailAddresses": [
+          ""
+        ],
+        "retentionDays": 0,
+        "state": "Disabled"
+      },
+      "type": "Microsoft.Sql/servers/databases/securityAlertPolicies"
+    },
+    {
+      "apiVersion": "2026-08-01-preview",
+      "dependsOn": [
+        "[resourceId('Microsoft.Sql/servers', 'sql-dropout-thi')]"
+      ],
+      "name": "sql-dropout-thi/master/Current",
+      "properties": {
+        "state": "Disabled"
+      },
+      "type": "Microsoft.Sql/servers/databases/transparentDataEncryption"
+    },
+    {
+      "apiVersion": "2026-08-01-preview",
+      "dependsOn": [
+        "[resourceId('Microsoft.Sql/servers', 'sql-dropout-thi')]"
+      ],
+      "name": "sql-dropout-thi/master/Default",
+      "properties": {
+        "recurringScans": {
+          "emailSubscriptionAdmins": true,
+          "isEnabled": false
+        }
+      },
+      "type": "Microsoft.Sql/servers/databases/vulnerabilityAssessments"
+    },
+    {
+      "apiVersion": "2026-08-01-preview",
+      "dependsOn": [
+        "[resourceId('Microsoft.Sql/servers', 'sql-dropout-thi')]"
+      ],
+      "name": "sql-dropout-thi/Default",
+      "properties": {
+        "isAzureMonitorTargetEnabled": false,
+        "isManagedIdentityInUse": false,
+        "state": "Disabled",
+        "storageAccountSubscriptionId": "00000000-0000-0000-0000-000000000000"
+      },
+      "type": "Microsoft.Sql/servers/devOpsAuditingSettings"
+    },
+    {
+      "apiVersion": "2026-08-01-preview",
+      "dependsOn": [
+        "[resourceId('Microsoft.Sql/servers', 'sql-dropout-thi')]"
+      ],
+      "kind": "servicemanaged",
+      "name": "sql-dropout-thi/current",
+      "properties": {
+        "autoRotationEnabled": false,
+        "serverKeyName": "ServiceManaged",
+        "serverKeyType": "ServiceManaged"
+      },
+      "type": "Microsoft.Sql/servers/encryptionProtector"
+    },
+    {
+      "apiVersion": "2026-08-01-preview",
+      "dependsOn": [
+        "[resourceId('Microsoft.Sql/servers', 'sql-dropout-thi')]"
+      ],
+      "name": "sql-dropout-thi/Default",
+      "properties": {
+        "auditActionsAndGroups": [],
+        "isAzureMonitorTargetEnabled": false,
+        "isManagedIdentityInUse": false,
+        "isStorageSecondaryKeyInUse": false,
+        "retentionDays": 0,
+        "state": "Disabled",
+        "storageAccountSubscriptionId": "00000000-0000-0000-0000-000000000000"
+      },
+      "type": "Microsoft.Sql/servers/extendedAuditingSettings"
+    },
+    {
+      "apiVersion": "2026-08-01-preview",
+      "dependsOn": [
+        "[resourceId('Microsoft.Sql/servers', 'sql-dropout-thi')]"
+      ],
+      "name": "sql-dropout-thi/AllowAllWindowsAzureIps",
+      "properties": {
+        "endIpAddress": "0.0.0.0",
+        "startIpAddress": "0.0.0.0"
+      },
+      "type": "Microsoft.Sql/servers/firewallRules"
+    },
+    {
+      "apiVersion": "2026-08-01-preview",
+      "dependsOn": [
+        "[resourceId('Microsoft.Sql/servers', 'sql-dropout-thi')]"
+      ],
+      "name": "sql-dropout-thi/ClientIp-2026-10-28_9-18-40",
+      "properties": {
+        "endIpAddress": "<client-ip>",
+        "startIpAddress": "<client-ip>"
+      },
+      "type": "Microsoft.Sql/servers/firewallRules"
+    },
+    {
+      "apiVersion": "2026-08-01-preview",
+      "dependsOn": [
+        "[resourceId('Microsoft.Sql/servers', 'sql-dropout-thi')]"
+      ],
+      "kind": "servicemanaged",
+      "name": "sql-dropout-thi/ServiceManaged",
+      "properties": {
+        "serverKeyType": "ServiceManaged"
+      },
+      "type": "Microsoft.Sql/servers/keys"
+    },
+    {
+      "apiVersion": "2026-08-01-preview",
+      "dependsOn": [
+        "[resourceId('Microsoft.Sql/servers', 'sql-dropout-thi')]"
+      ],
+      "name": "sql-dropout-thi/Default",
+      "properties": {
+        "disabledAlerts": [
+          ""
+        ],
+        "emailAccountAdmins": false,
+        "emailAddresses": [
+          ""
+        ],
+        "retentionDays": 0,
+        "state": "Disabled"
+      },
+      "type": "Microsoft.Sql/servers/securityAlertPolicies"
+    },
+    {
+      "apiVersion": "2026-08-01-preview",
+      "dependsOn": [
+        "[resourceId('Microsoft.Sql/servers', 'sql-dropout-thi')]"
+      ],
+      "name": "sql-dropout-thi/Default",
+      "properties": {
+        "state": "Disabled"
+      },
+      "type": "Microsoft.Sql/servers/sqlVulnerabilityAssessments"
+    },
+    {
+      "apiVersion": "2026-08-01-preview",
+      "dependsOn": [
+        "[resourceId('Microsoft.Sql/servers', 'sql-dropout-thi')]"
+      ],
+      "name": "sql-dropout-thi/Default",
+      "properties": {
+        "recurringScans": {
+          "emailSubscriptionAdmins": true,
+          "isEnabled": false
+        },
+        "storageContainerPath": null
+      },
+      "type": "Microsoft.Sql/servers/vulnerabilityAssessments"
+    },
+    {
+      "apiVersion": "2026-06-01",
+      "dependsOn": [
+        "[resourceId('Microsoft.Storage/storageAccounts', 'stdropoutthi1')]"
+      ],
+      "name": "stdropoutthi1/default",
+      "properties": {
+        "containerDeleteRetentionPolicy": {
+          "days": 7,
+          "enabled": true
+        },
+        "cors": {
+          "corsRules": []
+        },
+        "deleteRetentionPolicy": {
+          "allowPermanentDelete": false,
+          "days": 7,
+          "enabled": true
+        },
+        "staticWebsite": {
+          "enabled": false
+        }
+      },
+      "sku": {
+        "name": "Standard_LRS",
+        "tier": "Standard"
+      },
+      "type": "Microsoft.Storage/storageAccounts/blobServices"
+    },
+    {
+      "apiVersion": "2026-06-01",
+      "dependsOn": [
+        "[resourceId('Microsoft.Storage/storageAccounts', 'stdropoutthi1')]"
+      ],
+      "name": "stdropoutthi1/default",
+      "properties": {
+        "cors": {
+          "corsRules": []
+        },
+        "protocolSettings": {
+          "smb": {
+            "encryptionInTransit": {
+              "required": true
+            }
+          }
+        },
+        "shareDeleteRetentionPolicy": {
+          "days": 7,
+          "enabled": true
+        }
+      },
+      "sku": {
+        "name": "Standard_LRS",
+        "tier": "Standard"
+      },
+      "type": "Microsoft.Storage/storageAccounts/fileServices"
+    },
+    {
+      "apiVersion": "2026-06-01",
+      "dependsOn": [
+        "[resourceId('Microsoft.Storage/storageAccounts', 'stdropoutthi1')]"
+      ],
+      "name": "stdropoutthi1/default",
+      "properties": {
+        "cors": {
+          "corsRules": []
+        }
+      },
+      "type": "Microsoft.Storage/storageAccounts/queueServices"
+    },
+    {
+      "apiVersion": "2026-06-01",
+      "dependsOn": [
+        "[resourceId('Microsoft.Storage/storageAccounts', 'stdropoutthi1')]"
+      ],
+      "name": "stdropoutthi1/default",
+      "properties": {
+        "cors": {
+          "corsRules": []
+        }
+      },
+      "type": "Microsoft.Storage/storageAccounts/tableServices"
+    },
+    {
+      "apiVersion": "2021-06-01",
+      "dependsOn": [
+        "[resourceId('Microsoft.Storage/storageAccounts', 'stdropoutthi1')]"
+      ],
+      "identity": {
+        "type": "SystemAssigned"
+      },
+      "location": "eastasia",
+      "name": "syn-dropout-thi",
+      "properties": {
+        "azureADOnlyAuthentication": false,
+        "cspWorkspaceAdminProperties": {
+          "initialWorkspaceAdminObjectId": "b7f420e4-8a50-4779-b7f2-e3364d6fe108"
+        },
+        "defaultDataLakeStorage": {
+          "accountUrl": "https://stdropoutthi1.dfs.core.windows.net",
+          "createManagedPrivateEndpoint": false,
+          "filesystem": "synapse",
+          "resourceId": "[resourceId('Microsoft.Storage/storageAccounts', 'stdropoutthi1')]"
+        },
+        "encryption": {},
+        "managedResourceGroupName": "synapseworkspace-managedrg-9fcc5b03-693c-4d5d-99fc-ffd865774599",
+        "privateEndpointConnections": [],
+        "publicNetworkAccess": "Enabled",
+        "sqlAdministratorLogin": "sqladminuser",
+        "trustedServiceBypassEnabled": false,
+        "workspaceRepositoryConfiguration": {
+          "accountName": "minhthu2010",
+          "collaborationBranch": "main",
+          "hostName": "https://github.com",
+          "lastCommitId": "14b956397d743555cfe12d9799cf53eb6a1e9286",
+          "repositoryName": "IS402.R11",
+          "rootFolder": "/synapse-studio",
+          "type": "WorkspaceGitHubConfiguration"
+        }
+      },
+      "type": "Microsoft.Synapse/workspaces"
+    },
+    {
+      "apiVersion": "2021-06-01",
+      "dependsOn": [
+        "[resourceId('Microsoft.Synapse/workspaces', 'syn-dropout-thi')]"
+      ],
+      "name": "syn-dropout-thi/Default",
+      "properties": {
+        "auditActionsAndGroups": [],
+        "isAzureMonitorTargetEnabled": false,
+        "isStorageSecondaryKeyInUse": false,
+        "retentionDays": 0,
+        "state": "Disabled",
+        "storageAccountSubscriptionId": "00000000-0000-0000-0000-000000000000"
+      },
+      "type": "Microsoft.Synapse/workspaces/auditingSettings"
+    },
+    {
+      "apiVersion": "2021-06-01",
+      "dependsOn": [
+        "[resourceId('Microsoft.Synapse/workspaces', 'syn-dropout-thi')]"
+      ],
+      "name": "syn-dropout-thi/default",
+      "properties": {
+        "azureADOnlyAuthentication": false
+      },
+      "type": "Microsoft.Synapse/workspaces/azureADOnlyAuthentications"
+    },
+    {
+      "apiVersion": "2021-06-01",
+      "dependsOn": [
+        "[resourceId('Microsoft.Synapse/workspaces', 'syn-dropout-thi')]"
+      ],
+      "location": "eastasia",
+      "name": "syn-dropout-thi/default",
+      "properties": {
+        "minimalTlsVersion": "1.2"
+      },
+      "type": "Microsoft.Synapse/workspaces/dedicatedSQLminimalTlsSettings"
+    },
+    {
+      "apiVersion": "2021-06-01",
+      "dependsOn": [
+        "[resourceId('Microsoft.Synapse/workspaces', 'syn-dropout-thi')]"
+      ],
+      "name": "syn-dropout-thi/Default",
+      "properties": {
+        "auditActionsAndGroups": [],
+        "isAzureMonitorTargetEnabled": false,
+        "isStorageSecondaryKeyInUse": false,
+        "retentionDays": 0,
+        "state": "Disabled",
+        "storageAccountSubscriptionId": "00000000-0000-0000-0000-000000000000"
+      },
+      "type": "Microsoft.Synapse/workspaces/extendedAuditingSettings"
+    },
+    {
+      "apiVersion": "2021-06-01",
+      "dependsOn": [
+        "[resourceId('Microsoft.Synapse/workspaces', 'syn-dropout-thi')]"
+      ],
+      "name": "syn-dropout-thi/allowAll",
+      "properties": {
+        "endIpAddress": "255.255.255.255",
+        "startIpAddress": "0.0.0.0"
+      },
+      "type": "Microsoft.Synapse/workspaces/firewallRules"
+    },
+    {
+      "apiVersion": "2021-06-01",
+      "dependsOn": [
+        "[resourceId('Microsoft.Synapse/workspaces', 'syn-dropout-thi')]"
+      ],
+      "name": "syn-dropout-thi/AutoResolveIntegrationRuntime",
+      "properties": {
+        "type": "Managed",
+        "typeProperties": {
+          "computeProperties": {
+            "location": "AutoResolve"
+          }
+        }
+      },
+      "type": "Microsoft.Synapse/workspaces/integrationruntimes"
+    },
+    {
+      "apiVersion": "2021-06-01",
+      "dependsOn": [
+        "[resourceId('Microsoft.Synapse/workspaces', 'syn-dropout-thi')]"
+      ],
+      "name": "syn-dropout-thi/Default",
+      "properties": {
+        "disabledAlerts": [
+          ""
+        ],
+        "emailAccountAdmins": false,
+        "emailAddresses": [
+          ""
+        ],
+        "retentionDays": 0,
+        "state": "Disabled"
+      },
+      "type": "Microsoft.Synapse/workspaces/securityAlertPolicies"
+    },
+    {
+      "apiVersion": "2021-06-01",
+      "dependsOn": [
+        "[resourceId('Microsoft.Synapse/workspaces', 'syn-dropout-thi')]"
+      ],
+      "name": "syn-dropout-thi/Default",
+      "properties": {
+        "recurringScans": {
+          "emailSubscriptionAdmins": true,
+          "isEnabled": false
+        },
+        "storageContainerPath": null
+      },
+      "type": "Microsoft.Synapse/workspaces/vulnerabilityAssessments"
+    },
+    {
+      "apiVersion": "2026-08-01-preview",
+      "dependsOn": [
+        "[resourceId('Microsoft.Sql/servers/databases', 'sql-dropout-thi', 'dropoutdb')]",
+        "[resourceId('Microsoft.Sql/servers', 'sql-dropout-thi')]"
+      ],
+      "name": "sql-dropout-thi/dropoutdb/Default",
+      "properties": {
+        "state": "Disabled"
+      },
+      "type": "Microsoft.Sql/servers/databases/advancedThreatProtectionSettings"
+    },
+    {
+      "apiVersion": "2014-04-01",
+      "dependsOn": [
+        "[resourceId('Microsoft.Sql/servers/databases', 'sql-dropout-thi', 'dropoutdb')]",
+        "[resourceId('Microsoft.Sql/servers', 'sql-dropout-thi')]"
+      ],
+      "location": "East Asia",
+      "name": "sql-dropout-thi/dropoutdb/Default",
+      "properties": {
+        "auditingState": "Disabled"
+      },
+      "type": "Microsoft.Sql/servers/databases/auditingPolicies"
+    },
+    {
+      "apiVersion": "2026-08-01-preview",
+      "dependsOn": [
+        "[resourceId('Microsoft.Sql/servers/databases', 'sql-dropout-thi', 'dropoutdb')]",
+        "[resourceId('Microsoft.Sql/servers', 'sql-dropout-thi')]"
+      ],
+      "name": "sql-dropout-thi/dropoutdb/Default",
+      "properties": {
+        "isAzureMonitorTargetEnabled": false,
+        "retentionDays": 0,
+        "state": "Disabled",
+        "storageAccountSubscriptionId": "00000000-0000-0000-0000-000000000000"
+      },
+      "type": "Microsoft.Sql/servers/databases/auditingSettings"
+    },
+    {
+      "apiVersion": "2026-08-01-preview",
+      "dependsOn": [
+        "[resourceId('Microsoft.Sql/servers/databases', 'sql-dropout-thi', 'dropoutdb')]",
+        "[resourceId('Microsoft.Sql/servers', 'sql-dropout-thi')]"
+      ],
+      "name": "sql-dropout-thi/dropoutdb/default",
+      "properties": {
+        "monthlyRetention": "PT0S",
+        "timeBasedImmutability": "Disabled",
+        "weekOfYear": 0,
+        "weeklyRetention": "PT0S",
+        "yearlyRetention": "PT0S"
+      },
+      "type": "Microsoft.Sql/servers/databases/backupLongTermRetentionPolicies"
+    },
+    {
+      "apiVersion": "2026-08-01-preview",
+      "dependsOn": [
+        "[resourceId('Microsoft.Sql/servers/databases', 'sql-dropout-thi', 'dropoutdb')]",
+        "[resourceId('Microsoft.Sql/servers', 'sql-dropout-thi')]"
+      ],
+      "name": "sql-dropout-thi/dropoutdb/default",
+      "properties": {
+        "diffBackupIntervalInHours": 12,
+        "retentionDays": 7
+      },
+      "type": "Microsoft.Sql/servers/databases/backupShortTermRetentionPolicies"
+    },
+    {
+      "apiVersion": "2026-08-01-preview",
+      "dependsOn": [
+        "[resourceId('Microsoft.Sql/servers/databases', 'sql-dropout-thi', 'dropoutdb')]",
+        "[resourceId('Microsoft.Sql/servers', 'sql-dropout-thi')]"
+      ],
+      "name": "sql-dropout-thi/dropoutdb/Default",
+      "properties": {
+        "isAzureMonitorTargetEnabled": false,
+        "retentionDays": 0,
+        "state": "Disabled",
+        "storageAccountSubscriptionId": "00000000-0000-0000-0000-000000000000"
+      },
+      "type": "Microsoft.Sql/servers/databases/extendedAuditingSettings"
+    },
+    {
+      "apiVersion": "2026-08-01-preview",
+      "dependsOn": [
+        "[resourceId('Microsoft.Sql/servers/databases', 'sql-dropout-thi', 'dropoutdb')]",
+        "[resourceId('Microsoft.Sql/servers', 'sql-dropout-thi')]"
+      ],
+      "name": "sql-dropout-thi/dropoutdb/Default",
+      "properties": {
+        "state": "Disabled"
+      },
+      "type": "Microsoft.Sql/servers/databases/geoBackupPolicies"
+    },
+    {
+      "apiVersion": "2026-08-01-preview",
+      "dependsOn": [
+        "[resourceId('Microsoft.Sql/servers/databases', 'sql-dropout-thi', 'dropoutdb')]",
+        "[resourceId('Microsoft.Sql/servers', 'sql-dropout-thi')]"
+      ],
+      "name": "sql-dropout-thi/dropoutdb/Current",
+      "properties": {},
+      "type": "Microsoft.Sql/servers/databases/ledgerDigestUploads"
+    },
+    {
+      "apiVersion": "2026-08-01-preview",
+      "dependsOn": [
+        "[resourceId('Microsoft.Sql/servers/databases', 'sql-dropout-thi', 'dropoutdb')]",
+        "[resourceId('Microsoft.Sql/servers', 'sql-dropout-thi')]"
+      ],
+      "name": "sql-dropout-thi/dropoutdb/Default",
+      "properties": {
+        "disabledAlerts": [
+          ""
+        ],
+        "emailAccountAdmins": false,
+        "emailAddresses": [
+          ""
+        ],
+        "retentionDays": 0,
+        "state": "Disabled"
+      },
+      "type": "Microsoft.Sql/servers/databases/securityAlertPolicies"
+    },
+    {
+      "apiVersion": "2026-08-01-preview",
+      "dependsOn": [
+        "[resourceId('Microsoft.Sql/servers/databases', 'sql-dropout-thi', 'dropoutdb')]",
+        "[resourceId('Microsoft.Sql/servers', 'sql-dropout-thi')]"
+      ],
+      "name": "sql-dropout-thi/dropoutdb/Current",
+      "properties": {
+        "scanState": "Complete",
+        "state": "Enabled"
+      },
+      "type": "Microsoft.Sql/servers/databases/transparentDataEncryption"
+    },
+    {
+      "apiVersion": "2026-08-01-preview",
+      "dependsOn": [
+        "[resourceId('Microsoft.Sql/servers/databases', 'sql-dropout-thi', 'dropoutdb')]",
+        "[resourceId('Microsoft.Sql/servers', 'sql-dropout-thi')]"
+      ],
+      "name": "sql-dropout-thi/dropoutdb/Default",
+      "properties": {
+        "recurringScans": {
+          "emailSubscriptionAdmins": true,
+          "isEnabled": false
+        }
+      },
+      "type": "Microsoft.Sql/servers/databases/vulnerabilityAssessments"
+    },
+    {
+      "apiVersion": "2026-06-01",
+      "dependsOn": [
+        "[resourceId('Microsoft.Storage/storageAccounts/blobServices', 'stdropoutthi1', 'default')]",
+        "[resourceId('Microsoft.Storage/storageAccounts', 'stdropoutthi1')]"
+      ],
+      "name": "stdropoutthi1/default/curated",
+      "properties": {
+        "defaultEncryptionScope": "$account-encryption-key",
+        "denyEncryptionScopeOverride": false,
+        "immutableStorageWithVersioning": {
+          "enabled": false
+        },
+        "publicAccess": "None"
+      },
+      "type": "Microsoft.Storage/storageAccounts/blobServices/containers"
+    },
+    {
+      "apiVersion": "2026-06-01",
+      "dependsOn": [
+        "[resourceId('Microsoft.Storage/storageAccounts/blobServices', 'stdropoutthi1', 'default')]",
+        "[resourceId('Microsoft.Storage/storageAccounts', 'stdropoutthi1')]"
+      ],
+      "name": "stdropoutthi1/default/processed",
+      "properties": {
+        "defaultEncryptionScope": "$account-encryption-key",
+        "denyEncryptionScopeOverride": false,
+        "immutableStorageWithVersioning": {
+          "enabled": false
+        },
+        "publicAccess": "None"
+      },
+      "type": "Microsoft.Storage/storageAccounts/blobServices/containers"
+    },
+    {
+      "apiVersion": "2026-06-01",
+      "dependsOn": [
+        "[resourceId('Microsoft.Storage/storageAccounts/blobServices', 'stdropoutthi1', 'default')]",
+        "[resourceId('Microsoft.Storage/storageAccounts', 'stdropoutthi1')]"
+      ],
+      "name": "stdropoutthi1/default/raw",
+      "properties": {
+        "defaultEncryptionScope": "$account-encryption-key",
+        "denyEncryptionScopeOverride": false,
+        "immutableStorageWithVersioning": {
+          "enabled": false
+        },
+        "publicAccess": "None"
+      },
+      "type": "Microsoft.Storage/storageAccounts/blobServices/containers"
+    },
+    {
+      "apiVersion": "2026-06-01",
+      "dependsOn": [
+        "[resourceId('Microsoft.Storage/storageAccounts/blobServices', 'stdropoutthi1', 'default')]",
+        "[resourceId('Microsoft.Storage/storageAccounts', 'stdropoutthi1')]"
+      ],
+      "name": "stdropoutthi1/default/synapse",
+      "properties": {
+        "defaultEncryptionScope": "$account-encryption-key",
+        "denyEncryptionScopeOverride": false,
+        "immutableStorageWithVersioning": {
+          "enabled": false
+        },
+        "publicAccess": "None"
+      },
+      "type": "Microsoft.Storage/storageAccounts/blobServices/containers"
+    }
+  ],
+  "variables": {}
+}

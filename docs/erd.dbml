@@ -1,0 +1,196 @@
+TableGroup dimension {
+  dim_faculty
+  dim_major
+  dim_term
+  dim_class
+  dim_student
+}
+
+TableGroup fact {
+  fact_enrollment
+  fact_course_grade
+  student_features
+  agg_cohort_major
+}
+
+TableGroup app {
+  predictions
+  model_metrics
+  rls_user_scope
+  etl_log
+}
+
+Table dim_faculty {
+  faculty_id int [pk]
+  faculty_name nvarchar(100)
+}
+
+Table dim_major {
+  major_id int [pk]
+  major_name nvarchar(100)
+  faculty_id int
+}
+
+Table dim_term {
+  term_code int [pk, note: '200908 = Fall 2009']
+  year int
+  season varchar(6)
+  academic_year varchar(9)
+}
+
+Table dim_class {
+  class_code varchar(12) [pk]
+  major_id int
+  cohort_year int
+  faculty_id int
+}
+
+Table dim_student {
+  student_id int [pk]
+  age int
+  gender char(1)
+  background varchar(10)
+  in_state char(1)
+  international char(1)
+  housing varchar(12)
+  distance_from_home float
+  high_school varchar(20)
+  high_school_gpa float
+  father_edu nvarchar(40)
+  mother_edu nvarchar(40)
+  is_synthetic bit
+  block int
+}
+
+Table fact_enrollment {
+  student_id int [pk]
+  major_id int
+  faculty_id int
+  class_code varchar(12)
+  cohort_year int
+  first_term int
+  second_term int
+  minor nvarchar(60)
+  degree_group varchar(30)
+  entrance1 float
+  entrance2 float
+  entrance_comb float
+  first_term_attempt_hrs int
+  first_term_earned_hrs int
+  second_term_attempt_hrs int
+  second_term_earned_hrs int
+  gross_fin_need float
+  cost_of_attend float
+  est_fam_contribution float
+  unmet_need float
+  returned_2nd_yr bit
+  dropout bit
+  is_synthetic bit
+  block int
+}
+
+Table fact_course_grade {
+  student_id int
+  term_code int
+  term_seq int
+  slot int
+  course_code varchar(12)
+  dept varchar(6)
+  grade varchar(8)
+  grade_points float
+  is_pass bit
+  is_synthetic bit
+  block int
+}
+
+Table student_features {
+  student_id int [pk]
+  faculty_id int
+  major_id int
+  gpa_t1 float
+  gpa_t2 float
+  earned_ratio_t1 float
+  earned_ratio_t2 float
+  n_df_t1 int
+  n_df_t2 int
+  has_second_term bit
+  unmet_need float
+  fam_contribution_ratio float
+  dropout bit
+  is_synthetic bit
+}
+
+Table agg_cohort_major {
+  cohort_year int
+  major_id int
+  faculty_id int
+  is_synthetic bit
+  n_students bigint
+  n_dropout bigint
+  dropout_rate float
+  avg_high_school_gpa float
+  avg_gpa_term1 float
+}
+
+Table predictions {
+  id bigint [pk, increment]
+  student_id int
+  class_code varchar(12)
+  probability float
+  risk_level nvarchar(12)
+  top_factors nvarchar(400)
+  model_version varchar(50)
+  source varchar(20)
+  created_at datetime2
+}
+
+Table model_metrics {
+  run_id varchar(64)
+  model_name varchar(50)
+  params nvarchar(400)
+  metric varchar(30)
+  value float
+  logged_at datetime2
+}
+
+Table rls_user_scope {
+  user_email nvarchar(200)
+  role nvarchar(20)
+  faculty_id int
+  class_code varchar(12)
+}
+
+Table etl_log {
+  id bigint [pk, increment]
+  pipeline_name nvarchar(100)
+  run_id nvarchar(100)
+  activity nvarchar(100)
+  rows_copied bigint
+  duration_sec int
+  status nvarchar(20)
+  logged_at datetime2
+}
+
+// Quan hệ
+Ref: dim_major.faculty_id > dim_faculty.faculty_id
+Ref: dim_class.major_id > dim_major.major_id
+Ref: dim_class.faculty_id > dim_faculty.faculty_id
+
+Ref: fact_enrollment.student_id - dim_student.student_id
+Ref: fact_enrollment.major_id > dim_major.major_id
+Ref: fact_enrollment.faculty_id > dim_faculty.faculty_id
+Ref: fact_enrollment.class_code > dim_class.class_code
+Ref: fact_enrollment.first_term > dim_term.term_code
+Ref: fact_enrollment.second_term > dim_term.term_code
+
+Ref: fact_course_grade.student_id > dim_student.student_id
+Ref: fact_course_grade.term_code > dim_term.term_code
+
+Ref: student_features.student_id - dim_student.student_id
+Ref: agg_cohort_major.major_id > dim_major.major_id
+Ref: agg_cohort_major.faculty_id > dim_faculty.faculty_id
+
+Ref: predictions.student_id > dim_student.student_id
+Ref: predictions.class_code > dim_class.class_code
+Ref: rls_user_scope.faculty_id > dim_faculty.faculty_id
+Ref: rls_user_scope.class_code > dim_class.class_code
