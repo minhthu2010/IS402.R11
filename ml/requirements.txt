@@ -5,6 +5,7 @@
 numpy==2.2.6
 pandas==2.2.3
 scikit-learn==1.6.1
+scipy==1.15.3          # scipy 1.16+ làm sklearn 1.6.1 in cảnh báo "Unknown solver options: iprint"
 lightgbm==4.6.0
 xgboost==2.1.4
 joblib==1.4.2

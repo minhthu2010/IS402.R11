@@ -20,13 +20,13 @@ LABELS_VI = {   # tên dễ đọc hiển thị trên web / Power BI
     "second_term_attempt_hrs": "Tín chỉ đăng ký HK2", "second_term_earned_hrs": "Tín chỉ đạt HK2",
     "earned_ratio_t2": "Tỉ lệ tín chỉ đạt HK2", "gpa_t2": "GPA HK2", "n_df_t2": "Số môn D/F HK2",
     "gpa_change": "Thay đổi GPA HK2 so với HK1", "gross_fin_need": "Nhu cầu tài chính",
-    "unmet_need": "Phần tài chính thiếu hụt", "fam_contribution_ratio": "Tỉ lệ gia đình đóng góp",
+    "unmet_need": "Phần tài chính thiếu hụt", "fin_data_missing": "Không có hồ sơ tài chính", "fam_contribution_ratio": "Tỉ lệ gia đình đóng góp",
 }
 
 
 def _original_name(transformed, features):
     """'num__gpa_t1' -> 'gpa_t1'; 'cat__faculty_id_3.0' -> 'faculty_id'."""
-    name = transformed.split("__", 1)[-1]
+    name = transformed.split("__", 1)[-1].replace("missingindicator_", "")
     for f in sorted(features, key=len, reverse=True):
         if name == f or name.startswith(f + "_"):
             return f
@@ -37,8 +37,8 @@ def contributions(pipe, X, features, background=None):
     """DataFrame (số sinh viên × feature gốc): đóng góp vào log-odds bỏ học; dương = đẩy rủi ro lên."""
     prep, clf = pipe[:-1], pipe[-1]
     Xt = prep.transform(X[features])
-    Xt = Xt.toarray() if hasattr(Xt, "toarray") else np.asarray(Xt, dtype=float)
     names = list(prep.get_feature_names_out())
+    Xt = Xt.toarray() if hasattr(Xt, "toarray") else np.asarray(Xt, dtype=float)
     kind = type(clf).__name__
 
     if kind == "LogisticRegression":
@@ -53,7 +53,10 @@ def contributions(pipe, X, features, background=None):
             import shap
         except ImportError:                # thiếu shap thì vẫn dự đoán được, chỉ không có top_factors
             return None
-        sv = shap.TreeExplainer(clf).shap_values(Xt)
+        import warnings
+        with warnings.catch_warnings():        # shap báo đổi định dạng kết quả LightGBM; đã xử lý ở dưới
+            warnings.simplefilter("ignore", UserWarning)
+            sv = shap.TreeExplainer(clf).shap_values(Xt)
         if isinstance(sv, list):           # bản shap cũ: [lớp 0, lớp 1]
             sv = sv[1]
         sv = np.asarray(sv)

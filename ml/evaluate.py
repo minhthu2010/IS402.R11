@@ -10,9 +10,14 @@ Thêm --sql để ghi model_metrics vào Azure SQL (đặt biến môi trường
 Kết quả ở ml/figures/: 10_so_sanh_model.png, 11_roc.png, 12_tham_so_*.png, 13_confusion.png,
 14_shap_tong_quat.png, 15_giai_thich_1_sv.png; ml/figures/model_metrics.csv; ml/figures/ket_qua.md
 """
+import os
+import warnings
+# joblib cố đếm lõi CPU vật lý bằng lệnh "wmic" mà Windows 11 đã bỏ, rồi in cảnh báo dài (không ảnh hưởng kết quả).
+# Khai sẵn số lõi = 1/2 số luồng (thường đúng bằng số lõi vật lý) để joblib bỏ qua bước đếm đó.
+os.environ.setdefault("LOKY_MAX_CPU_COUNT", str(max(1, (os.cpu_count() or 2) // 2)))
+warnings.filterwarnings("ignore", message="Could not find the number of physical cores")
 import argparse
 import json
-import os
 import sys
 from pathlib import Path
 
@@ -32,7 +37,20 @@ from train import load_features, split_data  # noqa: E402
 
 FIG = HERE / "figures"
 NAMES = {"logreg": "Logistic Regression", "rf": "Random Forest", "lgbm": "LightGBM", "xgb": "XGBoost", "mlp": "MLP"}
-SHOW = ["val_auc", "val_f1", "val_recall", "val_precision"]
+SHOW = ["cv_auc", "cv_recall", "cv_precision", "cv_f1", "cv_accuracy"]
+
+
+def save(fig, name):
+    """Lưu hình vào ml/figures. Windows khóa file đang mở ở chương trình khác (trình xem ảnh, VS Code...),
+    khi đó lưu sang tên khác thay vì dừng cả chương trình."""
+    path = FIG / name
+    try:
+        fig.savefig(path, dpi=200, bbox_inches="tight")
+    except OSError:
+        alt = path.with_name(f"{path.stem}_moi{path.suffix}")
+        fig.savefig(alt, dpi=200, bbox_inches="tight")
+        print(f"Không ghi đè được {path.name} (file đang mở ở chương trình khác?) -> đã lưu thành {alt.name}")
+    plt.close(fig)
 
 
 # ---------------------------------------------------------------- lấy model
@@ -55,7 +73,10 @@ def mlflow_client():
 def load_aml(dst):
     mlflow = mlflow_client()
     runs = mlflow.search_runs(experiment_names=["dropout-models"], filter_string="attributes.status = 'FINISHED'")
-    runs = runs[runs["params.drop_term2"].astype(str) == "0"].sort_values("start_time", ascending=False)
+    keep = runs["params.drop_term2"].astype(str) == "0"
+    if "params.drop_sensitive" in runs:          # bản chính thức: không dùng xuất thân, giới tính
+        keep &= runs["params.drop_sensitive"].astype(str).isin(["1", "nan", "None"])
+    runs = runs[keep].sort_values("start_time", ascending=False)
     out = []
     for name, r in runs.groupby("tags.model_name", sort=False):
         rid = r.iloc[0]["run_id"]                       # run mới nhất của loại model này
@@ -68,24 +89,30 @@ def load_aml(dst):
 
 
 # ---------------------------------------------------------------- biểu đồ
-def plot_compare(models):
-    rows = [{"model": NAMES.get(m["meta"]["model_name"], m["meta"]["model_name"]),
-             **{k: m["meta"]["metrics"][k] for k in SHOW + ["train_seconds", "cv_auc_mean", "cv_auc_std"]}}
+def plot_compare(models, test):
+    """Cột trái: metric cross-validation (5 fold trên tập dev) của từng model + mốc "đoán tất cả ở lại"."""
+    rows = [{"model": NAMES.get(m["meta"]["model_name"], m["meta"]["model_name"])
+             + ("" if m["meta"].get("drop_sensitive", False) else " (+xuất thân, giới tính)"),
+             **{k: m["meta"]["metrics"][k] for k in SHOW + ["cv_auc_std", "test_auc", "train_seconds"]}}
             for m in models]
-    df = pd.DataFrame(rows).sort_values("val_auc", ascending=False)
-    fig, (a1, a2) = plt.subplots(1, 2, figsize=(13, 4.5), gridspec_kw={"width_ratios": [3, 1]})
-    df.set_index("model")[SHOW].rename(columns=lambda c: c.replace("val_", "").upper()).plot.bar(ax=a1, rot=0, width=0.8)
-    a1.set(ylim=(0, 1), ylabel="Giá trị trên tập validation", xlabel="",
-           title="So sánh model: ROC-AUC, F1, recall, precision")
-    a1.legend(ncols=4, loc="upper center", bbox_to_anchor=(0.5, -0.08), frameon=False)
+    df = pd.DataFrame(rows).sort_values("cv_auc", ascending=False)
+    base_acc = max(test["dropout"].mean(), 1 - test["dropout"].mean())
+    base = pd.DataFrame([{"model": "Đoán tất cả ở lại", "cv_auc": 0.5, "cv_recall": 0.0, "cv_precision": 0.0,
+                          "cv_f1": 0.0, "cv_accuracy": base_acc}])
+    plot = pd.concat([df, base], ignore_index=True).set_index("model")[SHOW]
+    fig, (a1, a2) = plt.subplots(1, 2, figsize=(14, 4.8), gridspec_kw={"width_ratios": [3.2, 1]})
+    plot.rename(columns=lambda c: c.replace("cv_", "").upper()).plot.bar(ax=a1, rot=0, width=0.85)
+    a1.set(ylim=(0, 1.05), ylabel="Cross-validation 5 fold (tập dev)", xlabel="",
+           title="So sánh model: ROC-AUC, recall, precision, F1, accuracy (lớp dương = bỏ học)")
+    a1.legend(ncols=5, loc="upper center", bbox_to_anchor=(0.5, -0.08), frameon=False)
     for c in a1.containers:
         a1.bar_label(c, fmt="%.2f", fontsize=7)
     a2.barh(df["model"], df["train_seconds"], color="grey")
-    a2.set(xlabel="Giây", title="Thời gian train")
+    a2.set(xlabel="Giây", title="Thời gian train (toàn bộ dev)")
     a2.invert_yaxis()
     fig.tight_layout()
-    fig.savefig(FIG / "10_so_sanh_model.png", dpi=200, bbox_inches="tight")
-    return df
+    save(fig, "10_so_sanh_model.png")
+    return pd.concat([df, base], ignore_index=True)
 
 
 def plot_roc(models, test):
@@ -97,35 +124,35 @@ def plot_roc(models, test):
     ax.plot([0, 1], [0, 1], "--", c="grey", lw=1)
     ax.set(xlabel="Tỉ lệ báo nhầm (FPR)", ylabel="Tỉ lệ phát hiện đúng (recall / TPR)", title="Đường ROC trên tập test")
     ax.legend(loc="lower right")
-    fig.savefig(FIG / "11_roc.png", dpi=200, bbox_inches="tight")
+    save(fig, "11_roc.png")
 
 
 def plot_sweep():
     mlflow = mlflow_client()
     runs = mlflow.search_runs(experiment_names=["dropout-sweep"], filter_string="attributes.status = 'FINISHED'")
-    runs = runs.dropna(subset=["metrics.val_auc"])
+    runs = runs.dropna(subset=["metrics.cv_auc"])
     params = [c for c in runs.columns if c.startswith("params.")
               and c.split(".", 1)[1] in ("n_estimators", "learning_rate", "num_leaves", "min_samples_leaf", "max_depth")
               and runs[c].nunique() > 1]
     fig, axes = plt.subplots(1, len(params), figsize=(4 * len(params), 3.8), sharey=True, squeeze=False)
     for ax, c in zip(axes[0], params):
         x = pd.to_numeric(runs[c])
-        ax.scatter(x, runs["metrics.val_auc"], alpha=0.7)
-        best = runs["metrics.val_auc"].idxmax()
-        ax.scatter(x[best], runs.loc[best, "metrics.val_auc"], c="red", s=60, label="tốt nhất")
+        ax.scatter(x, runs["metrics.cv_auc"], alpha=0.7)
+        best = runs["metrics.cv_auc"].idxmax()
+        ax.scatter(x[best], runs.loc[best, "metrics.cv_auc"], c="red", s=60, label="tốt nhất")
         ax.set(xlabel=c.split(".", 1)[1], title=c.split(".", 1)[1])
-    axes[0][0].set_ylabel("ROC-AUC validation")
+    axes[0][0].set_ylabel("ROC-AUC cross-validation")
     axes[0][0].legend()
     fig.suptitle(f"Sweep {len(runs)} lần chạy: ROC-AUC theo từng tham số")
     fig.tight_layout()
-    fig.savefig(FIG / "12_tham_so_sweep.png", dpi=200, bbox_inches="tight")
-    best = runs.loc[runs["metrics.val_auc"].idxmax()]
-    print("Tham số tốt nhất:", {c.split('.', 1)[1]: best[c] for c in params}, "val_auc", round(best["metrics.val_auc"], 4))
-    runs[[*params, "metrics.val_auc", "metrics.val_recall", "run_id"]].sort_values(
-        "metrics.val_auc", ascending=False).to_csv(FIG / "sweep_runs.csv", index=False)
+    save(fig, "12_tham_so_sweep.png")
+    best = runs.loc[runs["metrics.cv_auc"].idxmax()]
+    print("Tham số tốt nhất:", {c.split('.', 1)[1]: best[c] for c in params}, "cv_auc", round(best["metrics.cv_auc"], 4))
+    runs[[*params, "metrics.cv_auc", "metrics.cv_recall", "run_id"]].sort_values(
+        "metrics.cv_auc", ascending=False).to_csv(FIG / "sweep_runs.csv", index=False)
 
 
-def evaluate_best(best, test, train):
+def evaluate_best(best, test, dev):
     feats, t = best["meta"]["features"], best["meta"]["threshold"]
     p = best["pipe"].predict_proba(test[feats])[:, 1]
     pred = (p >= t).astype(int)
@@ -133,10 +160,10 @@ def evaluate_best(best, test, train):
     ConfusionMatrixDisplay(confusion_matrix(test["dropout"], pred),
                            display_labels=["Ở lại", "Bỏ học"]).plot(ax=ax, colorbar=False, cmap="Blues")
     ax.set(title=f"{NAMES.get(best['meta']['model_name'])}, ngưỡng {t:.2f}", xlabel="Dự đoán", ylabel="Thực tế")
-    fig.savefig(FIG / "13_confusion.png", dpi=200, bbox_inches="tight")
+    save(fig, "13_confusion.png")
     report = classification_report(test["dropout"], pred, target_names=["Ở lại", "Bỏ học"], digits=3)
 
-    contrib = contributions(best["pipe"], test, feats, train)
+    contrib = contributions(best["pipe"], test, feats, dev)
     if contrib is None:
         print("Model này không hỗ trợ giải thích (MLP); chọn model cây hoặc LogReg để có SHAP.")
         return report
@@ -144,9 +171,12 @@ def evaluate_best(best, test, train):
     fig, ax = plt.subplots(figsize=(7, 5.5))
     ax.barh([LABELS_VI.get(f, f) for f in imp.index], imp.values)
     ax.set(xlabel="Mức ảnh hưởng trung bình |SHAP| (log-odds)", title="15 yếu tố ảnh hưởng nhiều nhất tới dự đoán bỏ học")
-    fig.savefig(FIG / "14_shap_tong_quat.png", dpi=200, bbox_inches="tight")
+    save(fig, "14_shap_tong_quat.png")
 
-    i = int(np.argmax(p))                                  # sinh viên rủi ro cao nhất trong tập test -> demo
+    # Demo: sinh viên rủi ro cao nhất trong số CÓ đăng ký HK2 (nếu chọn người không đăng ký HK2 thì
+    # một yếu tố chiếm gần hết, ai cũng đoán được; người có HK2 cho thấy model dựa vào GPA, tín chỉ, tài chính)
+    pool = np.flatnonzero(test["has_second_term"].to_numpy() == 1) if "has_second_term" in feats else np.arange(len(p))
+    i = int(pool[np.argmax(p[pool])]) if len(pool) else int(np.argmax(p))
     row = contrib.iloc[i].sort_values(key=abs).tail(10)
     fig, ax = plt.subplots(figsize=(7, 4.5))
     ax.barh([LABELS_VI.get(f, f) for f in row.index], row.values,
@@ -154,7 +184,7 @@ def evaluate_best(best, test, train):
     ax.axvline(0, c="black", lw=0.8)
     ax.set(xlabel="Đóng góp vào rủi ro (đỏ = tăng, xanh = giảm)",
            title=f"Vì sao SV {test['student_id'].iloc[i]} được dự đoán bỏ học (xác suất {p[i]:.0%})")
-    fig.savefig(FIG / "15_giai_thich_1_sv.png", dpi=200, bbox_inches="tight")
+    save(fig, "15_giai_thich_1_sv.png")
     return report
 
 
@@ -192,7 +222,7 @@ def main():
     ap.add_argument("--data", required=True)
     ap.add_argument("--major-faculty", default=None)
     ap.add_argument("--sweep", action="store_true")
-    ap.add_argument("--best", default=None, help="tên model chọn làm model cuối (mặc định: val_auc cao nhất)")
+    ap.add_argument("--best", default=None, help="tên model chọn làm model cuối (mặc định: cv_auc cao nhất)")
     ap.add_argument("--sql", action="store_true")
     a = ap.parse_args()
     FIG.mkdir(exist_ok=True)
@@ -200,15 +230,17 @@ def main():
     models = load_aml(HERE / "downloads") if a.aml else [load_dir(d) for d in a.local]
     if not models:
         raise SystemExit("Không có model nào: dùng --aml hoặc --local <thư mục>")
-    train, _, test = split_data(load_features(a.data, a.major_faculty))
+    dev, test = split_data(load_features(a.data, a.major_faculty))
 
-    table = plot_compare(models)
+    table = plot_compare(models, test)
     plot_roc(models, test)
     if a.sweep:
         plot_sweep()
-    best = (next(m for m in models if m["meta"]["model_name"] == a.best) if a.best
-            else max(models, key=lambda m: m["meta"]["metrics"]["val_auc"]))
-    report = evaluate_best(best, test, train)
+    # Model chính thức chỉ chọn trong các bản KHÔNG dùng xuất thân, giới tính; bản có dùng chỉ để so sánh.
+    official = [m for m in models if m["meta"].get("drop_sensitive", True)] or models
+    best = (next(m for m in official if m["meta"]["model_name"] == a.best) if a.best
+            else max(official, key=lambda m: m["meta"]["metrics"]["cv_auc"]))
+    report = evaluate_best(best, test, dev)
 
     mm = metrics_rows(models)
     mm.to_csv(FIG / "model_metrics.csv", index=False)
