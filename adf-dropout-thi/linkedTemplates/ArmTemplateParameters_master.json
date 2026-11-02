@@ -26,6 +26,9 @@
 		"ls_synapse_properties_typeProperties_database": {
 			"value": "dropout_lake"
 		},
+		"tr_new_raw_file_properties_typeProperties_scope": {
+			"value": "/subscriptions/89f280fd-0758-4210-b24d-5879434f606a/resourceGroups/rg-dropout-data/providers/Microsoft.Storage/storageAccounts/stdropoutthi1"
+		},
 		"containerUri": {
 			"value": ""
 		},

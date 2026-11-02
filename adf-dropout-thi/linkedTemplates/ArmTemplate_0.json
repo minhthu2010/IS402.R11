@@ -34,6 +34,10 @@
 		"ls_synapse_properties_typeProperties_database": {
 			"type": "string",
 			"defaultValue": "dropout_lake"
+		},
+		"tr_new_raw_file_properties_typeProperties_scope": {
+			"type": "string",
+			"defaultValue": "/subscriptions/89f280fd-0758-4210-b24d-5879434f606a/resourceGroups/rg-dropout-data/providers/Microsoft.Storage/storageAccounts/stdropoutthi1"
 		}
 	},
 	"variables": {
@@ -683,6 +687,74 @@
 				"[concat(variables('factoryId'), '/pipelines/pl_curated_to_sql')]",
 				"[concat(variables('factoryId'), '/linkedServices/ls_sql')]",
 				"[concat(variables('factoryId'), '/datasets/ds_parquet')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/tr_nightly')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Stopped",
+				"pipelines": [
+					{
+						"pipelineReference": {
+							"referenceName": "pl_dropout_etl",
+							"type": "PipelineReference"
+						},
+						"parameters": {}
+					}
+				],
+				"type": "ScheduleTrigger",
+				"typeProperties": {
+					"recurrence": {
+						"frequency": "Day",
+						"interval": 1,
+						"startTime": "2026-11-02T08:11:00",
+						"timeZone": "SE Asia Standard Time",
+						"schedule": {
+							"minutes": [
+								0
+							],
+							"hours": [
+								23
+							]
+						}
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/pipelines/pl_dropout_etl')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/tr_new_raw_file')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Stopped",
+				"pipelines": [
+					{
+						"pipelineReference": {
+							"referenceName": "pl_dropout_etl",
+							"type": "PipelineReference"
+						},
+						"parameters": {}
+					}
+				],
+				"type": "BlobEventsTrigger",
+				"typeProperties": {
+					"blobPathBeginsWith": "/raw/blobs/real/",
+					"ignoreEmptyBlobs": true,
+					"scope": "[parameters('tr_new_raw_file_properties_typeProperties_scope')]",
+					"events": [
+						"Microsoft.Storage.BlobCreated"
+					]
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/pipelines/pl_dropout_etl')]"
 			]
 		}
 	]
