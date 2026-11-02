@@ -1,0 +1,24 @@
+{
+	"name": "tr_new_raw_file",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Stopped",
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "pl_dropout_etl",
+					"type": "PipelineReference"
+				}
+			}
+		],
+		"type": "BlobEventsTrigger",
+		"typeProperties": {
+			"blobPathBeginsWith": "/raw/blobs/real/",
+			"ignoreEmptyBlobs": true,
+			"scope": "/subscriptions/89f280fd-0758-4210-b24d-5879434f606a/resourceGroups/rg-dropout-data/providers/Microsoft.Storage/storageAccounts/stdropoutthi1",
+			"events": [
+				"Microsoft.Storage.BlobCreated"
+			]
+		}
+	}
+}
