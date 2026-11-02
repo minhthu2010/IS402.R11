@@ -210,6 +210,7 @@ def main():
           f"| tỉ lệ bỏ học {df['dropout'].mean():.1%} | {len(feats)} feature")
 
     params = {k: v for k, v in vars(a).items() if k not in ("data", "major_faculty", "out")}
+    params["data_source"] = "students_csv" if a.major_faculty else "curated"   # để phân biệt khi so sánh
     if mlflow:
         mlflow.start_run()
         mlflow.log_params(params)
