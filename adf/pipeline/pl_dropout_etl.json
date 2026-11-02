@@ -25,50 +25,13 @@
 				}
 			},
 			{
-				"name": "clear_curated",
-				"type": "Delete",
-				"dependsOn": [
-					{
-						"activity": "run_raw_to_processed",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
-				"policy": {
-					"timeout": "0.12:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"dataset": {
-						"referenceName": "ds_parquet",
-						"type": "DatasetReference",
-						"parameters": {
-							"container": "curated",
-							"folder": "/"
-						}
-					},
-					"enableLogging": false,
-					"storeSettings": {
-						"type": "AzureBlobFSReadSettings",
-						"recursive": true,
-						"wildcardFileName": "*",
-						"enablePartitionDiscovery": false
-					}
-				}
-			},
-			{
 				"name": "synapse_cetas",
 				"type": "Script",
 				"dependsOn": [
 					{
-						"activity": "clear_curated",
+						"activity": "foreach_clear_curated",
 						"dependencyConditions": [
-							"Succeeded"
+							"Completed"
 						]
 					}
 				],
@@ -186,6 +149,60 @@
 						}
 					],
 					"scriptBlockExecutionTimeout": "02:00:00"
+				}
+			},
+			{
+				"name": "foreach_clear_curated",
+				"type": "ForEach",
+				"dependsOn": [
+					{
+						"activity": "run_raw_to_processed",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@createArray('dim_faculty','dim_major','dim_term','dim_class','dim_student','fact_enrollment','fact_course_grade','student_features','agg_cohort_major')",
+						"type": "Expression"
+					},
+					"batchCount": 5,
+					"activities": [
+						{
+							"name": "clear_curated",
+							"type": "Delete",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "0.12:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"dataset": {
+									"referenceName": "ds_parquet",
+									"type": "DatasetReference",
+									"parameters": {
+										"container": "curated",
+										"folder": {
+											"value": "@{item()}",
+											"type": "Expression"
+										}
+									}
+								},
+								"enableLogging": false,
+								"storeSettings": {
+									"type": "AzureBlobFSReadSettings",
+									"recursive": true,
+									"enablePartitionDiscovery": false
+								}
+							}
+						}
+					]
 				}
 			}
 		],
