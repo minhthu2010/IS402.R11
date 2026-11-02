@@ -122,18 +122,32 @@ def load_aml(dst, run_ids=None):
 
 
 # ---------------------------------------------------------------- biểu đồ
+def model_label(m, models):
+    """Tên hiển thị của 1 model; thêm chú thích trong ngoặc khi cần phân biệt các bản cùng loại."""
+    meta, p = m["meta"], m["meta"].get("params", {})
+    name = NAMES.get(meta["model_name"], meta["model_name"])
+    if not meta.get("drop_sensitive", False):
+        name += " (+xuất thân, giới tính)"
+    if meta.get("drop_term2", False):
+        name += " (cuối HK1)"
+    if str(p.get("data_source", "")) == "curated":
+        name += " (curated)"
+    same = [x for x in models if x["meta"]["model_name"] == meta["model_name"]
+            and x["meta"].get("drop_term2") == meta.get("drop_term2")
+            and str(x["meta"].get("params", {}).get("data_source", "")) == str(p.get("data_source", ""))]
+    if meta["model_name"] == "lgbm" and len(same) > 1:
+        name += f" ({p.get('n_estimators')} cây, {p.get('num_leaves')} lá)"   # phân biệt bản mặc định / sau sweep
+    return name
+
+
+def wrap(label):
+    """Mỗi phần trong ngoặc xuống 1 dòng riêng để nhãn trục không đè lên nhau."""
+    return label.replace(" (", "\n(")
+
+
 def plot_compare(models, test):
     """Cột trái: metric cross-validation (5 fold trên tập dev) của từng model + mốc "đoán tất cả ở lại"."""
-    def label(m):
-        name = NAMES.get(m["meta"]["model_name"], m["meta"]["model_name"])
-        if not m["meta"].get("drop_sensitive", False):
-            name += " (+xuất thân, giới tính)"
-        p = m["meta"].get("params", {})
-        if m["meta"]["model_name"] == "lgbm" and sum(x["meta"]["model_name"] == "lgbm" for x in models) > 1:
-            name += f" ({p.get('n_estimators')} cây, {p.get('num_leaves')} lá)"   # phân biệt bản mặc định / sau sweep
-        return name
-
-    rows = [{"model": label(m),
+    rows = [{"model": model_label(m, models),
              **{k: m["meta"]["metrics"][k] for k in SHOW + ["cv_auc_std", "test_auc", "train_seconds"]}}
             for m in models]
     df = pd.DataFrame(rows).sort_values("cv_auc", ascending=False)
@@ -141,15 +155,20 @@ def plot_compare(models, test):
     base = pd.DataFrame([{"model": "Đoán tất cả ở lại", "cv_auc": 0.5, "cv_recall": 0.0, "cv_precision": 0.0,
                           "cv_f1": 0.0, "cv_accuracy": base_acc}])
     plot = pd.concat([df, base], ignore_index=True).set_index("model")[SHOW]
-    fig, (a1, a2) = plt.subplots(1, 2, figsize=(14, 4.8), gridspec_kw={"width_ratios": [3.2, 1]})
+    plot.index = [wrap(i) for i in plot.index]
+    n = len(plot)
+    fig, (a1, a2) = plt.subplots(1, 2, figsize=(max(14, 2.3 * n + 4), 5.6),
+                                 gridspec_kw={"width_ratios": [3.2, 1.1]})
     plot.rename(columns=lambda c: c.replace("cv_", "").upper()).plot.bar(ax=a1, rot=0, width=0.85)
     a1.set(ylim=(0, 1.05), ylabel="Cross-validation 5 fold (tập dev)", xlabel="",
            title="So sánh model: ROC-AUC, recall, precision, F1, accuracy (lớp dương = bỏ học)")
-    a1.legend(ncols=5, loc="upper center", bbox_to_anchor=(0.5, -0.08), frameon=False)
+    a1.tick_params(axis="x", labelsize=9)
+    a1.legend(ncols=5, loc="upper center", bbox_to_anchor=(0.5, -0.17), frameon=False)
     for c in a1.containers:
         a1.bar_label(c, fmt="%.2f", fontsize=7)
-    a2.barh(df["model"], df["train_seconds"], color="grey")
+    a2.barh([wrap(x) for x in df["model"]], df["train_seconds"], color="grey")
     a2.set(xlabel="Giây", title="Thời gian train (toàn bộ dev)")
+    a2.tick_params(axis="y", labelsize=9)
     a2.invert_yaxis()
     fig.tight_layout()
     save(fig, "10_so_sanh_model.png")
@@ -161,7 +180,7 @@ def plot_roc(models, test):
     for m in models:
         p = m["pipe"].predict_proba(test[m["meta"]["features"]])[:, 1]
         fpr, tpr, _ = roc_curve(test["dropout"], p)
-        ax.plot(fpr, tpr, label=f"{NAMES.get(m['meta']['model_name'])} (AUC {roc_auc_score(test['dropout'], p):.3f})")
+        ax.plot(fpr, tpr, label=f"{model_label(m, models)}: AUC {roc_auc_score(test['dropout'], p):.3f}")
     ax.plot([0, 1], [0, 1], "--", c="grey", lw=1)
     ax.set(xlabel="Tỉ lệ báo nhầm (FPR)", ylabel="Tỉ lệ phát hiện đúng (recall / TPR)", title="Đường ROC trên tập test")
     ax.legend(loc="lower right")
