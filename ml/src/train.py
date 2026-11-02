@@ -247,7 +247,11 @@ def main():
 
     if mlflow:
         mlflow.log_metrics({k: v for k, v in m.items() if not np.isnan(v)})
-        mlflow.log_artifacts(str(out), artifact_path="model")
+        # Trên Azure ML, thư mục ./outputs được tự động tải lên làm kết quả của job (outputs/model/...),
+        # nên không cần log_artifacts. Gọi log_artifacts ở đó còn gây lỗi do lệch phiên bản
+        # mlflow/azureml-mlflow ("azureml_artifacts_builder() got an unexpected keyword argument 'tracking_uri'").
+        if "AZUREML_RUN_ID" not in os.environ:
+            mlflow.log_artifacts(str(out), artifact_path="model")
         mlflow.end_run()
 
 

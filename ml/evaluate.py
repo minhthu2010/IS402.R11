@@ -61,17 +61,21 @@ def load_dir(d):
     return {"run_id": d.parent.name, "dir": d, "pipe": joblib.load(d / "model.pkl"), "meta": meta}
 
 
-def mlflow_client():
+def aml_clients():
     import mlflow
     from azure.ai.ml import MLClient
     from azure.identity import DefaultAzureCredential
-    ml = MLClient.from_config(DefaultAzureCredential(), path=str(HERE / "config.json"))
+    ml = MLClient.from_config(DefaultAzureCredential(exclude_interactive_browser_credential=False), path=str(HERE / "config.json"))
     mlflow.set_tracking_uri(ml.workspaces.get(ml.workspace_name).mlflow_tracking_uri)
-    return mlflow
+    return ml, mlflow
+
+
+def mlflow_client():
+    return aml_clients()[1]
 
 
 def load_aml(dst):
-    mlflow = mlflow_client()
+    ml, mlflow = aml_clients()
     runs = mlflow.search_runs(experiment_names=["dropout-models"], filter_string="attributes.status = 'FINISHED'")
     keep = runs["params.drop_term2"].astype(str) == "0"
     if "params.drop_sensitive" in runs:          # bản chính thức: không dùng xuất thân, giới tính
@@ -80,8 +84,11 @@ def load_aml(dst):
     out = []
     for name, r in runs.groupby("tags.model_name", sort=False):
         rid = r.iloc[0]["run_id"]                       # run mới nhất của loại model này
-        path = mlflow.artifacts.download_artifacts(run_id=rid, artifact_path="model", dst_path=str(dst / rid))
-        m = load_dir(path)
+        # Tải thư mục outputs/model của job (Azure ML tự lưu ./outputs) bằng SDK, không qua mlflow
+        target = dst / rid
+        if not any(target.rglob("model.pkl")):
+            ml.jobs.download(name=rid, download_path=str(target))
+        m = load_dir(next(target.rglob("model.pkl")).parent)
         m["run_id"] = rid
         out.append(m)
         print(f"{name:7s} run {rid}")
