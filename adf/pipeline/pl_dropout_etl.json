@@ -15,7 +15,13 @@
 						"referenceName": "pl_raw_to_processed",
 						"type": "PipelineReference"
 					},
-					"waitOnCompletion": true
+					"waitOnCompletion": true,
+					"parameters": {
+						"folders": {
+							"value": "@createArray('real/students','synthetic/students','reference/major_faculty')",
+							"type": "Expression"
+						}
+					}
 				}
 			},
 			{
@@ -140,7 +146,13 @@
 						"referenceName": "pl_curated_to_sql",
 						"type": "PipelineReference"
 					},
-					"waitOnCompletion": true
+					"waitOnCompletion": true,
+					"parameters": {
+						"Table": {
+							"value": "@createArray('dim_faculty','dim_major','dim_term','dim_class','dim_student','fact_enrollment','fact_course_grade','student_features','agg_cohort_major')",
+							"type": "Expression"
+						}
+					}
 				}
 			},
 			{
