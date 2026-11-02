@@ -1,0 +1,198 @@
+{
+	"name": "pl_dropout_etl",
+	"properties": {
+		"activities": [
+			{
+				"name": "run_raw_to_processed",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"policy": {
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "pl_raw_to_processed",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "clear_curated",
+				"type": "Delete",
+				"dependsOn": [
+					{
+						"activity": "run_raw_to_processed",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataset": {
+						"referenceName": "ds_parquet",
+						"type": "DatasetReference",
+						"parameters": {
+							"container": "curated",
+							"folder": "*"
+						}
+					},
+					"enableLogging": false,
+					"storeSettings": {
+						"type": "AzureBlobFSReadSettings",
+						"recursive": true,
+						"wildcardFileName": "*",
+						"enablePartitionDiscovery": false
+					}
+				}
+			},
+			{
+				"name": "synapse_cetas",
+				"type": "Script",
+				"dependsOn": [
+					{
+						"activity": "clear_curated",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"linkedServiceName": {
+					"referenceName": "ls_synapse",
+					"type": "LinkedServiceReference"
+				},
+				"typeProperties": {
+					"scripts": [
+						{
+							"type": "NonQuery",
+							"text": "IF EXISTS (SELECT 1 FROM sys.external_tables WHERE name = 'dim_faculty') DROP EXTERNAL TABLE dbo.dim_faculty;\nCREATE EXTERNAL TABLE dbo.dim_faculty\nWITH (LOCATION = 'dim_faculty/', DATA_SOURCE = lake_curated, FILE_FORMAT = pq) AS\nSELECT DISTINCT faculty_id, faculty_name FROM dbo.v_major_faculty;"
+						},
+						{
+							"type": "NonQuery",
+							"text": "IF EXISTS (SELECT 1 FROM sys.external_tables WHERE name = 'dim_major') DROP EXTERNAL TABLE dbo.dim_major;\nCREATE EXTERNAL TABLE dbo.dim_major\nWITH (LOCATION = 'dim_major/', DATA_SOURCE = lake_curated, FILE_FORMAT = pq) AS\nSELECT major_id, major_name, faculty_id FROM dbo.v_major_faculty;"
+						},
+						{
+							"type": "NonQuery",
+							"text": "IF EXISTS (SELECT 1 FROM sys.external_tables WHERE name = 'dim_term') DROP EXTERNAL TABLE dbo.dim_term;\nCREATE EXTERNAL TABLE dbo.dim_term\nWITH (LOCATION = 'dim_term/', DATA_SOURCE = lake_curated, FILE_FORMAT = pq) AS\nSELECT t.term_code,\n       t.term_code / 100 AS [year],\n       CASE WHEN t.term_code % 100 = 8 THEN 'Fall' ELSE 'Spring' END AS season,\n       CASE WHEN t.term_code % 100 = 8\n            THEN CONCAT(t.term_code / 100, '-', t.term_code / 100 + 1)\n            ELSE CONCAT(t.term_code / 100 - 1, '-', t.term_code / 100) END AS academic_year\nFROM (SELECT first_term AS term_code FROM dbo.v_students WHERE block <= 1\n      UNION SELECT second_term FROM dbo.v_students WHERE block <= 1 AND second_term IS NOT NULL) t;"
+						},
+						{
+							"type": "NonQuery",
+							"text": "IF EXISTS (SELECT 1 FROM sys.external_tables WHERE name = 'dim_class') DROP EXTERNAL TABLE dbo.dim_class;\nCREATE EXTERNAL TABLE dbo.dim_class\nWITH (LOCATION = 'dim_class/', DATA_SOURCE = lake_curated, FILE_FORMAT = pq) AS\nSELECT DISTINCT CONCAT('M', RIGHT(CONCAT('0', m.major_id), 2), '-', s.first_term / 100) AS class_code,\n       m.major_id, s.first_term / 100 AS cohort_year, m.faculty_id\nFROM dbo.v_students s JOIN dbo.v_major_faculty m ON m.major_name = s.major_name\nWHERE s.block <= 1;"
+						},
+						{
+							"type": "NonQuery",
+							"text": "IF EXISTS (SELECT 1 FROM sys.external_tables WHERE name = 'dim_student') DROP EXTERNAL TABLE dbo.dim_student;\nCREATE EXTERNAL TABLE dbo.dim_student\nWITH (LOCATION = 'dim_student/', DATA_SOURCE = lake_curated, FILE_FORMAT = pq) AS\nSELECT student_id, age, gender, background, in_state, international, housing, distance_from_home,\n       high_school, high_school_gpa, father_edu, mother_edu, is_synthetic, block\nFROM dbo.v_students\nWHERE block <= 1;"
+						},
+						{
+							"type": "NonQuery",
+							"text": "IF EXISTS (SELECT 1 FROM sys.external_tables WHERE name = 'fact_enrollment') DROP EXTERNAL TABLE dbo.fact_enrollment;\nCREATE EXTERNAL TABLE dbo.fact_enrollment\nWITH (LOCATION = 'fact_enrollment/', DATA_SOURCE = lake_curated, FILE_FORMAT = pq) AS\nSELECT s.student_id, m.major_id, m.faculty_id,\n       CONCAT('M', RIGHT(CONCAT('0', m.major_id), 2), '-', s.first_term / 100) AS class_code,\n       s.first_term / 100 AS cohort_year, s.first_term, s.second_term,\n       s.minor, s.degree_group, s.entrance1, s.entrance2, s.entrance_comb,\n       CAST(s.first_term_attempt_hrs AS INT)  AS first_term_attempt_hrs,\n       CAST(s.first_term_earned_hrs AS INT)   AS first_term_earned_hrs,\n       CAST(s.second_term_attempt_hrs AS INT) AS second_term_attempt_hrs,\n       CAST(s.second_term_earned_hrs AS INT)  AS second_term_earned_hrs,\n       s.gross_fin_need, s.cost_of_attend, s.est_fam_contribution, s.unmet_need,\n       CAST(s.returned_2nd_yr AS BIT)     AS returned_2nd_yr,\n       CAST(1 - s.returned_2nd_yr AS BIT) AS dropout,\n       s.is_synthetic, s.block\nFROM dbo.v_students s JOIN dbo.v_major_faculty m ON m.major_name = s.major_name\nWHERE s.block <= 1;"
+						},
+						{
+							"type": "NonQuery",
+							"text": "IF EXISTS (SELECT 1 FROM sys.external_tables WHERE name = 'fact_course_grade') DROP EXTERNAL TABLE dbo.fact_course_grade;\nCREATE EXTERNAL TABLE dbo.fact_course_grade\nWITH (LOCATION = 'fact_course_grade/', DATA_SOURCE = lake_curated, FILE_FORMAT = pq) AS\nSELECT student_id, term_code, term_seq, slot, course_code, dept, grade, grade_points, is_pass, is_synthetic, block\nFROM dbo.v_course_grades\nWHERE block <= 1;"
+						},
+						{
+							"type": "NonQuery",
+							"text": "IF EXISTS (SELECT 1 FROM sys.external_tables WHERE name = 'student_features') DROP EXTERNAL TABLE dbo.student_features;\nCREATE EXTERNAL TABLE dbo.student_features\nWITH (LOCATION = 'student_features/', DATA_SOURCE = lake_curated, FILE_FORMAT = pq) AS\nSELECT s.student_id, s.age,\n       CAST(CASE s.gender WHEN 'F' THEN 1 WHEN 'M' THEN 0 END AS BIT)        AS is_female,\n       s.background,\n       CAST(CASE s.in_state WHEN 'Y' THEN 1 WHEN 'N' THEN 0 END AS BIT)      AS in_state,\n       CAST(CASE s.international WHEN 'Y' THEN 1 WHEN 'N' THEN 0 END AS BIT) AS international,\n       CAST(CASE s.housing WHEN 'On Campus' THEN 1 WHEN 'Off Campus' THEN 0 END AS BIT) AS on_campus,\n       s.distance_from_home, s.high_school_gpa, s.entrance_comb,\n       CAST(CASE WHEN s.entrance_comb IS NULL THEN 1 ELSE 0 END AS BIT) AS entrance_missing,\n       CAST(s.father_edu_cd AS INT) AS father_edu_cd, CAST(s.mother_edu_cd AS INT) AS mother_edu_cd,\n       m.faculty_id, m.major_id,\n       CAST(CASE WHEN m.faculty_id = 8 THEN 1 ELSE 0 END AS BIT)      AS is_undeclared,\n       CAST(CASE WHEN s.minor IS NULL THEN 0 ELSE 1 END AS BIT)       AS has_minor,\n       CAST(s.first_term_attempt_hrs AS INT)                          AS first_term_attempt_hrs,\n       CAST(s.first_term_earned_hrs AS INT)                           AS first_term_earned_hrs,\n       s.first_term_earned_hrs / NULLIF(s.first_term_attempt_hrs, 0)  AS earned_ratio_t1,\n       g.gpa_t1,\n       COALESCE(g.n_courses_t1, 0)                                    AS n_courses_t1,\n       COALESCE(g.n_df_t1, 0)                                         AS n_df_t1,\n       CAST(CASE WHEN s.second_term_attempt_hrs > 0 THEN 1 ELSE 0 END AS BIT) AS has_second_term,\n       CAST(s.second_term_attempt_hrs AS INT)                         AS second_term_attempt_hrs,\n       CAST(s.second_term_earned_hrs AS INT)                          AS second_term_earned_hrs,\n       s.second_term_earned_hrs / NULLIF(s.second_term_attempt_hrs, 0) AS earned_ratio_t2,\n       g.gpa_t2,\n       COALESCE(g.n_df_t2, 0)                                         AS n_df_t2,\n       g.gpa_t2 - g.gpa_t1                                            AS gpa_change,\n       CAST(CASE WHEN ISNULL(s.cost_of_attend, 0) = 0 THEN 1 ELSE 0 END AS BIT) AS fin_data_missing,\n       CASE WHEN ISNULL(s.cost_of_attend, 0) = 0 THEN NULL ELSE s.gross_fin_need END AS gross_fin_need,\n       CASE WHEN ISNULL(s.cost_of_attend, 0) = 0 THEN NULL ELSE s.unmet_need END     AS unmet_need,\n       s.est_fam_contribution / NULLIF(s.cost_of_attend, 0)           AS fam_contribution_ratio,\n       CAST(1 - s.returned_2nd_yr AS BIT)                             AS dropout,\n       s.is_synthetic, s.block\nFROM dbo.v_students s\nJOIN dbo.v_major_faculty m ON m.major_name = s.major_name\nLEFT JOIN (SELECT student_id,\n                  AVG(CASE WHEN term_seq = 1 THEN grade_points END)                 AS gpa_t1,\n                  SUM(CASE WHEN term_seq = 1 AND grade_points IS NOT NULL THEN 1 ELSE 0 END) AS n_courses_t1,  \n                  SUM(CASE WHEN term_seq = 1 AND grade IN ('D', 'F') THEN 1 ELSE 0 END) AS n_df_t1,\n                  AVG(CASE WHEN term_seq = 2 THEN grade_points END)                 AS gpa_t2,\n                  SUM(CASE WHEN term_seq = 2 AND grade IN ('D', 'F') THEN 1 ELSE 0 END) AS n_df_t2\n           FROM dbo.v_course_grades\n           WHERE block <= 1\n           GROUP BY student_id) g ON g.student_id = s.student_id\nWHERE s.block <= 1;"
+						},
+						{
+							"type": "NonQuery",
+							"text": "IF EXISTS (SELECT 1 FROM sys.external_tables WHERE name = 'agg_cohort_major') DROP EXTERNAL TABLE dbo.agg_cohort_major;\nCREATE EXTERNAL TABLE dbo.agg_cohort_major\nWITH (LOCATION = 'agg_cohort_major/', DATA_SOURCE = lake_curated, FILE_FORMAT = pq) AS\nSELECT s.first_term / 100 AS cohort_year, m.major_id, m.faculty_id, s.is_synthetic,\n       COUNT_BIG(*)                                     AS n_students,\n       SUM(CAST(1 - s.returned_2nd_yr AS BIGINT))       AS n_dropout,\n       AVG(CAST(1 - s.returned_2nd_yr AS FLOAT))        AS dropout_rate,\n       AVG(s.high_school_gpa)                           AS avg_high_school_gpa,\n       AVG(g.gpa_t1)                                    AS avg_gpa_term1\nFROM dbo.v_students s\nJOIN dbo.v_major_faculty m ON m.major_name = s.major_name\nLEFT JOIN (SELECT student_id, AVG(grade_points) AS gpa_t1\n           FROM dbo.v_course_grades WHERE term_seq = 1 GROUP BY student_id) g ON g.student_id = s.student_id\nGROUP BY s.first_term / 100, m.major_id, m.faculty_id, s.is_synthetic;"
+						}
+					],
+					"scriptBlockExecutionTimeout": "02:00:00"
+				}
+			},
+			{
+				"name": "run_curated_to_sql",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "synapse_cetas",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "pl_curated_to_sql",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "write_log",
+				"type": "Script",
+				"dependsOn": [
+					{
+						"activity": "run_curated_to_sql",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 3,
+					"retryIntervalInSeconds": 60,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"linkedServiceName": {
+					"referenceName": "ls_sql",
+					"type": "LinkedServiceReference"
+				},
+				"typeProperties": {
+					"scripts": [
+						{
+							"type": "NonQuery",
+							"text": "INSERT INTO etl_log (pipeline_name, run_id, activity, status)\nVALUES ('@{pipeline().Pipeline}', '@{pipeline().RunId}', 'full_run', 'Succeeded')\n"
+						}
+					],
+					"scriptBlockExecutionTimeout": "02:00:00"
+				}
+			}
+		],
+		"parameters": {
+			"Table": {
+				"type": "array",
+				"defaultValue": [
+					"dim_faculty",
+					"dim_major",
+					"dim_term",
+					"dim_class",
+					"dim_student",
+					"fact_enrollment",
+					"fact_course_grade",
+					"student_features",
+					"agg_cohort_major"
+				]
+			}
+		},
+		"annotations": []
+	}
+}
