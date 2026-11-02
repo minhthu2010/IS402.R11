@@ -74,16 +74,42 @@ def mlflow_client():
     return aml_clients()[1]
 
 
-def load_aml(dst):
+def finished_runs(mlflow, experiment):
+    """Các run đã chạy xong của 1 experiment. Azure ML đặt tên trạng thái khác MLflow gốc
+    (Completed thay vì FINISHED), nên lọc bằng pandas thay vì filter_string của MLflow."""
+    runs = mlflow.search_runs(experiment_names=[experiment])
+    if runs.empty:
+        raise SystemExit(f"Không tìm thấy run nào trong experiment '{experiment}'. "
+                         "Kiểm tra config.json trỏ đúng workspace và job đã chạy xong.")
+    runs = runs[runs["status"].astype(str).str.upper().isin(["FINISHED", "COMPLETED"])]
+    if runs.empty:
+        raise SystemExit(f"Experiment '{experiment}' chưa có run nào chạy xong.")
+    return runs
+
+
+def param(runs, name, default):
+    """Cột tham số của run; run cũ chưa log tham số đó thì coi như giá trị mặc định."""
+    col = f"params.{name}"
+    return runs[col].fillna(default).astype(str) if col in runs else pd.Series(default, index=runs.index)
+
+
+def load_aml(dst, run_ids=None):
     ml, mlflow = aml_clients()
-    runs = mlflow.search_runs(experiment_names=["dropout-models"], filter_string="attributes.status = 'FINISHED'")
-    keep = runs["params.drop_term2"].astype(str) == "0"
-    if "params.drop_sensitive" in runs:          # bản chính thức: không dùng xuất thân, giới tính
-        keep &= runs["params.drop_sensitive"].astype(str).isin(["1", "nan", "None"])
-    runs = runs[keep].sort_values("start_time", ascending=False)
+    runs = finished_runs(mlflow, "dropout-models")
+    if run_ids:                                  # chọn đích danh các job (Name trong tab Overview)
+        runs = runs[runs["run_id"].isin(run_ids)]
+        missing = set(run_ids) - set(runs["run_id"])
+        if missing:
+            raise SystemExit(f"Không tìm thấy job đã chạy xong: {', '.join(sorted(missing))}")
+    else:                                        # mặc định: job mới nhất của mỗi loại model, bản chính thức
+        keep = (param(runs, "drop_term2", "0") == "0") & (param(runs, "drop_sensitive", "1") == "1")
+        keep &= runs["tags.model_name"].notna() & (runs["tags.model_name"] != "benchmark")
+        runs = runs[keep]
+    runs = runs.sort_values("start_time", ascending=False)
     out = []
-    for name, r in runs.groupby("tags.model_name", sort=False):
-        rid = r.iloc[0]["run_id"]                       # run mới nhất của loại model này
+    groups = runs.groupby("run_id", sort=False) if run_ids else runs.groupby("tags.model_name", sort=False)
+    for name, r in groups:
+        rid = r.iloc[0]["run_id"]                       # run mới nhất của loại model này (hoặc job được chỉ định)
         # Tải thư mục outputs/model của job (Azure ML tự lưu ./outputs) bằng SDK, không qua mlflow
         target = dst / rid
         if not any(target.rglob("model.pkl")):
@@ -98,8 +124,16 @@ def load_aml(dst):
 # ---------------------------------------------------------------- biểu đồ
 def plot_compare(models, test):
     """Cột trái: metric cross-validation (5 fold trên tập dev) của từng model + mốc "đoán tất cả ở lại"."""
-    rows = [{"model": NAMES.get(m["meta"]["model_name"], m["meta"]["model_name"])
-             + ("" if m["meta"].get("drop_sensitive", False) else " (+xuất thân, giới tính)"),
+    def label(m):
+        name = NAMES.get(m["meta"]["model_name"], m["meta"]["model_name"])
+        if not m["meta"].get("drop_sensitive", False):
+            name += " (+xuất thân, giới tính)"
+        p = m["meta"].get("params", {})
+        if m["meta"]["model_name"] == "lgbm" and sum(x["meta"]["model_name"] == "lgbm" for x in models) > 1:
+            name += f" ({p.get('n_estimators')} cây, {p.get('num_leaves')} lá)"   # phân biệt bản mặc định / sau sweep
+        return name
+
+    rows = [{"model": label(m),
              **{k: m["meta"]["metrics"][k] for k in SHOW + ["cv_auc_std", "test_auc", "train_seconds"]}}
             for m in models]
     df = pd.DataFrame(rows).sort_values("cv_auc", ascending=False)
@@ -136,7 +170,7 @@ def plot_roc(models, test):
 
 def plot_sweep():
     mlflow = mlflow_client()
-    runs = mlflow.search_runs(experiment_names=["dropout-sweep"], filter_string="attributes.status = 'FINISHED'")
+    runs = finished_runs(mlflow, "dropout-sweep")      # gồm cả job cha (không có metric) -> bị loại ở dòng dưới
     runs = runs.dropna(subset=["metrics.cv_auc"])
     params = [c for c in runs.columns if c.startswith("params.")
               and c.split(".", 1)[1] in ("n_estimators", "learning_rate", "num_leaves", "min_samples_leaf", "max_depth")
@@ -225,16 +259,18 @@ def write_sql(df):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--aml", action="store_true")
+    ap.add_argument("--runs", nargs="*", default=None,
+                    help="dùng với --aml: Name các job muốn so sánh (mặc định: job mới nhất của mỗi model)")
     ap.add_argument("--local", nargs="*", default=[])
     ap.add_argument("--data", required=True)
     ap.add_argument("--major-faculty", default=None)
     ap.add_argument("--sweep", action="store_true")
-    ap.add_argument("--best", default=None, help="tên model chọn làm model cuối (mặc định: cv_auc cao nhất)")
+    ap.add_argument("--best", default=None, help="model cuối: Name của job (vd purple_pin_...) hoặc loại model (lgbm); mặc định: cv_auc cao nhất")
     ap.add_argument("--sql", action="store_true")
     a = ap.parse_args()
     FIG.mkdir(exist_ok=True)
 
-    models = load_aml(HERE / "downloads") if a.aml else [load_dir(d) for d in a.local]
+    models = load_aml(HERE / "downloads", a.runs) if a.aml else [load_dir(d) for d in a.local]
     if not models:
         raise SystemExit("Không có model nào: dùng --aml hoặc --local <thư mục>")
     dev, test = split_data(load_features(a.data, a.major_faculty))
@@ -245,8 +281,13 @@ def main():
         plot_sweep()
     # Model chính thức chỉ chọn trong các bản KHÔNG dùng xuất thân, giới tính; bản có dùng chỉ để so sánh.
     official = [m for m in models if m["meta"].get("drop_sensitive", True)] or models
-    best = (next(m for m in official if m["meta"]["model_name"] == a.best) if a.best
-            else max(official, key=lambda m: m["meta"]["metrics"]["cv_auc"]))
+    if a.best:                                   # Name của job (ưu tiên) hoặc tên loại model
+        match = [m for m in models if m["run_id"] == a.best] or [m for m in official if m["meta"]["model_name"] == a.best]
+        if not match:
+            raise SystemExit(f"--best {a.best}: không khớp job hay loại model nào trong danh sách")
+        best = match[0]
+    else:
+        best = max(official, key=lambda m: m["meta"]["metrics"]["cv_auc"])
     report = evaluate_best(best, test, dev)
 
     mm = metrics_rows(models)
