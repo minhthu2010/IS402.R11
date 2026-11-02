@@ -91,7 +91,7 @@ CREATE TABLE fact_course_grade (                -- 12 cột môn/điểm của m
     term_code    INT         NULL,
     term_seq     INT         NOT NULL,          -- 1 = học kỳ đầu, 2 = học kỳ hai
     slot         INT         NOT NULL,          -- môn thứ 1..6 trong học kỳ
-    course_code  VARCHAR(12) NOT NULL,          -- vd MATH 1111
+    course_code  VARCHAR(30) NOT NULL,          -- vd MATH 1111; 2 dòng ghi tên môn đầy đủ
     dept         VARCHAR(6)  NOT NULL,          -- vd MATH
     grade        VARCHAR(8)  NULL,              -- A–F, NOT REP, INCOMPL, Unknown
     grade_points FLOAT       NULL,              -- A=4 … F=0; NULL nếu không phải điểm chữ
