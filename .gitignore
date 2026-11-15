@@ -12,3 +12,5 @@ outputs/
 out_*/
 mlflow.db
 mlruns/
+.env
+
