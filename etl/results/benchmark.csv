@@ -2,3 +2,28 @@
 2026-10-28,upload,Azure CLI upload-batch (8 ket noi),raw/synthetic/students,80,4.36,2051,2.2,Tinh tu Last Modified cua blob; mang nha
 2026-10-28,nen CSV sang Parquet,ADF Copy (pl_raw_to_processed),processed/synthetic/students,80,1.58,~124,~36,CSV 4.36GB -> Parquet snappy 1.58GB (giam 64%); thoi gian tinh tu Last Modified file dau-cuoi
 2026-10-28,doc Parquet,Synapse serverless,processed/*/students (2 cot),81,1.58,16.3,,COUNT + AVG tren 17.6 trieu dong
+2026-11-15,E1 doc CSV lan 1 (lanh),Synapse serverless,raw/synthetic/students (CSV),80,14.03,24.688,,Lan dau: tao thong ke nen quet nhieu hon
+2026-11-15,E1 doc CSV lan 2,Synapse serverless,raw/synthetic/students (CSV),80,4.68,3.070,,Quet toan bo file
+2026-11-15,E1 doc CSV lan 3,Synapse serverless,raw/synthetic/students (CSV),80,4.68,1.817,,Quet toan bo file
+2026-11-15,E1 doc Parquet lan 1 (lanh),Synapse serverless,processed/synthetic/students (Parquet),80,0.099,4.876,,Lan dau
+2026-11-15,E1 doc Parquet lan 2,Synapse serverless,processed/synthetic/students (Parquet),80,0.056,3.079,,Chi doc 2 cot
+2026-11-15,E1 doc Parquet lan 3,Synapse serverless,processed/synthetic/students (Parquet),80,0.056,3.660,,Chi doc 2 cot; quet it hon CSV ~84 lan
+2026-11-15,E2 upload lan 1,Portal (trinh duyet),raw/test_upload/students_b001.csv,1,0.054,31.56,1.76,Tu bam gio; mang nha
+2026-11-15,E2 upload lan 2,Portal (trinh duyet),raw/test_upload/students_b001.csv,1,0.054,31.41,1.77,Tu bam gio; mang nha
+2026-11-15,E2 upload lan 3,Portal (trinh duyet),raw/test_upload/students_b001.csv,1,0.054,29.53,1.88,Tu bam gio; mang nha
+2026-11-15,E2 upload lan 1,Azure CLI az storage blob upload,raw/test_upload/students_b001.csv,1,0.054,34.427,1.61,Measure-Command; gom ca thoi gian khoi dong az
+2026-11-15,E2 upload lan 2,Azure CLI az storage blob upload,raw/test_upload/students_b001.csv,1,0.054,32.001,1.74,Measure-Command; gom ca thoi gian khoi dong az
+2026-11-15,E2 upload lan 3,Azure CLI az storage blob upload,raw/test_upload/students_b001.csv,1,0.054,31.039,1.79,Measure-Command; gom ca thoi gian khoi dong az
+2026-11-15,E3 heap lan 1,Azure SQL (SSMS; Heap (khong index)),fact_course_grade (1481593 dong),1,0.1056,1.003,,GROUP BY term_code dept; dung luong = data cua sp_spaceused; 13847 trang; lan dau
+2026-11-15,E3 heap lan 2,Azure SQL (SSMS; Heap (khong index)),fact_course_grade (1481593 dong),1,0.1056,0.381,,GROUP BY term_code dept; dung luong = data cua sp_spaceused; 13847 trang
+2026-11-15,E3 heap lan 3,Azure SQL (SSMS; Heap (khong index)),fact_course_grade (1481593 dong),1,0.1056,0.365,,GROUP BY term_code dept; dung luong = data cua sp_spaceused; 13847 trang
+2026-11-15,E3 rowstore lan 1,Azure SQL (SSMS; Clustered index (term_code + dept + student_id)),fact_course_grade (1481593 dong),1,0.0888,0.484,,GROUP BY term_code dept; dung luong = data cua sp_spaceused; 11677 trang; lan dau
+2026-11-15,E3 rowstore lan 2,Azure SQL (SSMS; Clustered index (term_code + dept + student_id)),fact_course_grade (1481593 dong),1,0.0888,0.487,,GROUP BY term_code dept; dung luong = data cua sp_spaceused; 11677 trang
+2026-11-15,E3 rowstore lan 3,Azure SQL (SSMS; Clustered index (term_code + dept + student_id)),fact_course_grade (1481593 dong),1,0.0888,0.478,,GROUP BY term_code dept; dung luong = data cua sp_spaceused; 11677 trang
+2026-11-15,E3 columnstore lan 1,Azure SQL (SSMS; Clustered columnstore index),fact_course_grade (1481593 dong),1,0.0059,0.061,,GROUP BY term_code dept; dung luong = data cua sp_spaceused; 34 lob trang; 2 segment; lan dau
+2026-11-15,E3 columnstore lan 2,Azure SQL (SSMS; Clustered columnstore index),fact_course_grade (1481593 dong),1,0.0059,0.057,,GROUP BY term_code dept; dung luong = data cua sp_spaceused; 34 lob trang; 2 segment
+2026-11-15,E3 columnstore lan 3,Azure SQL (SSMS; Clustered columnstore index),fact_course_grade (1481593 dong),1,0.0059,0.072,,GROUP BY term_code dept; dung luong = data cua sp_spaceused; 34 lob trang; 2 segment
+2026-11-15,E4 Synapse lan 1 (lanh),Synapse serverless (truy van 3: xoay bang diem + 2 phep noi),processed/*/students (17.6 trieu SV),82,2.78,28.945,,Lan dau tao thong ke
+2026-11-15,E4 Synapse lan 2,Synapse serverless (truy van 3: xoay bang diem + 2 phep noi),processed/*/students (17.6 trieu SV),82,1.80,8.310,,Quet 1845 MB
+2026-11-15,E4 Synapse lan 3,Synapse serverless (truy van 3: xoay bang diem + 2 phep noi),processed/*/students (17.6 trieu SV),82,1.80,6.125,,Quet 1847 MB; so voi Azure SQL columnstore 0.065s tren 223 nghin SV (khac quy mo)
+2026-11-15,F incremental load,ADF Copy (pl_raw_to_processed; Filter by last modified = 1 ngay),raw -> processed (khong co file moi),0,0,19,,0 file duoc copy; so voi nap toan bo 88s (82 file; 4.36GB)
