@@ -9,4 +9,5 @@ ml/figures/bench_laptop.csv
 .venv/
 __pycache__/
 outputs/
-out_*/
+out_*/mlflow.db
+mlruns/
