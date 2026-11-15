@@ -1,0 +1,45 @@
+﻿{
+  "id": "/subscriptions/89f280fd-0758-4210-b24d-5879434f606a/resourceGroups/rg-dropout-data/providers/Microsoft.Storage/storageAccounts/stdropoutthi1/managementPolicies/default",
+  "lastModifiedTime": "2026-11-15T09:05:03.889075+00:00",
+  "name": "DefaultManagementPolicy",
+  "policy": {
+    "rules": [
+      {
+        "definition": {
+          "actions": {
+            "baseBlob": {
+              "delete": null,
+              "enableAutoTierToHotFromCool": null,
+              "tierToArchive": null,
+              "tierToCold": null,
+              "tierToCool": {
+                "daysAfterCreationGreaterThan": null,
+                "daysAfterLastAccessTimeGreaterThan": null,
+                "daysAfterLastTierChangeGreaterThan": null,
+                "daysAfterModificationGreaterThan": 14.0
+              },
+              "tierToHot": null
+            },
+            "snapshot": null,
+            "version": null
+          },
+          "filters": {
+            "blobIndexMatch": null,
+            "blobTypes": [
+              "blockBlob"
+            ],
+            "prefixMatch": [
+              "raw/synthetic/"
+            ]
+          }
+        },
+        "enabled": true,
+        "name": "raw-to-cool",
+        "type": "Lifecycle"
+      }
+    ]
+  },
+  "resourceGroup": "rg-dropout-data",
+  "systemData": null,
+  "type": "Microsoft.Storage/storageAccounts/managementPolicies"
+}
