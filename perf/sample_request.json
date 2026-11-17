@@ -1,0 +1,36 @@
+{
+ "data": [
+  {
+   "age": 18,
+   "in_state": 1,
+   "international": 0,
+   "on_campus": 0,
+   "distance_from_home": 0,
+   "high_school_gpa": 2.87,
+   "entrance_comb": 950,
+   "entrance_missing": 0,
+   "father_edu_cd": 2,
+   "mother_edu_cd": 3,
+   "is_undeclared": 0,
+   "has_minor": 0,
+   "first_term_attempt_hrs": 12,
+   "first_term_earned_hrs": 12,
+   "earned_ratio_t1": 1,
+   "gpa_t1": 2.25,
+   "n_courses_t1": 4,
+   "n_df_t1": 0,
+   "has_second_term": 1,
+   "second_term_attempt_hrs": 12,
+   "second_term_earned_hrs": 12,
+   "earned_ratio_t2": 1,
+   "gpa_t2": 3,
+   "n_df_t2": 0,
+   "gpa_change": 0.75,
+   "fin_data_missing": 0,
+   "gross_fin_need": 0,
+   "unmet_need": -288180,
+   "fam_contribution_ratio": 0,
+   "faculty_id": 1
+  }
+ ]
+}

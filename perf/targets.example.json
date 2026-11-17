@@ -1,0 +1,7 @@
+{
+  "targets": [
+    {"name": "storage-tv1",    "region": "eastasia",         "container": "latency-test", "conn_env": "CONN_EASTASIA"},
+    {"name": "tv4latencysa02", "region": "japaneast",        "container": "latency-test", "conn_env": "CONN_JAPANEAST"},
+    {"name": "tv4latencysa03", "region": "indonesiacentral", "container": "latency-test", "conn_env": "CONN_INDONESIA"}
+  ]
+}

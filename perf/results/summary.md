@@ -1,0 +1,60 @@
+| client      | region           | op       | size_label   |   n_ok |   n_total |   p50_ms |   p95_ms |   MBps_at_p50 |
+|:------------|:-----------------|:---------|:-------------|-------:|----------:|---------:|---------:|--------------:|
+| hcmc        | eastasia         | download | 10mb         |     30 |        30 |   648.13 |  1273.1  |         15.43 |
+| hcmc        | eastasia         | download | 1kb          |     30 |        30 |    57.71 |    66.03 |        nan    |
+| hcmc        | eastasia         | download | 1mb          |     30 |        30 |    92.24 |   159.81 |         10.84 |
+| hcmc        | eastasia         | download | 50mb         |     30 |        30 |  3468.66 |  4336.16 |         14.41 |
+| hcmc        | eastasia         | head     | 1kb          |     30 |        30 |    53.34 |    58.38 |        nan    |
+| hcmc        | eastasia         | score    |              |     30 |        30 |   217.02 |   237.35 |        nan    |
+| hcmc        | eastasia         | upload   | 10mb         |     30 |        30 |   564.95 |  1106.87 |         17.7  |
+| hcmc        | eastasia         | upload   | 1kb          |     30 |        30 |    66.46 |    72.33 |        nan    |
+| hcmc        | eastasia         | upload   | 1mb          |     30 |        30 |    95.02 |   141.2  |         10.52 |
+| hcmc        | eastasia         | upload   | 50mb         |     30 |        30 |  9218.38 | 18900.4  |          5.42 |
+| hcmc        | indonesiacentral | download | 10mb         |     30 |        30 |   624.86 |   717.38 |         16    |
+| hcmc        | indonesiacentral | download | 1kb          |     30 |        30 |    54.7  |    60.83 |        nan    |
+| hcmc        | indonesiacentral | download | 1mb          |     30 |        30 |    68.91 |   107.42 |         14.51 |
+| hcmc        | indonesiacentral | download | 50mb         |     30 |        30 |  3122.92 |  3563.48 |         16.01 |
+| hcmc        | indonesiacentral | head     | 1kb          |     30 |        30 |    54.24 |    59.78 |        nan    |
+| hcmc        | indonesiacentral | upload   | 10mb         |     30 |        30 |   458.15 |   614    |         21.83 |
+| hcmc        | indonesiacentral | upload   | 1kb          |     30 |        30 |    54.24 |    63.95 |        nan    |
+| hcmc        | indonesiacentral | upload   | 1mb          |     30 |        30 |    80.71 |    97.49 |         12.39 |
+| hcmc        | indonesiacentral | upload   | 50mb         |     30 |        30 |  2076.9  |  2653.98 |         24.07 |
+| hcmc        | japaneast        | download | 10mb         |     30 |        30 |  1283.61 |  2328.83 |          7.79 |
+| hcmc        | japaneast        | download | 1kb          |     30 |        30 |    98.43 |   104.17 |        nan    |
+| hcmc        | japaneast        | download | 1mb          |     30 |        30 |   166.35 |   290.25 |          6.01 |
+| hcmc        | japaneast        | download | 50mb         |     30 |        30 |  5996.1  |  6894.68 |          8.34 |
+| hcmc        | japaneast        | head     | 1kb          |     30 |        30 |    97.59 |   103.31 |        nan    |
+| hcmc        | japaneast        | score    |              |     30 |        30 |   245.72 |   258.22 |        nan    |
+| hcmc        | japaneast        | upload   | 10mb         |     30 |        30 |  1294    |  2413.83 |          7.73 |
+| hcmc        | japaneast        | upload   | 1kb          |     30 |        30 |   101.2  |   107.46 |        nan    |
+| hcmc        | japaneast        | upload   | 1mb          |     30 |        30 |   193.2  |   265.75 |          5.18 |
+| hcmc        | japaneast        | upload   | 50mb         |     30 |        30 | 24034.1  | 34221.8  |          2.08 |
+| vm-eastasia | eastasia         | download | 10mb         |     30 |        30 |   152.55 |   251.76 |         65.55 |
+| vm-eastasia | eastasia         | download | 1kb          |     30 |        30 |    10.35 |    14.85 |        nan    |
+| vm-eastasia | eastasia         | download | 1mb          |     30 |        30 |    20.71 |    24.33 |         48.28 |
+| vm-eastasia | eastasia         | download | 50mb         |     30 |        30 |   705.15 |   874.85 |         70.91 |
+| vm-eastasia | eastasia         | head     | 1kb          |     30 |        30 |     7.29 |     9.86 |        nan    |
+| vm-eastasia | eastasia         | score    |              |     30 |        30 |   169.08 |   185.12 |        nan    |
+| vm-eastasia | eastasia         | upload   | 10mb         |     30 |        30 |   262.56 |   309.03 |         38.09 |
+| vm-eastasia | eastasia         | upload   | 1kb          |     30 |        30 |    20.73 |    24.83 |        nan    |
+| vm-eastasia | eastasia         | upload   | 1mb          |     30 |        30 |    40.92 |    62.91 |         24.44 |
+| vm-eastasia | eastasia         | upload   | 50mb         |     30 |        30 |  1176.13 |  1337.85 |         42.51 |
+| vm-eastasia | indonesiacentral | download | 10mb         |     30 |        30 |   320.54 |   348.15 |         31.2  |
+| vm-eastasia | indonesiacentral | download | 1kb          |     30 |        30 |    49.38 |    51.11 |        nan    |
+| vm-eastasia | indonesiacentral | download | 1mb          |     30 |        30 |    58.1  |    59.88 |         17.21 |
+| vm-eastasia | indonesiacentral | download | 50mb         |     30 |        30 |  1563.3  |  2528.99 |         31.98 |
+| vm-eastasia | indonesiacentral | head     | 1kb          |     30 |        30 |    50.31 |    52.85 |        nan    |
+| vm-eastasia | indonesiacentral | upload   | 10mb         |     30 |        30 |   477.63 |   637.33 |         20.94 |
+| vm-eastasia | indonesiacentral | upload   | 1kb          |     30 |        30 |    50.99 |    62.42 |        nan    |
+| vm-eastasia | indonesiacentral | upload   | 1mb          |     30 |        30 |   319.62 |   325.42 |          3.13 |
+| vm-eastasia | indonesiacentral | upload   | 50mb         |     30 |        30 |  1756.28 |  1840.46 |         28.47 |
+| vm-eastasia | japaneast        | download | 10mb         |     30 |        30 |   331.41 |   377.13 |         30.17 |
+| vm-eastasia | japaneast        | download | 1kb          |     30 |        30 |    50.69 |    51.94 |        nan    |
+| vm-eastasia | japaneast        | download | 1mb          |     30 |        30 |    60.96 |    69.67 |         16.41 |
+| vm-eastasia | japaneast        | download | 50mb         |     30 |        30 |  2136.61 |  3016.23 |         23.4  |
+| vm-eastasia | japaneast        | head     | 1kb          |     30 |        30 |    49.54 |    50.54 |        nan    |
+| vm-eastasia | japaneast        | score    |              |     30 |        30 |   198.01 |   201.97 |        nan    |
+| vm-eastasia | japaneast        | upload   | 10mb         |     30 |        30 |   762.01 |  1034.78 |         13.12 |
+| vm-eastasia | japaneast        | upload   | 1kb          |     30 |        30 |    53.59 |    57.68 |        nan    |
+| vm-eastasia | japaneast        | upload   | 1mb          |     30 |        30 |   295.57 |   387.97 |          3.38 |
+| vm-eastasia | japaneast        | upload   | 50mb         |     30 |        30 |  3133.42 |  4207.79 |         15.96 |

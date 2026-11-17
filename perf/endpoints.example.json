@@ -1,0 +1,20 @@
+{
+ "endpoints": [
+  {
+   "name": "ep-eastasia",
+   "region": "eastasia",
+   "url": "https://<endpoint-cua-TV3>.eastasia.inference.ml.azure.com/score",
+   "key_env": "KEY_EP1",
+   "deployment": "main",
+   "request_file": "sample_request.json"
+  },
+  {
+   "name": "ep-region2",
+   "region": "japaneast",
+   "url": "https://<endpoint-region-2>.japaneast.inference.ml.azure.com/score",
+   "key_env": "KEY_EP2",
+   "deployment": "main",
+   "request_file": "sample_request.json"
+  }
+ ]
+}
