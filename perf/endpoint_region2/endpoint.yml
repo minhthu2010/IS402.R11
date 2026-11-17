@@ -1,0 +1,3 @@
+$schema: https://azuremlschemas.azureedge.net/latest/managedOnlineEndpoint.schema.json
+name: dropout-ep-tv4-r2        # tên phải là duy nhất trong region; nếu báo trùng thì đổi (vd thêm số)
+auth_mode: key

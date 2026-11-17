@@ -1,0 +1,18 @@
+$schema: https://azuremlschemas.azureedge.net/latest/managedOnlineDeployment.schema.json
+# Ban sao deployment "main" cua TV3 (dropout-ep-pa, East Asia), dung lai o Japan East de do latency (T4.7).
+# Truoc khi deploy, tao canh file nay:
+#   model/     <- artifacts cua dropout-model:2 (model.pkl, meta.json, background.csv)
+#   src/       <- copy tu ml/src (score.py, features.py, explain.py, major_faculty.csv)
+#   conda.yml  <- copy tu ml/deploy/conda.yml
+name: main
+endpoint_name: dropout-ep-tv4-r2
+model:
+  path: ./model
+code_configuration:
+  code: ./src
+  scoring_script: score.py
+environment:
+  conda_file: ./conda.yml
+  image: mcr.microsoft.com/azureml/openmpi4.1.0-ubuntu22.04:latest
+instance_type: Standard_DS2_v2     # giong endpoint cua TV3 de so sanh cong bang
+instance_count: 1
