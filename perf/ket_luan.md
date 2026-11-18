@@ -13,12 +13,12 @@ Số liệu đầy đủ: [`results/summary.md`](results/summary.md). Mọi phé
 
 | Đo từ | Thao tác | East Asia | Indonesia Central | Japan East |
 |---|---|---|---|---|
-| HCMC | download | 14,4 | **16,0** | 8,3 |
-| HCMC | upload | 5,4 (*) | **24,1** | 2,1 |
+| HCMC | download | 14,7 | **16,4** | 8,2 |
+| HCMC | upload | 14,5 | **21,8** | 13,3 |
 | VM East Asia | download | **70,9** | 32,0 | 23,4 |
 | VM East Asia | upload | **42,5** | 28,5 | 16,0 |
 
-(*) Upload 50 MB từ HCMC tới East Asia dao động lớn (p95 = 18,9 s, gấp đôi p50) và thấp hơn hẳn upload 10 MB tới cùng storage (17,7 MB/s); lần đo 50 MB chạy riêng ở thời điểm khác, nhiều khả năng do mạng gia đình lúc đó.
+Phép đo 50 MB từ HCMC được chạy lại riêng ngày 18/11/2026 (lần đầu bị nghẽn mạng gia đình, xem mục 5); bảng trên dùng số liệu lần chạy lại.
 
 ## 3. Gọi endpoint (1 bản ghi) – p50 / p95 (ms)
 
@@ -41,6 +41,6 @@ Nhóm chọn **East Asia** làm region chính cho toàn bộ hệ thống (Data 
 
 ## 5. Hạn chế
 
-- Chỉ đo từ 1 đường mạng gia đình tại TP.HCM và 1 VM (B2ats_v2), trong một khung giờ (17/11/2026).
-- Upload 50 MB HCMC → East Asia dao động lớn (xem ghi chú mục 2).
+- Chỉ đo từ 1 đường mạng gia đình tại TP.HCM và 1 VM (B2ats_v2), trong ngày 17–18/11/2026.
+- Tốc độ **upload từ HCMC phụ thuộc nhiều vào mạng gia đình lúc đo**: lần đo 50 MB đầu tiên chỉ đạt 5,4 MB/s (East Asia) và 2,1 MB/s (Japan East), lần chạy lại đạt 14,5 và 13,3 MB/s. Vì vậy so sánh tốc độ từ HCMC chỉ nên xem như tham khảo; chỉ số ổn định hơn là độ trễ `head` (mục 1). Thứ tự giữa các region vẫn giữ nguyên ở cả hai lần: Indonesia Central nhanh nhất, Japan East chậm nhất.
 - Từ VM, upload 1 MB sang Indonesia/Japan (~300 ms) chậm bất thường so với 10 MB; mới là quan sát, chưa xác định nguyên nhân.
