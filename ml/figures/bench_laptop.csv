@@ -1,0 +1,5 @@
+mode,status,files,size_gb,rows,seconds,peak_ram_gb,machine
+chunked,ok,80,4.36,17600000,83.5,0.26,"Intel64 Family 6 Model 165 Stepping 2, GenuineIntel | 12 luồng | 16 GB RAM"
+chunked,ok,80,4.36,17600000,79.3,0.28,"Intel64 Family 6 Model 165 Stepping 2, GenuineIntel | 12 luồng | 16 GB RAM"
+chunked,ok,80,4.36,17600000,72.3,0.26,"Intel64 Family 6 Model 165 Stepping 2, GenuineIntel | 12 luồng | 16 GB RAM"
+naive,ok,80,4.36,17600000,150.8,10.85,"Intel64 Family 6 Model 165 Stepping 2, GenuineIntel | 12 luồng | 16 GB RAM"

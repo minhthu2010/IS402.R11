@@ -1,0 +1,286 @@
+{
+ "info": {
+  "name": "Dropout API - TV3",
+  "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+ },
+ "variable": [
+  {
+   "key": "scoring_uri",
+   "value": "https://<endpoint>.<region>.inference.ml.azure.com/score"
+  },
+  {
+   "key": "scoring_key",
+   "value": ""
+  },
+  {
+   "key": "web_url",
+   "value": "https://<ten-web>.azurewebsites.net"
+  },
+  {
+   "key": "big_body",
+   "value": ""
+  }
+ ],
+ "item": [
+  {
+   "name": "1 - Hop le (3 sinh vien)",
+   "event": [
+    {
+     "listen": "test",
+     "script": {
+      "type": "text/javascript",
+      "exec": [
+       "pm.test('HTTP 200', () => pm.response.to.have.status(200));",
+       "const b = pm.response.json();",
+       "pm.test('tra ve 3 ket qua', () => pm.expect(b).to.be.an('array').with.lengthOf(3));",
+       "pm.test('risk_level hop le', () => b.forEach(x => pm.expect(['Thấp','Trung bình','Cao']).to.include(x.risk_level)));",
+       "pm.test('co top_factors', () => b.forEach(x => pm.expect(x.top_factors).to.be.an('array')));"
+      ]
+     }
+    }
+   ],
+   "request": {
+    "method": "POST",
+    "header": [
+     {
+      "key": "Authorization",
+      "value": "Bearer {{scoring_key}}"
+     },
+     {
+      "key": "Content-Type",
+      "value": "application/json"
+     }
+    ],
+    "url": {
+     "raw": "{{scoring_uri}}"
+    },
+    "body": {
+     "mode": "raw",
+     "raw": "{\n \"data\": [\n  {\n   \"STUDENT_IDENTIFIER\": 9000001,\n   \"STDNT_AGE\": 18,\n   \"STDNT_GENDER\": \"F\",\n   \"STDNT_BACKGROUND\": \"BGD 1\",\n   \"IN_STATE_FLAG\": \"Y\",\n   \"INTERNATIONAL_STS\": \"N\",\n   \"STDNT_MAJOR\": \"Nursing\",\n   \"STDNT_MINOR\": \"N\",\n   \"HIGH_SCHL_GPA\": 3.6,\n   \"STDNT_TEST_ENTRANCE_COMB\": 1180,\n   \"FATHER_HI_EDU_CD\": 3,\n   \"MOTHER_HI_EDU_CD\": 3,\n   \"HOUSING_STS\": \"On Campus\",\n   \"DISTANCE_FROM_HOME\": 40,\n   \"FIRST_TERM\": 200908,\n   \"FIRST_TERM_ATTEMPT_HRS\": 15,\n   \"FIRST_TERM_EARNED_HRS\": 15,\n   \"SECOND_TERM\": 201002,\n   \"SECOND_TERM_ATTEMPT_HRS\": 15,\n   \"SECOND_TERM_EARNED_HRS\": 15,\n   \"GROSS_FIN_NEED\": 8000,\n   \"COST_OF_ATTEND\": 18000,\n   \"EST_FAM_CONTRIBUTION\": 9000,\n   \"UNMET_NEED\": 1000,\n   \"CORE_COURSE_GRADE_1_F\": \"A\",\n   \"CORE_COURSE_GRADE_2_F\": \"B\",\n   \"CORE_COURSE_GRADE_3_F\": \"A\",\n   \"CORE_COURSE_GRADE_4_F\": \"B\",\n   \"CORE_COURSE_GRADE_1_S\": \"A\",\n   \"CORE_COURSE_GRADE_2_S\": \"A\",\n   \"CORE_COURSE_GRADE_3_S\": \"B\"\n  },\n  {\n   \"STUDENT_IDENTIFIER\": 9000002,\n   \"STDNT_AGE\": 18,\n   \"STDNT_GENDER\": \"M\",\n   \"STDNT_BACKGROUND\": \"BGD 1\",\n   \"IN_STATE_FLAG\": \"Y\",\n   \"INTERNATIONAL_STS\": \"N\",\n   \"STDNT_MAJOR\": \"Undeclared\",\n   \"STDNT_MINOR\": \"N\",\n   \"HIGH_SCHL_GPA\": 2.4,\n   \"STDNT_TEST_ENTRANCE_COMB\": 1180,\n   \"FATHER_HI_EDU_CD\": 3,\n   \"MOTHER_HI_EDU_CD\": 3,\n   \"HOUSING_STS\": \"Off Campus\",\n   \"DISTANCE_FROM_HOME\": 180,\n   \"FIRST_TERM\": 200908,\n   \"FIRST_TERM_ATTEMPT_HRS\": 15,\n   \"FIRST_TERM_EARNED_HRS\": 6,\n   \"SECOND_TERM\": 201002,\n   \"SECOND_TERM_ATTEMPT_HRS\": null,\n   \"SECOND_TERM_EARNED_HRS\": null,\n   \"GROSS_FIN_NEED\": 8000,\n   \"COST_OF_ATTEND\": 18000,\n   \"EST_FAM_CONTRIBUTION\": 9000,\n   \"UNMET_NEED\": 9000,\n   \"CORE_COURSE_GRADE_1_F\": \"D\",\n   \"CORE_COURSE_GRADE_2_F\": \"F\",\n   \"CORE_COURSE_GRADE_3_F\": \"C\",\n   \"CORE_COURSE_GRADE_4_F\": \"F\"\n  },\n  {\n   \"STUDENT_IDENTIFIER\": 9000003,\n   \"STDNT_AGE\": 18,\n   \"STDNT_GENDER\": \"F\",\n   \"STDNT_BACKGROUND\": \"BGD 1\",\n   \"IN_STATE_FLAG\": \"Y\",\n   \"INTERNATIONAL_STS\": \"N\",\n   \"STDNT_MAJOR\": \"General Business\",\n   \"STDNT_MINOR\": \"N\",\n   \"HIGH_SCHL_GPA\": 3.0,\n   \"STDNT_TEST_ENTRANCE_COMB\": null,\n   \"FATHER_HI_EDU_CD\": 3,\n   \"MOTHER_HI_EDU_CD\": 3,\n   \"HOUSING_STS\": \"On Campus\",\n   \"DISTANCE_FROM_HOME\": 40,\n   \"FIRST_TERM\": 200908,\n   \"FIRST_TERM_ATTEMPT_HRS\": 15,\n   \"FIRST_TERM_EARNED_HRS\": 15,\n   \"SECOND_TERM\": 201002,\n   \"SECOND_TERM_ATTEMPT_HRS\": 15,\n   \"SECOND_TERM_EARNED_HRS\": 15,\n   \"GROSS_FIN_NEED\": 8000,\n   \"COST_OF_ATTEND\": 18000,\n   \"EST_FAM_CONTRIBUTION\": 9000,\n   \"UNMET_NEED\": 1000,\n   \"CORE_COURSE_GRADE_1_F\": \"B\",\n   \"CORE_COURSE_GRADE_2_F\": \"C\",\n   \"CORE_COURSE_GRADE_3_F\": \"C\",\n   \"CORE_COURSE_GRADE_1_S\": \"C\",\n   \"CORE_COURSE_GRADE_2_S\": \"D\"\n  }\n ]\n}",
+     "options": {
+      "raw": {
+       "language": "json"
+      }
+     }
+    }
+   }
+  },
+  {
+   "name": "2 - Thieu cot STDNT_AGE",
+   "event": [
+    {
+     "listen": "test",
+     "script": {
+      "type": "text/javascript",
+      "exec": [
+       "pm.test('khong 500 rong', () => pm.expect(pm.response.text().length).to.be.above(0));",
+       "const b = pm.response.json();",
+       "pm.test('tra ve loi co thong bao (KeyError cot thieu)', () => pm.expect(b).to.have.property('error'));"
+      ]
+     }
+    }
+   ],
+   "request": {
+    "method": "POST",
+    "header": [
+     {
+      "key": "Authorization",
+      "value": "Bearer {{scoring_key}}"
+     },
+     {
+      "key": "Content-Type",
+      "value": "application/json"
+     }
+    ],
+    "url": {
+     "raw": "{{scoring_uri}}"
+    },
+    "body": {
+     "mode": "raw",
+     "raw": "{\n \"data\": [\n  {\n   \"STUDENT_IDENTIFIER\": 9000001,\n   \"STDNT_GENDER\": \"F\",\n   \"STDNT_BACKGROUND\": \"BGD 1\",\n   \"IN_STATE_FLAG\": \"Y\",\n   \"INTERNATIONAL_STS\": \"N\",\n   \"STDNT_MAJOR\": \"Nursing\",\n   \"STDNT_MINOR\": \"N\",\n   \"HIGH_SCHL_GPA\": 3.6,\n   \"STDNT_TEST_ENTRANCE_COMB\": 1180,\n   \"FATHER_HI_EDU_CD\": 3,\n   \"MOTHER_HI_EDU_CD\": 3,\n   \"HOUSING_STS\": \"On Campus\",\n   \"DISTANCE_FROM_HOME\": 40,\n   \"FIRST_TERM\": 200908,\n   \"FIRST_TERM_ATTEMPT_HRS\": 15,\n   \"FIRST_TERM_EARNED_HRS\": 15,\n   \"SECOND_TERM\": 201002,\n   \"SECOND_TERM_ATTEMPT_HRS\": 15,\n   \"SECOND_TERM_EARNED_HRS\": 15,\n   \"GROSS_FIN_NEED\": 8000,\n   \"COST_OF_ATTEND\": 18000,\n   \"EST_FAM_CONTRIBUTION\": 9000,\n   \"UNMET_NEED\": 1000,\n   \"CORE_COURSE_GRADE_1_F\": \"A\",\n   \"CORE_COURSE_GRADE_2_F\": \"B\",\n   \"CORE_COURSE_GRADE_3_F\": \"A\",\n   \"CORE_COURSE_GRADE_4_F\": \"B\",\n   \"CORE_COURSE_GRADE_1_S\": \"A\",\n   \"CORE_COURSE_GRADE_2_S\": \"A\",\n   \"CORE_COURSE_GRADE_3_S\": \"B\"\n  }\n ]\n}",
+     "options": {
+      "raw": {
+       "language": "json"
+      }
+     }
+    }
+   }
+  },
+  {
+   "name": "3 - Sai kieu du lieu (GPA = abc)",
+   "event": [
+    {
+     "listen": "test",
+     "script": {
+      "type": "text/javascript",
+      "exec": [
+       "pm.test('khong 500 rong', () => pm.expect(pm.response.text().length).to.be.above(0));",
+       "console.log('Ket qua thuc te (ghi vao bien ban):', pm.response.text());"
+      ]
+     }
+    }
+   ],
+   "request": {
+    "method": "POST",
+    "header": [
+     {
+      "key": "Authorization",
+      "value": "Bearer {{scoring_key}}"
+     },
+     {
+      "key": "Content-Type",
+      "value": "application/json"
+     }
+    ],
+    "url": {
+     "raw": "{{scoring_uri}}"
+    },
+    "body": {
+     "mode": "raw",
+     "raw": "{\n \"data\": [\n  {\n   \"STUDENT_IDENTIFIER\": 9000001,\n   \"STDNT_AGE\": 18,\n   \"STDNT_GENDER\": \"F\",\n   \"STDNT_BACKGROUND\": \"BGD 1\",\n   \"IN_STATE_FLAG\": \"Y\",\n   \"INTERNATIONAL_STS\": \"N\",\n   \"STDNT_MAJOR\": \"Nursing\",\n   \"STDNT_MINOR\": \"N\",\n   \"HIGH_SCHL_GPA\": \"abc\",\n   \"STDNT_TEST_ENTRANCE_COMB\": 1180,\n   \"FATHER_HI_EDU_CD\": 3,\n   \"MOTHER_HI_EDU_CD\": 3,\n   \"HOUSING_STS\": \"On Campus\",\n   \"DISTANCE_FROM_HOME\": 40,\n   \"FIRST_TERM\": 200908,\n   \"FIRST_TERM_ATTEMPT_HRS\": 15,\n   \"FIRST_TERM_EARNED_HRS\": 15,\n   \"SECOND_TERM\": 201002,\n   \"SECOND_TERM_ATTEMPT_HRS\": 15,\n   \"SECOND_TERM_EARNED_HRS\": 15,\n   \"GROSS_FIN_NEED\": 8000,\n   \"COST_OF_ATTEND\": 18000,\n   \"EST_FAM_CONTRIBUTION\": 9000,\n   \"UNMET_NEED\": 1000,\n   \"CORE_COURSE_GRADE_1_F\": \"A\",\n   \"CORE_COURSE_GRADE_2_F\": \"B\",\n   \"CORE_COURSE_GRADE_3_F\": \"A\",\n   \"CORE_COURSE_GRADE_4_F\": \"B\",\n   \"CORE_COURSE_GRADE_1_S\": \"A\",\n   \"CORE_COURSE_GRADE_2_S\": \"A\",\n   \"CORE_COURSE_GRADE_3_S\": \"B\"\n  }\n ]\n}",
+     "options": {
+      "raw": {
+       "language": "json"
+      }
+     }
+    }
+   }
+  },
+  {
+   "name": "4 - Rong (data = [])",
+   "event": [
+    {
+     "listen": "test",
+     "script": {
+      "type": "text/javascript",
+      "exec": [
+       "const b = pm.response.json();",
+       "pm.test('bao khong co dong du lieu', () => pm.expect(b.error).to.include('Không có dòng dữ liệu'));"
+      ]
+     }
+    }
+   ],
+   "request": {
+    "method": "POST",
+    "header": [
+     {
+      "key": "Authorization",
+      "value": "Bearer {{scoring_key}}"
+     },
+     {
+      "key": "Content-Type",
+      "value": "application/json"
+     }
+    ],
+    "url": {
+     "raw": "{{scoring_uri}}"
+    },
+    "body": {
+     "mode": "raw",
+     "raw": "{\n \"data\": []\n}",
+     "options": {
+      "raw": {
+       "language": "json"
+      }
+     }
+    }
+   }
+  },
+  {
+   "name": "5 - File lon 500 sinh vien",
+   "event": [
+    {
+     "listen": "prerequest",
+     "script": {
+      "type": "text/javascript",
+      "exec": [
+       "const rec = {\"STUDENT_IDENTIFIER\": 9000002, \"STDNT_AGE\": 18, \"STDNT_GENDER\": \"M\", \"STDNT_BACKGROUND\": \"BGD 1\", \"IN_STATE_FLAG\": \"Y\", \"INTERNATIONAL_STS\": \"N\", \"STDNT_MAJOR\": \"Undeclared\", \"STDNT_MINOR\": \"N\", \"HIGH_SCHL_GPA\": 2.4, \"STDNT_TEST_ENTRANCE_COMB\": 1180, \"FATHER_HI_EDU_CD\": 3, \"MOTHER_HI_EDU_CD\": 3, \"HOUSING_STS\": \"Off Campus\", \"DISTANCE_FROM_HOME\": 180, \"FIRST_TERM\": 200908, \"FIRST_TERM_ATTEMPT_HRS\": 15, \"FIRST_TERM_EARNED_HRS\": 6, \"SECOND_TERM\": 201002, \"SECOND_TERM_ATTEMPT_HRS\": null, \"SECOND_TERM_EARNED_HRS\": null, \"GROSS_FIN_NEED\": 8000, \"COST_OF_ATTEND\": 18000, \"EST_FAM_CONTRIBUTION\": 9000, \"UNMET_NEED\": 9000, \"CORE_COURSE_GRADE_1_F\": \"D\", \"CORE_COURSE_GRADE_2_F\": \"F\", \"CORE_COURSE_GRADE_3_F\": \"C\", \"CORE_COURSE_GRADE_4_F\": \"F\"};",
+       "const data = [];",
+       "for (let i = 0; i < 500; i++) { data.push(Object.assign({}, rec, {STUDENT_IDENTIFIER: 9200000 + i})); }",
+       "pm.collectionVariables.set('big_body', JSON.stringify({data: data}));"
+      ]
+     }
+    },
+    {
+     "listen": "test",
+     "script": {
+      "type": "text/javascript",
+      "exec": [
+       "pm.test('HTTP 200', () => pm.response.to.have.status(200));",
+       "pm.test('du 500 ket qua', () => pm.expect(pm.response.json()).to.have.lengthOf(500));",
+       "pm.test('duoi 60 giay', () => pm.expect(pm.response.responseTime).to.be.below(60000));"
+      ]
+     }
+    }
+   ],
+   "request": {
+    "method": "POST",
+    "header": [
+     {
+      "key": "Authorization",
+      "value": "Bearer {{scoring_key}}"
+     },
+     {
+      "key": "Content-Type",
+      "value": "application/json"
+     }
+    ],
+    "url": {
+     "raw": "{{scoring_uri}}"
+    },
+    "body": {
+     "mode": "raw",
+     "raw": "{{big_body}}",
+     "options": {
+      "raw": {
+       "language": "json"
+      }
+     }
+    }
+   }
+  },
+  {
+   "name": "6 - Web /healthz",
+   "event": [
+    {
+     "listen": "test",
+     "script": {
+      "type": "text/javascript",
+      "exec": [
+       "pm.test('HTTP 200', () => pm.response.to.have.status(200));",
+       "pm.test('status ok', () => pm.expect(pm.response.json().status).to.eql('ok'));"
+      ]
+     }
+    }
+   ],
+   "request": {
+    "method": "GET",
+    "header": [],
+    "url": {
+     "raw": "{{web_url}}/healthz"
+    }
+   }
+  },
+  {
+   "name": "7 - Web /history",
+   "event": [
+    {
+     "listen": "test",
+     "script": {
+      "type": "text/javascript",
+      "exec": [
+       "pm.test('HTTP 200', () => pm.response.to.have.status(200));"
+      ]
+     }
+    }
+   ],
+   "request": {
+    "method": "GET",
+    "header": [],
+    "url": {
+     "raw": "{{web_url}}/history"
+    }
+   }
+  }
+ ]
+}
