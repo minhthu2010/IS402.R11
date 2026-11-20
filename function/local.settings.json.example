@@ -1,0 +1,14 @@
+{
+  "IsEncrypted": false,
+  "Values": {
+    "AzureWebJobsStorage": "UseDevelopmentStorage=true",
+    "FUNCTIONS_WORKER_RUNTIME": "python",
+    "LAKE_CONN": "<connection string storage stdropoutthi1>",
+    "SCORING_URI": "<scoring uri>",
+    "SCORING_KEY": "<key>",
+    "SQL_SERVER": "sql-dropout-thi.database.windows.net",
+    "SQL_DB": "dropoutdb",
+    "SQL_USER": "app_writer",
+    "SQL_PASSWORD": "<mật khẩu>"
+  }
+}

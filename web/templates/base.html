@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>{% block title %}Dự đoán sinh viên bỏ học{% endblock %}</title>
+<style>
+:root{--bg:#f6f7f9;--card:#fff;--ink:#1d2433;--mute:#667085;--line:#e4e7ec;--brand:#2457c5;--ok:#157f3b;--mid:#b54708;--bad:#c01048}
+@media (prefers-color-scheme:dark){:root{--bg:#10131a;--card:#181c26;--ink:#e8ebf2;--mute:#98a2b3;--line:#2a3040;--brand:#6c93f0;--ok:#4ac17a;--mid:#f2a24b;--bad:#f46a93}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 system-ui,-apple-system,Segoe UI,sans-serif}
+nav{background:var(--card);border-bottom:1px solid var(--line);padding:0 16px;display:flex;gap:4px;flex-wrap:wrap;align-items:center}
+nav b{margin-right:16px}nav a{padding:14px 12px;color:var(--mute);text-decoration:none}nav a:hover,nav a.on{color:var(--brand)}
+main{max-width:1000px;margin:24px auto;padding:0 16px}.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:18px;margin-bottom:16px}
+h1{font-size:22px;margin:0 0 14px}h2{font-size:16px;margin:0 0 12px}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.stat{font-size:28px;font-weight:650}.mute{color:var(--mute);font-size:13px}label{display:block;font-size:13px;color:var(--mute);margin-bottom:3px}
+input,select{width:100%;padding:8px;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--ink);font:inherit}
+button,.btn{background:var(--brand);color:#fff;border:0;border-radius:6px;padding:9px 16px;font:inherit;cursor:pointer}button.ghost{background:transparent;color:var(--brand);border:1px solid var(--brand)}
+.badge{display:inline-block;padding:3px 10px;border-radius:99px;font-weight:600;font-size:13px}.Cao{background:#fde2ea;color:var(--bad)}.TB{background:#fdeccf;color:var(--mid)}.Thap{background:#d9f3e2;color:var(--ok)}
+.err{border-left:4px solid var(--bad)}.warn{border-left:4px solid var(--mid)}.good{border-left:4px solid var(--ok)}
+table{width:100%;border-collapse:collapse;font-size:14px}th,td{text-align:left;padding:8px;border-bottom:1px solid var(--line)}.tbl{overflow-x:auto}
+.banner{background:#fdeccf;color:#7a4510;padding:6px 16px;font-size:13px;text-align:center}
+</style></head><body>
+{% if mock %}<div class="banner">Đang chạy chế độ MOCK (kết quả giả, không gọi endpoint thật)</div>{% endif %}
+<nav><b>Dropout Predictor</b>
+<a href="/" class="{{ 'on' if request.url.path == '/' }}">Trang chủ</a>
+<a href="/predict" class="{{ 'on' if request.url.path == '/predict' }}">Dự đoán 1 SV</a>
+<a href="/upload" class="{{ 'on' if request.url.path == '/upload' }}">Upload CSV</a>
+<a href="/history" class="{{ 'on' if request.url.path == '/history' }}">Lịch sử</a></nav>
+<main>{% block body %}{% endblock %}</main></body></html>

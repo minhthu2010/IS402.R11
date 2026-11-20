@@ -1,0 +1,14 @@
+{% extends "base.html" %}{% block body %}
+<h1>Hệ thống cảnh báo sinh viên có nguy cơ bỏ học</h1>
+<div class="card"><p>Nhập thông tin sinh viên năm nhất (hoặc upload file CSV hàng loạt), hệ thống gọi model LightGBM trên Azure Machine Learning và trả về
+xác suất bỏ học, mức rủi ro (Thấp / Trung bình / Cao) cùng 3 yếu tố ảnh hưởng nhiều nhất. Kết quả được lưu vào Azure SQL để Power BI hiển thị.</p></div>
+<div class="grid">
+<div class="card"><div class="mute">Sinh viên trong dữ liệu</div><div class="stat">{{ "{:,}".format(stats.students) if stats.students is not none and stats.students is defined else "–" }}</div></div>
+<div class="card"><div class="mute">Tỉ lệ bỏ học thực tế</div><div class="stat">{{ stats.rate ~ "%" if stats.rate is defined else "–" }}</div></div>
+<div class="card"><div class="mute">Lượt dự đoán đã lưu</div><div class="stat">{{ stats.total if stats.total is defined else "–" }}</div></div>
+<div class="card"><div class="mute">Trong đó rủi ro Cao</div><div class="stat">{{ stats.high if stats.high is defined else "–" }}</div></div>
+</div>
+{% if stats.last %}<p class="mute">Lần dự đoán gần nhất: {{ stats.last }} (giờ Việt Nam)</p>{% endif %}
+{% for n in note %}<div class="card warn mute">{{ n }}</div>{% endfor %}
+<p><a class="btn" href="/predict">Dự đoán 1 sinh viên</a> &nbsp; <a class="btn ghost" href="/upload">Upload CSV</a></p>
+{% endblock %}
