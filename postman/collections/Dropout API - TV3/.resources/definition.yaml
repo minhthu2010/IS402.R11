@@ -1,0 +1,7 @@
+$kind: collection
+description: ""
+variables:
+  scoring_uri: https://dropout-ep-pa.eastasia.inference.ml.azure.com/score
+  scoring_key: {{scoring_key}}
+  web_url: https://web-dropout-pah.azurewebsites.net
+  big_body: ""

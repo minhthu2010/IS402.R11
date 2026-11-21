@@ -1,0 +1,8 @@
+name: tv3
+values:
+  - key: scoring_uri
+    value: ''
+  - key: scoring_key
+    value: ''
+  - key: web_url
+    value: ''

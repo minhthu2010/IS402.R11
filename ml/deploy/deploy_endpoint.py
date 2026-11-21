@@ -15,7 +15,7 @@ import tempfile
 from pathlib import Path
 
 from azure.ai.ml import MLClient
-from azure.ai.ml.entities import CodeConfiguration, ManagedOnlineDeployment, ManagedOnlineEndpoint
+from azure.ai.ml.entities import CodeConfiguration, ManagedOnlineDeployment, ManagedOnlineEndpoint, OnlineRequestSettings
 from azure.identity import DefaultAzureCredential
 
 HERE = Path(__file__).resolve().parent          # ml/deploy
@@ -38,7 +38,8 @@ def deploy(ml, a):
         model=f"azureml:dropout-model:{a.model_version}",
         environment=f"azureml:dropout-env:{a.env_version}",
         code_configuration=CodeConfiguration(code=str(ML_DIR / "src"), scoring_script="score.py"),
-        instance_type=a.instance, instance_count=1)
+        instance_type=a.instance, instance_count=1,
+        request_settings=OnlineRequestSettings(request_timeout_ms=90000))
     ml.online_deployments.begin_create_or_update(dep).result()
     print("[3/3] Chuyển 100% traffic vào deployment ...")
     ep = ml.online_endpoints.get(a.endpoint)

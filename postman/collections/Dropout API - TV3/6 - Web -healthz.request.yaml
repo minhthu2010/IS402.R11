@@ -1,0 +1,11 @@
+$kind: http-request
+name: 6 - Web /healthz
+url: ""
+method: GET
+scripts:
+  - type: afterResponse
+    code: |-
+      pm.test('HTTP 200', () => pm.response.to.have.status(200));
+      pm.test('status ok', () => pm.expect(pm.response.json().status).to.eql('ok'));
+    language: text/javascript
+order: 6000
