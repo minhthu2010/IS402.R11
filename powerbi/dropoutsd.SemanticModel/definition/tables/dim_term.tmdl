@@ -1,0 +1,54 @@
+table dim_term
+	lineageTag: 5f5219f2-d31d-4b64-8f33-9cb1bf645bd0
+
+	column term_code
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: e3f0404a-dba5-4f43-b62d-fc395451793f
+		summarizeBy: none
+		sourceColumn: term_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column year
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 2caec08b-d600-4260-be26-b351bf00d6e0
+		summarizeBy: none
+		sourceColumn: year
+
+		annotation SummarizationSetBy = Automatic
+
+	column season
+		dataType: string
+		isNullable: false
+		sourceProviderType: varchar(6)
+		lineageTag: 71a4f2eb-d49c-4eb5-893b-c072c534567c
+		summarizeBy: none
+		sourceColumn: season
+
+		annotation SummarizationSetBy = Automatic
+
+	column academic_year
+		dataType: string
+		isNullable: false
+		sourceProviderType: varchar(9)
+		lineageTag: 6ac433c2-dad3-4bb2-b005-025dc9498381
+		summarizeBy: none
+		sourceColumn: academic_year
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_term = m
+		mode: directQuery
+		source =
+				let
+				    Source = Sql.Database("sql-dropout-thi.database.windows.net", "dropoutdb"),
+				    dbo_dim_term = Source{[Schema="dbo",Item="dim_term"]}[Data]
+				in
+				    dbo_dim_term
+

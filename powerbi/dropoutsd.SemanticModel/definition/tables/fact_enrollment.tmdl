@@ -1,0 +1,278 @@
+table fact_enrollment
+	lineageTag: 79048dc9-2742-4385-bae1-f23b00ffa4b1
+
+	column student_id
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 4d544ce5-7287-4de4-9864-20bd476d53e5
+		summarizeBy: none
+		sourceColumn: student_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column major_id
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 91779b2a-8eb1-48a5-8e32-448c2c31c6ee
+		summarizeBy: sum
+		sourceColumn: major_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column faculty_id
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 25b232ad-553d-411a-8c6b-8d4a38a41efc
+		summarizeBy: sum
+		sourceColumn: faculty_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column class_code
+		dataType: string
+		isNullable: false
+		sourceProviderType: varchar(12)
+		lineageTag: 7705c73d-be76-4527-97e9-d5fba685ac9c
+		summarizeBy: none
+		sourceColumn: class_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column cohort_year
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 2d13604c-43dc-472a-8e6d-534ac7e37943
+		summarizeBy: sum
+		sourceColumn: cohort_year
+
+		annotation SummarizationSetBy = Automatic
+
+	column first_term
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 9cb3ea95-1051-4800-86b6-5a9cb46c741c
+		summarizeBy: sum
+		sourceColumn: first_term
+
+		annotation SummarizationSetBy = Automatic
+
+	column second_term
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: be16bc57-e181-4638-bc6b-7b8cf58e035d
+		summarizeBy: sum
+		sourceColumn: second_term
+
+		annotation SummarizationSetBy = Automatic
+
+	column minor
+		dataType: string
+		sourceProviderType: nvarchar(60)
+		lineageTag: 80d0f1b0-6e84-4ff0-818a-6686cb04fb07
+		summarizeBy: none
+		sourceColumn: minor
+
+		annotation SummarizationSetBy = Automatic
+
+	column degree_group
+		dataType: string
+		sourceProviderType: varchar(30)
+		lineageTag: b10bc09e-c798-40de-a00d-5ea062be0f90
+		summarizeBy: none
+		sourceColumn: degree_group
+
+		annotation SummarizationSetBy = Automatic
+
+	column entrance1
+		dataType: double
+		sourceProviderType: float
+		lineageTag: f56040eb-8bc0-4d16-9071-27861f176781
+		summarizeBy: sum
+		sourceColumn: entrance1
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column entrance2
+		dataType: double
+		sourceProviderType: float
+		lineageTag: 23c419e7-c4ab-4671-845d-2e5df9ac72e7
+		summarizeBy: sum
+		sourceColumn: entrance2
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column entrance_comb
+		dataType: double
+		sourceProviderType: float
+		lineageTag: 8c4ec972-f139-49a6-a9d5-009c8284897d
+		summarizeBy: sum
+		sourceColumn: entrance_comb
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column first_term_attempt_hrs
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 59c11986-335e-48de-b9ac-ec44d3a5b978
+		summarizeBy: sum
+		sourceColumn: first_term_attempt_hrs
+
+		annotation SummarizationSetBy = Automatic
+
+	column first_term_earned_hrs
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: e27ede83-8e09-468a-b27c-444f006cc92b
+		summarizeBy: sum
+		sourceColumn: first_term_earned_hrs
+
+		annotation SummarizationSetBy = Automatic
+
+	column second_term_attempt_hrs
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: de667801-c9e7-4e14-8751-a794d317abb5
+		summarizeBy: sum
+		sourceColumn: second_term_attempt_hrs
+
+		annotation SummarizationSetBy = Automatic
+
+	column second_term_earned_hrs
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 4a7278cc-e596-4b3e-9433-e9a47e914cd6
+		summarizeBy: sum
+		sourceColumn: second_term_earned_hrs
+
+		annotation SummarizationSetBy = Automatic
+
+	column gross_fin_need
+		dataType: double
+		sourceProviderType: float
+		lineageTag: 6a7265ad-e2c8-43a8-8b32-f300d3322462
+		summarizeBy: sum
+		sourceColumn: gross_fin_need
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column cost_of_attend
+		dataType: double
+		sourceProviderType: float
+		lineageTag: 59fa79d3-599d-4ab6-b466-59873715a388
+		summarizeBy: sum
+		sourceColumn: cost_of_attend
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column est_fam_contribution
+		dataType: double
+		sourceProviderType: float
+		lineageTag: 907d4360-123a-46fb-b151-a5609fa4424d
+		summarizeBy: sum
+		sourceColumn: est_fam_contribution
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column unmet_need
+		dataType: double
+		sourceProviderType: float
+		lineageTag: b970ae1b-3bac-466a-bc6c-0a954f769bf8
+		summarizeBy: sum
+		sourceColumn: unmet_need
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column returned_2nd_yr
+		dataType: boolean
+		isNullable: false
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		sourceProviderType: bit
+		lineageTag: a83ac64c-1b44-4913-a1b3-0ae508921244
+		summarizeBy: none
+		sourceColumn: returned_2nd_yr
+
+		annotation SummarizationSetBy = Automatic
+
+	column dropout
+		dataType: boolean
+		isNullable: false
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		sourceProviderType: bit
+		lineageTag: c3fda9e9-9750-4e26-9bcb-7c6b25e0c0b9
+		summarizeBy: none
+		sourceColumn: dropout
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_synthetic
+		dataType: boolean
+		isNullable: false
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		sourceProviderType: bit
+		lineageTag: 19e3e770-567a-467c-b484-ceb4ad59567e
+		summarizeBy: none
+		sourceColumn: is_synthetic
+
+		annotation SummarizationSetBy = Automatic
+
+	column block
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: fcfd4964-9a2c-4940-959b-3cc0f8767d35
+		summarizeBy: sum
+		sourceColumn: block
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Student Status' =
+			
+			IF(
+			    'fact_enrollment'[returned_2nd_yr] = TRUE(),
+			    "Returned",
+			    "Dropout"
+			)
+		lineageTag: bc2303f2-7572-4fb4-a277-7ba89ee47159
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fact_enrollment = m
+		mode: directQuery
+		source =
+				let
+				    Source = Sql.Database("sql-dropout-thi.database.windows.net", "dropoutdb"),
+				    dbo_fact_enrollment = Source{[Schema="dbo",Item="fact_enrollment"]}[Data]
+				in
+				    dbo_fact_enrollment
+

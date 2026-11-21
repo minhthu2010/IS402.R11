@@ -1,0 +1,81 @@
+role Dynamic_RLS
+	modelPermission: read
+
+	tablePermission dim_class =
+			VAR CurrentEmail =
+			    LOWER(USERPRINCIPALNAME())
+			
+			VAR CurrentRole =
+			    LOOKUPVALUE(
+			        rls_user_scope[role],
+			        rls_user_scope[user_email], CurrentEmail
+			    )
+			
+			VAR CurrentFaculty =
+			    LOOKUPVALUE(
+			        rls_user_scope[faculty_id],
+			        rls_user_scope[user_email], CurrentEmail
+			    )
+			
+			VAR CurrentClass =
+			    LOOKUPVALUE(
+			        rls_user_scope[class_code],
+			        rls_user_scope[user_email], CurrentEmail
+			    )
+			
+			RETURN
+			    CurrentRole = "Admin"
+			    ||
+			    (
+			        CurrentRole = "TruongKhoa"
+			        && dim_class[faculty_id] = CurrentFaculty
+			    )
+			    ||
+			    (
+			        CurrentRole = "CoVan"
+			        && dim_class[class_code] = CurrentClass
+			    )
+
+	tablePermission dim_faculty =
+			VAR CurrentEmail =
+			    LOWER(USERPRINCIPALNAME())
+			
+			VAR CurrentRole =
+			    LOOKUPVALUE(
+			        rls_user_scope[role],
+			        rls_user_scope[user_email], CurrentEmail
+			    )
+			
+			VAR CurrentFaculty =
+			    LOOKUPVALUE(
+			        rls_user_scope[faculty_id],
+			        rls_user_scope[user_email], CurrentEmail
+			    )
+			
+			VAR CurrentClass =
+			    LOOKUPVALUE(
+			        rls_user_scope[class_code],
+			        rls_user_scope[user_email], CurrentEmail
+			    )
+			
+			VAR AdvisorFaculty =
+			    LOOKUPVALUE(
+			        dim_class[faculty_id],
+			        dim_class[class_code], CurrentClass
+			    )
+			
+			RETURN
+			    CurrentRole = "Admin"
+			    ||
+			    (
+			        CurrentRole = "TruongKhoa"
+			        && dim_faculty[faculty_id] = CurrentFaculty
+			    )
+			    ||
+			    (
+			        CurrentRole = "CoVan"
+			        && dim_faculty[faculty_id] = AdvisorFaculty
+			    )
+
+	annotation PBI_Id = 978f23d857ec4c0d8d76a77947e31a14
+

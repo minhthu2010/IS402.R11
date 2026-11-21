@@ -1,0 +1,112 @@
+table agg_cohort_major
+	lineageTag: b776696a-f88b-4fc5-990a-f868d1626c3c
+
+	column cohort_year
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: f9ec06fe-141b-44d3-8d79-57014009af30
+		summarizeBy: sum
+		sourceColumn: cohort_year
+
+		annotation SummarizationSetBy = Automatic
+
+	column major_id
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: e19c64f1-24b4-4f5f-94ae-7a19d20d7d4a
+		summarizeBy: none
+		sourceColumn: major_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column faculty_id
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: bc1627a1-c0c6-4c8f-8fc9-4588d57906e5
+		summarizeBy: sum
+		sourceColumn: faculty_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_synthetic
+		dataType: boolean
+		isNullable: false
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		sourceProviderType: bit
+		lineageTag: 8f75ad2c-0393-4e2d-ae7d-00f00967924a
+		summarizeBy: none
+		sourceColumn: is_synthetic
+
+		annotation SummarizationSetBy = Automatic
+
+	column n_students
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: ef492255-69db-4b16-b103-feaa5b27ae45
+		summarizeBy: sum
+		sourceColumn: n_students
+
+		annotation SummarizationSetBy = Automatic
+
+	column n_dropout
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: bd27f42b-27ca-433b-8e2a-431cb626507d
+		summarizeBy: sum
+		sourceColumn: n_dropout
+
+		annotation SummarizationSetBy = Automatic
+
+	column dropout_rate
+		dataType: double
+		isNullable: false
+		sourceProviderType: float
+		lineageTag: 0d40b65c-a906-4f15-8393-8c384346de66
+		summarizeBy: sum
+		sourceColumn: dropout_rate
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column avg_high_school_gpa
+		dataType: double
+		sourceProviderType: float
+		lineageTag: acb80909-b8b4-46cb-8e67-809f93160eb7
+		summarizeBy: sum
+		sourceColumn: avg_high_school_gpa
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column avg_gpa_term1
+		dataType: double
+		sourceProviderType: float
+		lineageTag: 3842fd9a-47ab-4847-8096-4b2ef18f60ae
+		summarizeBy: sum
+		sourceColumn: avg_gpa_term1
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition agg_cohort_major = m
+		mode: directQuery
+		source =
+				let
+				    Source = Sql.Database("sql-dropout-thi.database.windows.net", "dropoutdb"),
+				    dbo_agg_cohort_major = Source{[Schema="dbo",Item="agg_cohort_major"]}[Data]
+				in
+				    dbo_agg_cohort_major
+

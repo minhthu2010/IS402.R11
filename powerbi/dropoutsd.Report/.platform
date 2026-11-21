@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Report",
+    "displayName": "dropoutsd"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "695d5246-ea35-492c-8837-4e565f9f0f7f"
+  }
+}

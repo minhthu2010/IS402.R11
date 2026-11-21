@@ -1,0 +1,63 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/2.0.0/schema.json",
+  "name": "808bc60064b6ba2ab04e",
+  "displayName": "Student details",
+  "displayOption": "FitToPage",
+  "height": 720,
+  "width": 1280,
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "a17073ea0e47cede9965",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Students"
+              }
+            },
+            "Property": "HIGH_SCHL_GPA"
+          }
+        },
+        "type": "Categorical",
+        "howCreated": "Drillthrough"
+      }
+    ]
+  },
+  "pageBinding": {
+    "name": "25d7d7dc26d18a020d56",
+    "type": "Drillthrough",
+    "parameters": [
+      {
+        "name": "12fd27a6208356c41a5c",
+        "boundFilter": "a17073ea0e47cede9965",
+        "asAggregation": true,
+        "fieldExpr": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Students"
+              }
+            },
+            "Property": "HIGH_SCHL_GPA"
+          }
+        }
+      }
+    ]
+  },
+  "objects": {
+    "outspacePane": [
+      {
+        "properties": {
+          "width": {
+            "expr": {
+              "Literal": {
+                "Value": "196L"
+              }
+            }
+          }
+        }
+      }
+    ]
+  }
+}

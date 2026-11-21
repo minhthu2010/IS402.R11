@@ -19,3 +19,7 @@ mlruns/
 web/.env
 function/local.settings.json
 .azure/
+
+# Power BI (TV4)
+**/.pbi/localSettings.json
+**/.pbi/cache.abf

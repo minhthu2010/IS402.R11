@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "dropoutsd"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "6805efe4-2bbd-46d3-9416-7d23f9ecff96"
+  }
+}

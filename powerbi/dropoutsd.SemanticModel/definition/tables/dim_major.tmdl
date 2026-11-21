@@ -1,0 +1,44 @@
+table dim_major
+	lineageTag: e302af74-d52a-4d06-a5f2-b29965aaaa49
+
+	column major_id
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 800f24f6-018e-454d-b399-9a1afb57494f
+		summarizeBy: none
+		sourceColumn: major_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column major_name
+		dataType: string
+		isNullable: false
+		sourceProviderType: nvarchar(100)
+		lineageTag: 1a4a41a4-573a-4627-bddf-9dee2355222c
+		summarizeBy: none
+		sourceColumn: major_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column faculty_id
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 5af72cd1-7824-46da-9c48-e19a9c25a484
+		summarizeBy: none
+		sourceColumn: faculty_id
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_major = m
+		mode: directQuery
+		source =
+				let
+				    Source = Sql.Database("sql-dropout-thi.database.windows.net", "dropoutdb"),
+				    dbo_dim_major = Source{[Schema="dbo",Item="dim_major"]}[Data]
+				in
+				    dbo_dim_major
+

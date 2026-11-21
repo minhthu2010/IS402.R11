@@ -1,0 +1,55 @@
+table dim_class
+	lineageTag: 0b069d35-151c-44f5-a09d-4f444c5b845b
+
+	column class_code
+		dataType: string
+		isNullable: false
+		sourceProviderType: varchar(12)
+		lineageTag: cda48f1b-c283-4242-a501-41c3fa6dd99f
+		summarizeBy: none
+		sourceColumn: class_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column major_id
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 35ca2ca3-20af-42ee-a737-55c6d8392b61
+		summarizeBy: sum
+		sourceColumn: major_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column cohort_year
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 776c5509-5828-4ba5-a317-9b1b9bcd241e
+		summarizeBy: sum
+		sourceColumn: cohort_year
+
+		annotation SummarizationSetBy = Automatic
+
+	column faculty_id
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 7846469b-2c44-40fe-8043-51aabfa5791b
+		summarizeBy: none
+		sourceColumn: faculty_id
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_class = m
+		mode: directQuery
+		source =
+				let
+				    Source = Sql.Database("sql-dropout-thi.database.windows.net", "dropoutdb"),
+				    dbo_dim_class = Source{[Schema="dbo",Item="dim_class"]}[Data]
+				in
+				    dbo_dim_class
+

@@ -1,0 +1,217 @@
+{
+  "version": "1.1.0",
+  "diagrams": [
+    {
+      "ordinal": 0,
+      "scrollPosition": {
+        "x": 0,
+        "y": 5.6689952844745859
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 0,
+            "y": 2
+          },
+          "nodeIndex": "agg_cohort_major",
+          "nodeLineageTag": "b776696a-f88b-4fc5-990a-f868d1626c3c",
+          "size": {
+            "height": 296,
+            "width": 234
+          },
+          "zIndex": 4
+        },
+        {
+          "location": {
+            "x": 248.56878000000012,
+            "y": 784.79686645897232
+          },
+          "nodeIndex": "dim_class",
+          "nodeLineageTag": "0b069d35-151c-44f5-a09d-4f444c5b845b",
+          "size": {
+            "height": 176,
+            "width": 234
+          },
+          "zIndex": 14
+        },
+        {
+          "location": {
+            "x": 150.54867087282696,
+            "y": 383.62973355528692
+          },
+          "nodeIndex": "dim_faculty",
+          "nodeLineageTag": "36f1098d-506e-480d-a1e6-acda3eff4177",
+          "size": {
+            "height": 128,
+            "width": 234
+          },
+          "zIndex": 12
+        },
+        {
+          "location": {
+            "x": 0,
+            "y": 620.32251542958488
+          },
+          "nodeIndex": "dim_major",
+          "nodeLineageTag": "e302af74-d52a-4d06-a5f2-b29965aaaa49",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 15
+        },
+        {
+          "location": {
+            "x": 863.1796060000006,
+            "y": 0
+          },
+          "nodeIndex": "dim_student",
+          "nodeLineageTag": "1c45173f-8733-4137-b81a-8107e12d4bbf",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 13
+        },
+        {
+          "location": {
+            "x": 1277.9208132063754,
+            "y": 538.54990899999893
+          },
+          "nodeIndex": "dim_term",
+          "nodeLineageTag": "5f5219f2-d31d-4b64-8f33-9cb1bf645bd0",
+          "size": {
+            "height": 176,
+            "width": 234
+          },
+          "zIndex": 5
+        },
+        {
+          "location": {
+            "x": 887.310379000002,
+            "y": 531.46829999999886
+          },
+          "nodeIndex": "fact_course_grade",
+          "nodeLineageTag": "f4c7542b-6ec4-4e21-814c-d08768ddda4d",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 6
+        },
+        {
+          "location": {
+            "x": 538.86310200000378,
+            "y": 561.58483699999863
+          },
+          "nodeIndex": "fact_enrollment",
+          "nodeLineageTag": "79048dc9-2742-4385-bae1-f23b00ffa4b1",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 7
+        },
+        {
+          "location": {
+            "x": 1556.2893560000018,
+            "y": 229.32858799999954
+          },
+          "nodeIndex": "model_metrics",
+          "nodeLineageTag": "44affa66-63de-4ef3-8ac1-14da6cd621c3",
+          "size": {
+            "height": 224,
+            "width": 234
+          },
+          "zIndex": 8
+        },
+        {
+          "location": {
+            "x": 1571.5623240000032,
+            "y": 563.35176299999887
+          },
+          "nodeIndex": "rls_user_scope",
+          "nodeLineageTag": "5cf628f4-94a5-42e5-954f-026b63e44139",
+          "size": {
+            "height": 176,
+            "width": 234
+          },
+          "zIndex": 9
+        },
+        {
+          "location": {
+            "x": 1247.9169010000039,
+            "y": 0
+          },
+          "nodeIndex": "student_features",
+          "nodeLineageTag": "12155e77-1dbd-49f5-bc2a-f9797ea6361b",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 10
+        },
+        {
+          "location": {
+            "x": 4544,
+            "y": 14
+          },
+          "nodeIndex": "etl_log",
+          "nodeLineageTag": "a88ec9a4-41e6-4795-a012-683631b76fe5",
+          "size": {
+            "height": 272,
+            "width": 234
+          },
+          "zIndex": 11
+        },
+        {
+          "location": {
+            "x": 4828,
+            "y": 179.3633161195977
+          },
+          "nodeIndex": "_Measures",
+          "nodeLineageTag": "4a3901da-2c4d-49b5-bb7d-bfedcb98bbb3",
+          "size": {
+            "height": 104,
+            "width": 234
+          },
+          "zIndex": 3
+        },
+        {
+          "location": {
+            "x": 5112,
+            "y": 356.39843322948616
+          },
+          "nodeIndex": "Sweep",
+          "nodeLineageTag": "ea4e518a-8df4-4987-a517-1e2285a7be0b",
+          "size": {
+            "height": 248,
+            "width": 234
+          },
+          "zIndex": 1
+        },
+        {
+          "location": {
+            "x": 404.43989147926391,
+            "y": 0
+          },
+          "nodeIndex": "Pred",
+          "nodeLineageTag": "e3e361a1-09ac-4573-8510-d6887e57d36f",
+          "size": {
+            "height": 296,
+            "width": 234
+          },
+          "zIndex": 2
+        }
+      ],
+      "name": "All tables",
+      "zoomValue": 56.447393005378,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    }
+  ],
+  "selectedDiagram": "All tables",
+  "defaultDiagram": "All tables"
+}

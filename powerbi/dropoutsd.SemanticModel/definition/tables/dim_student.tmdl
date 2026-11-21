@@ -1,0 +1,149 @@
+table dim_student
+	lineageTag: 1c45173f-8733-4137-b81a-8107e12d4bbf
+
+	column student_id
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 75259e50-85f1-4d7f-aefa-0a4fc06f8d99
+		summarizeBy: none
+		sourceColumn: student_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column age
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 93c7898c-e4a1-4025-a436-c9625304760d
+		summarizeBy: none
+		sourceColumn: age
+
+		annotation SummarizationSetBy = Automatic
+
+	column gender
+		dataType: string
+		sourceProviderType: char
+		lineageTag: 96c613ea-0ead-4a1a-b13c-ba4edc3819c2
+		summarizeBy: none
+		sourceColumn: gender
+
+		annotation SummarizationSetBy = Automatic
+
+	column background
+		dataType: string
+		sourceProviderType: varchar(10)
+		lineageTag: f3e055ab-d575-4cc8-9ba0-a3cfe2b44f9f
+		summarizeBy: none
+		sourceColumn: background
+
+		annotation SummarizationSetBy = Automatic
+
+	column in_state
+		dataType: string
+		sourceProviderType: char
+		lineageTag: 963105d7-2c14-4c36-9683-cdcbb1573d5b
+		summarizeBy: none
+		sourceColumn: in_state
+
+		annotation SummarizationSetBy = Automatic
+
+	column international
+		dataType: string
+		sourceProviderType: char
+		lineageTag: 17fa342f-88c3-48c6-8704-7bfe997b9c69
+		summarizeBy: none
+		sourceColumn: international
+
+		annotation SummarizationSetBy = Automatic
+
+	column housing
+		dataType: string
+		sourceProviderType: varchar(12)
+		lineageTag: fe4aa85c-041b-4345-a76c-a446e1b7d98b
+		summarizeBy: none
+		sourceColumn: housing
+
+		annotation SummarizationSetBy = Automatic
+
+	column distance_from_home
+		dataType: double
+		sourceProviderType: float
+		lineageTag: 4e7a394a-3fa2-49f4-a6e5-da3a482a4a96
+		summarizeBy: none
+		sourceColumn: distance_from_home
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column high_school
+		dataType: string
+		sourceProviderType: varchar(20)
+		lineageTag: 789f9e24-97ac-4f97-8040-69796d019610
+		summarizeBy: none
+		sourceColumn: high_school
+
+		annotation SummarizationSetBy = Automatic
+
+	column high_school_gpa
+		dataType: double
+		sourceProviderType: float
+		lineageTag: e7766f23-816b-4df0-ab21-01f9a274ff75
+		summarizeBy: none
+		sourceColumn: high_school_gpa
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column father_edu
+		dataType: string
+		sourceProviderType: nvarchar(40)
+		lineageTag: 4668c3cf-5e4c-48fd-99fa-b6a50fd5b306
+		summarizeBy: none
+		sourceColumn: father_edu
+
+		annotation SummarizationSetBy = Automatic
+
+	column mother_edu
+		dataType: string
+		sourceProviderType: nvarchar(40)
+		lineageTag: 1f68423c-3601-4136-8827-7ad262904b8a
+		summarizeBy: none
+		sourceColumn: mother_edu
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_synthetic
+		dataType: boolean
+		isNullable: false
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		sourceProviderType: bit
+		lineageTag: 02528ff1-0c19-48bc-bef2-629b3332b71e
+		summarizeBy: none
+		sourceColumn: is_synthetic
+
+		annotation SummarizationSetBy = Automatic
+
+	column block
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 4d2c048c-3e57-498b-a07f-2170c98ec696
+		summarizeBy: none
+		sourceColumn: block
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_student = m
+		mode: directQuery
+		source =
+				let
+				    Source = Sql.Database("sql-dropout-thi.database.windows.net", "dropoutdb"),
+				    dbo_dim_student = Source{[Schema="dbo",Item="dim_student"]}[Data]
+				in
+				    dbo_dim_student
+

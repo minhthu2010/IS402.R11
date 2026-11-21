@@ -1,0 +1,151 @@
+table model_metrics
+	lineageTag: 44affa66-63de-4ef3-8ac1-14da6cd621c3
+
+	measure 'AUC test' = CALCULATE ( [Giá trị], REMOVEFILTERS ( model_metrics ), model_metrics[Model chọn] = 1, model_metrics[metric] = "test_auc" )
+		lineageTag: 6cee6b75-6bfc-47ee-902d-d1bbf4bd8be7
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Recall test' = CALCULATE ( [Giá trị], REMOVEFILTERS ( model_metrics ), model_metrics[Model chọn] = 1, model_metrics[metric] = "test_recall" )
+		lineageTag: d5fee614-2148-4c9f-9251-d204bbed7180
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'F1 test' = CALCULATE ( [Giá trị], REMOVEFILTERS ( model_metrics ), model_metrics[Model chọn] = 1, model_metrics[metric] = "test_f1" )
+		lineageTag: de8edf37-aecf-4a45-9796-3318b0e4212f
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure Ngưỡng = CALCULATE ( [Giá trị], REMOVEFILTERS ( model_metrics ), model_metrics[Model chọn] = 1, model_metrics[metric] = "threshold" )
+		lineageTag: 64cc2884-6f97-4011-847b-ceeda8e33eec
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Ghi chú accuracy' =
+			
+			VAR acc = CALCULATE ( AVERAGE ( model_metrics[value] ), REMOVEFILTERS ( model_metrics ),
+			                      model_metrics[metric] = "test_baseline_accuracy" )
+			RETURN "Nếu đoán tất cả sinh viên đều ở lại, accuracy đã đạt " & FORMAT ( acc, "0.0%" )
+			     & " nhưng không phát hiện được sinh viên bỏ học nào. Vì vậy nhóm đánh giá model bằng Recall và ROC-AUC thay vì Accuracy."
+		lineageTag: 6ec0771f-a30f-4cff-ab9d-139e607721d5
+
+	column run_id
+		dataType: string
+		isNullable: false
+		sourceProviderType: varchar(64)
+		lineageTag: f7814888-f020-4b04-99a1-c2e6a2ed92fd
+		summarizeBy: none
+		sourceColumn: run_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column model_name
+		dataType: string
+		isNullable: false
+		sourceProviderType: varchar(50)
+		lineageTag: 974eac95-4849-4dc5-b438-e5d9d5f884ae
+		summarizeBy: none
+		sourceColumn: model_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column params
+		dataType: string
+		sourceProviderType: nvarchar(400)
+		lineageTag: f705a6e3-d3f9-4483-b4f4-38cb03db879a
+		summarizeBy: none
+		sourceColumn: params
+
+		annotation SummarizationSetBy = Automatic
+
+	column metric
+		dataType: string
+		isNullable: false
+		sourceProviderType: varchar(30)
+		lineageTag: 854b9b6f-9678-433f-8aba-7532b68102c3
+		summarizeBy: none
+		sourceColumn: metric
+
+		annotation SummarizationSetBy = Automatic
+
+	column value
+		dataType: double
+		isNullable: false
+		formatString: 0.000
+		sourceProviderType: float
+		lineageTag: 6a4a260e-cc9a-4473-ab62-418c00ba5d51
+		summarizeBy: sum
+		sourceColumn: value
+
+		annotation SummarizationSetBy = Automatic
+
+	column logged_at
+		dataType: dateTime
+		isNullable: false
+		formatString: General Date
+		sourceProviderType: datetime2
+		lineageTag: fe22950f-b014-43cf-9c90-6004b118f0d5
+		summarizeBy: none
+		sourceColumn: logged_at
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Tên model' =
+			SWITCH ( model_metrics[run_id],
+			    "purple_pin_hhkg5dhtnb",   "LightGBM (300 cây, 15 lá)",
+			    "musing_drain_2ygs83pwn4", "LightGBM (100 cây, 4 lá)",
+			    "salmon_plum_x4pvr0j5cw",  "Random Forest",
+			    "modest_panda_090ybl0p99", "Logistic Regression",
+			    "lucid_farm_bs2hvd0xn1",   "MLP",
+			    model_metrics[model_name] )
+		lineageTag: 49b9f7f1-2d5b-45cd-95f5-789a9eb667e0
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column Tập =
+			IF ( LEFT ( model_metrics[metric], 3 ) = "cv_", "CV",
+			      IF ( LEFT ( model_metrics[metric], 5 ) = "test_", "Test", "Khác" ) )
+		lineageTag: 38bc9e45-6eb1-41f6-829d-ef5059908dd5
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Chỉ số' =
+			SWITCH ( SUBSTITUTE ( SUBSTITUTE ( model_metrics[metric], "cv_", "" ), "test_", "" ),
+			    "auc", "ROC-AUC", "recall", "Recall", "precision", "Precision", "f1", "F1",
+			    "accuracy", "Accuracy", "train_seconds", "Thời gian train (s)", "threshold", "Ngưỡng",
+			    model_metrics[metric] )
+		lineageTag: 7f7a0d13-cfaf-443a-af18-a3fd66dde01f
+		summarizeBy: none
+		sortByColumn: 'Thứ tự chỉ số'
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Thứ tự chỉ số' =
+			SWITCH ( SUBSTITUTE ( SUBSTITUTE ( model_metrics[metric], "cv_", "" ), "test_", "" ),
+			    "auc", 1, "recall", 2, "precision", 3, "f1", 4, "accuracy", 5, 9 )
+		formatString: 0
+		lineageTag: b61d3275-3c39-48be-981a-081eb8c708b9
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Model chọn' = IF ( model_metrics[run_id] = "purple_pin_hhkg5dhtnb", 1, 0 )
+		formatString: 0
+		lineageTag: c02b1d38-cbed-4a15-991e-fb0e5aa51e9a
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	partition model_metrics = m
+		mode: directQuery
+		source =
+				let
+				    Source = Sql.Database("sql-dropout-thi.database.windows.net", "dropoutdb"),
+				    dbo_model_metrics = Source{[Schema="dbo",Item="model_metrics"]}[Data]
+				in
+				    dbo_model_metrics
+

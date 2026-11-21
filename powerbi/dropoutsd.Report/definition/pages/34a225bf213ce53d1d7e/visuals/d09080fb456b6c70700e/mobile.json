@@ -1,0 +1,35 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainerMobileState/2.2.0/schema.json",
+  "position": {
+    "x": 0,
+    "y": 0,
+    "z": 8000,
+    "height": 60.5136186770428,
+    "width": 324,
+    "tabOrder": 8000
+  },
+  "objects": {
+    "general": [
+      {
+        "properties": {
+          "paragraphs": [
+            {
+              "textRuns": [
+                {
+                  "value": "Faculty & Cohort",
+                  "textStyle": {
+                    "fontWeight": "bold",
+                    "fontFamily": "Arial",
+                    "fontSize": "20pt",
+                    "color": "#004949"
+                  }
+                }
+              ],
+              "horizontalTextAlignment": "center"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}
