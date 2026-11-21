@@ -3,10 +3,10 @@
   "name": "0122dc888ae72e82c53d",
   "position": {
     "x": 0,
-    "y": 92.857142857142861,
+    "y": 92.912350929864061,
     "z": 0,
-    "height": 444.28571428571433,
-    "width": 282.85714285714289,
+    "height": 243.21174213993828,
+    "width": 282.8361270953215,
     "tabOrder": 0
   },
   "visual": {
@@ -23,7 +23,7 @@
                       "Entity": "dim_major"
                     }
                   },
-                  "Property": "major_name"
+                  "Property": "Ngành"
                 }
               },
               "queryRef": "dim_major.major_name",
@@ -90,7 +90,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Student major'"
+                  "Value": "'Ngành'"
                 }
               }
             },
@@ -143,7 +143,7 @@
                 "Entity": "dim_major"
               }
             },
-            "Property": "major_name"
+            "Property": "Ngành"
           }
         },
         "type": "Categorical",
@@ -170,7 +170,7 @@
                                 "Source": "d"
                               }
                             },
-                            "Property": "major_name"
+                            "Property": "Ngành"
                           }
                         }
                       ],

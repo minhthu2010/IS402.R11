@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
   "name": "6097ce905bc9eb471819",
   "position": {
-    "x": 330,
-    "y": 525.71428571428578,
+    "x": 621.61443240255289,
+    "y": 161.92164022847956,
     "z": 6000,
-    "height": 192.85714285714286,
-    "width": 418.57142857142861,
+    "height": 263.46571969379721,
+    "width": 332.07658419739028,
     "tabOrder": 6000
   },
   "visual": {
@@ -23,7 +23,7 @@
                       "Entity": "fact_enrollment"
                     }
                   },
-                  "Property": "Student Status"
+                  "Property": "Trạng thái"
                 }
               },
               "queryRef": "fact_enrollment.Student Status",
@@ -42,7 +42,7 @@
                       "Entity": "_Measures"
                     }
                   },
-                  "Property": "Average First Term Earned Hours"
+                  "Property": "Tín chỉ đạt HK1 TB"
                 }
               },
               "queryRef": "_Measures.Average First Term Earned Hours",
@@ -61,7 +61,7 @@
                     "Entity": "_Measures"
                   }
                 },
-                "Property": "Average First Term Earned Hours"
+                "Property": "Tín chỉ đạt HK1 TB"
               }
             },
             "direction": "Descending"
@@ -236,43 +236,18 @@
                   "Value": "'center'"
                 }
               }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Tín chỉ đạt HK1 trung bình theo trạng thái'"
+                }
+              }
             }
           }
         }
       ]
     },
     "drillFilterOtherVisuals": true
-  },
-  "filterConfig": {
-    "filters": [
-      {
-        "name": "f4af6378d49b149d3665",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "fact_enrollment"
-              }
-            },
-            "Property": "Student Status"
-          }
-        },
-        "type": "Categorical"
-      },
-      {
-        "name": "9fc6a4998799c43084ab",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "_Measures"
-              }
-            },
-            "Property": "Average First Term Earned Hours"
-          }
-        },
-        "type": "Advanced"
-      }
-    ]
   }
 }

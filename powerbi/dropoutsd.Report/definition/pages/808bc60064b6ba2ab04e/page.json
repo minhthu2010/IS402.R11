@@ -1,45 +1,85 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/2.0.0/schema.json",
   "name": "808bc60064b6ba2ab04e",
-  "displayName": "Student details",
+  "displayName": "Chi tiết sinh viên",
   "displayOption": "FitToPage",
   "height": 720,
   "width": 1280,
   "filterConfig": {
     "filters": [
       {
-        "name": "a17073ea0e47cede9965",
+        "name": "520bdb083179be030b03",
         "field": {
           "Column": {
             "Expression": {
               "SourceRef": {
-                "Entity": "Students"
+                "Entity": "dim_faculty"
               }
             },
-            "Property": "HIGH_SCHL_GPA"
+            "Property": "Khoa"
           }
         },
         "type": "Categorical",
+        "filter": {
+          "Version": 2,
+          "From": [
+            {
+              "Name": "d",
+              "Entity": "dim_faculty",
+              "Type": 0
+            }
+          ],
+          "Where": [
+            {
+              "Condition": {
+                "In": {
+                  "Expressions": [
+                    {
+                      "Column": {
+                        "Expression": {
+                          "SourceRef": {
+                            "Source": "d"
+                          }
+                        },
+                        "Property": "Khoa"
+                      }
+                    }
+                  ],
+                  "Values": [
+                    [
+                      {
+                        "Literal": {
+                          "Value": "'Khoa học Tự nhiên & Kỹ thuật'"
+                        }
+                      }
+                    ]
+                  ]
+                }
+              }
+            }
+          ]
+        },
         "howCreated": "Drillthrough"
       }
     ]
   },
   "pageBinding": {
-    "name": "25d7d7dc26d18a020d56",
+    "name": "3b3183191d40e76767c2",
     "type": "Drillthrough",
     "parameters": [
       {
-        "name": "12fd27a6208356c41a5c",
-        "boundFilter": "a17073ea0e47cede9965",
-        "asAggregation": true,
+        "name": "db0c63be3884c471d55a",
+        "boundFilter": "520bdb083179be030b03",
+        "asAggregation": false,
+        "qnaSingleSelectRequired": false,
         "fieldExpr": {
           "Column": {
             "Expression": {
               "SourceRef": {
-                "Entity": "Students"
+                "Entity": "dim_faculty"
               }
             },
-            "Property": "HIGH_SCHL_GPA"
+            "Property": "Khoa"
           }
         }
       }

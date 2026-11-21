@@ -9,13 +9,13 @@ cultureInfo en-US
 			      "Definition": {
 			        "Binding": {
 			          "ConceptualEntity": "dim_student",
-			          "ConceptualProperty": "age"
+			          "ConceptualProperty": "Tuổi"
 			        }
 			      },
 			      "State": "Generated",
 			      "Terms": [
 			        {
-			          "Age": {
+			          "Tuổi": {
 			            "State": "Suggested",
 			            "Source": {
 			              "Type": "External",
@@ -30,13 +30,13 @@ cultureInfo en-US
 			      "Definition": {
 			        "Binding": {
 			          "ConceptualEntity": "fact_enrollment",
-			          "ConceptualProperty": "student_id"
+			          "ConceptualProperty": "Mã SV"
 			        }
 			      },
 			      "State": "Generated",
 			      "Terms": [
 			        {
-			          "Student ID": {
+			          "Mã SV": {
 			            "State": "Suggested",
 			            "Source": {
 			              "Type": "External",
@@ -57,7 +57,7 @@ cultureInfo en-US
 			      "State": "Generated",
 			      "Terms": [
 			        {
-			          "Gender": {
+			          "Giới tính": {
 			            "State": "Suggested",
 			            "Source": {
 			              "Type": "External",
@@ -72,13 +72,13 @@ cultureInfo en-US
 			      "Definition": {
 			        "Binding": {
 			          "ConceptualEntity": "dim_major",
-			          "ConceptualProperty": "major_name"
+			          "ConceptualProperty": "Ngành"
 			        }
 			      },
 			      "State": "Generated",
 			      "Terms": [
 			        {
-			          "Major name": {
+			          "Ngành": {
 			            "State": "Suggested",
 			            "Source": {
 			              "Type": "External",
@@ -93,13 +93,13 @@ cultureInfo en-US
 			      "Definition": {
 			        "Binding": {
 			          "ConceptualEntity": "fact_enrollment",
-			          "ConceptualProperty": "first_term"
+			          "ConceptualProperty": "Học kỳ nhập học"
 			        }
 			      },
 			      "State": "Generated",
 			      "Terms": [
 			        {
-			          "First term": {
+			          "Học kỳ nhập học HK1": {
 			            "State": "Suggested",
 			            "Source": {
 			              "Type": "External",
@@ -120,7 +120,7 @@ cultureInfo en-US
 			      "State": "Generated",
 			      "Terms": [
 			        {
-			          "Second term": {
+			          "Học kỳ nhập học HK2": {
 			            "State": "Suggested",
 			            "Source": {
 			              "Type": "External",
@@ -135,13 +135,13 @@ cultureInfo en-US
 			      "Definition": {
 			        "Binding": {
 			          "ConceptualEntity": "dim_student",
-			          "ConceptualProperty": "high_school_gpa"
+			          "ConceptualProperty": "GPA THPT"
 			        }
 			      },
 			      "State": "Generated",
 			      "Terms": [
 			        {
-			          "High school GPA": {
+			          "GPA THPT": {
 			            "State": "Suggested",
 			            "Source": {
 			              "Type": "External",
@@ -156,13 +156,13 @@ cultureInfo en-US
 			      "Definition": {
 			        "Binding": {
 			          "ConceptualEntity": "fact_enrollment",
-			          "ConceptualProperty": "Student Status"
+			          "ConceptualProperty": "Trạng thái"
 			        }
 			      },
 			      "State": "Generated",
 			      "Terms": [
 			        {
-			          "Student status": {
+			          "Trạng thái": {
 			            "State": "Suggested",
 			            "Source": {
 			              "Type": "External",
@@ -177,13 +177,13 @@ cultureInfo en-US
 			      "Definition": {
 			        "Binding": {
 			          "ConceptualEntity": "dim_faculty",
-			          "ConceptualProperty": "faculty_name"
+			          "ConceptualProperty": "Khoa"
 			        }
 			      },
 			      "State": "Generated",
 			      "Terms": [
 			        {
-			          "Faculty name": {
+			          "Khoa": {
 			            "State": "Suggested",
 			            "Source": {
 			              "Type": "External",
@@ -198,106 +198,46 @@ cultureInfo en-US
 			      "Definition": {
 			        "Binding": {
 			          "ConceptualEntity": "fact_enrollment",
-			          "ConceptualProperty": "cohort_year"
+			          "ConceptualProperty": "Khóa"
 			        }
 			      },
-			      "State": "Generated",
-			      "Terms": [
-			        {
-			          "Cohort year": {
-			            "State": "Suggested",
-			            "Source": {
-			              "Type": "External",
-			              "Agent": "PowerBI.VisualColumnRename"
-			            },
-			            "Weight": 0.9
-			          }
-			        }
-			      ]
+			      "State": "Generated"
 			    },
 			    "table_measures.average_first_term_earned_hours": {
 			      "Definition": {
 			        "Binding": {
 			          "ConceptualEntity": "_Measures",
-			          "ConceptualProperty": "Average First Term Earned Hours"
+			          "ConceptualProperty": "Tín chỉ đạt HK1 TB"
 			        }
 			      },
-			      "State": "Generated",
-			      "Terms": [
-			        {
-			          "Avg 1st Term Earned Hours": {
-			            "State": "Suggested",
-			            "Source": {
-			              "Type": "External",
-			              "Agent": "PowerBI.VisualColumnRename"
-			            },
-			            "Weight": 0.9
-			          }
-			        }
-			      ]
+			      "State": "Generated"
 			    },
 			    "table_measures.average_second_term_earned_hours": {
 			      "Definition": {
 			        "Binding": {
 			          "ConceptualEntity": "_Measures",
-			          "ConceptualProperty": "Average Second Term Earned Hours"
+			          "ConceptualProperty": "Tín chỉ đạt HK2 TB"
 			        }
 			      },
-			      "State": "Generated",
-			      "Terms": [
-			        {
-			          "Avg 2nd Term Earned Hours": {
-			            "State": "Suggested",
-			            "Source": {
-			              "Type": "External",
-			              "Agent": "PowerBI.VisualColumnRename"
-			            },
-			            "Weight": 0.9
-			          }
-			        }
-			      ]
+			      "State": "Generated"
 			    },
 			    "table_measures.first_term_credit_completion_rate": {
 			      "Definition": {
 			        "Binding": {
 			          "ConceptualEntity": "_Measures",
-			          "ConceptualProperty": "First Term Credit Completion Rate"
+			          "ConceptualProperty": "Tỉ lệ hoàn thành TC HK1"
 			        }
 			      },
-			      "State": "Generated",
-			      "Terms": [
-			        {
-			          "1st Term Credit Completion Rate": {
-			            "State": "Suggested",
-			            "Source": {
-			              "Type": "External",
-			              "Agent": "PowerBI.VisualColumnRename"
-			            },
-			            "Weight": 0.9
-			          }
-			        }
-			      ]
+			      "State": "Generated"
 			    },
 			    "table_measures.second_term_credit_completion_rate": {
 			      "Definition": {
 			        "Binding": {
 			          "ConceptualEntity": "_Measures",
-			          "ConceptualProperty": "Second Term Credit Completion Rate"
+			          "ConceptualProperty": "Tỉ lệ hoàn thành TC HK2"
 			        }
 			      },
-			      "State": "Generated",
-			      "Terms": [
-			        {
-			          "2nd Term Credit Completion Rate": {
-			            "State": "Suggested",
-			            "Source": {
-			              "Type": "External",
-			              "Agent": "PowerBI.VisualColumnRename"
-			            },
-			            "Weight": 0.9
-			          }
-			        }
-			      ]
+			      "State": "Generated"
 			    },
 			    "pred.risk_level": {
 			      "Definition": {
@@ -310,6 +250,153 @@ cultureInfo en-US
 			      "Terms": [
 			        {
 			          "Mức rủi ro": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "pred.student_id": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Pred",
+			          "ConceptualProperty": "student_id"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Mã SV": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "pred.class_code": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Pred",
+			          "ConceptualProperty": "class_code"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Mã lớp": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "pred.probability": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Pred",
+			          "ConceptualProperty": "probability"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Xác xuất": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "pred.top_factors": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Pred",
+			          "ConceptualProperty": "top_factors"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Yếu tố chính": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "pred.source": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Pred",
+			          "ConceptualProperty": "source"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Nguồn": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "pred.created_at_vn": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Pred",
+			          "ConceptualProperty": "created_at_vn"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Thời gian tạo": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "sweep.n_estimators": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Sweep",
+			          "ConceptualProperty": "n_estimators"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Số cây": {
 			            "State": "Suggested",
 			            "Source": {
 			              "Type": "External",

@@ -3,10 +3,10 @@
   "name": "e2ef42ed11b82ea27151",
   "position": {
     "x": 0,
-    "y": 625.71428571428578,
+    "y": 438.60095071303476,
     "z": 2000,
-    "height": 94.285714285714292,
-    "width": 282.85714285714289,
+    "height": 94.278709031773829,
+    "width": 282.8361270953215,
     "tabOrder": 2000
   },
   "visual": {
@@ -23,7 +23,7 @@
                       "Entity": "fact_enrollment"
                     }
                   },
-                  "Property": "Student Status"
+                  "Property": "Trạng thái"
                 }
               },
               "queryRef": "fact_enrollment.Student Status",
@@ -141,7 +141,7 @@
                 "Entity": "fact_enrollment"
               }
             },
-            "Property": "Student Status"
+            "Property": "Trạng thái"
           }
         },
         "type": "Categorical",
@@ -168,7 +168,7 @@
                                 "Source": "f"
                               }
                             },
-                            "Property": "Student Status"
+                            "Property": "Trạng thái"
                           }
                         }
                       ],

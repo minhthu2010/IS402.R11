@@ -23,12 +23,11 @@
                       "Entity": "_Measures"
                     }
                   },
-                  "Property": "Second Term Credit Completion Rate"
+                  "Property": "Tỉ lệ hoàn thành TC HK2"
                 }
               },
-              "queryRef": "_Measures.Second Term Credit Completion Rate",
-              "nativeQueryRef": "2nd Term Credit Completion Rate",
-              "displayName": "2nd Term Credit Completion Rate"
+              "queryRef": "_Measures.Tỉ lệ hoàn thành TC HK2",
+              "nativeQueryRef": "Tỉ lệ hoàn thành TC HK2"
             }
           ]
         }
@@ -43,7 +42,7 @@
                     "Entity": "_Measures"
                   }
                 },
-                "Property": "Second Term Credit Completion Rate"
+                "Property": "Tỉ lệ hoàn thành TC HK2"
               }
             },
             "direction": "Descending"
@@ -106,6 +105,13 @@
                   }
                 }
               }
+            },
+            "bold": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
             }
           }
         }
@@ -116,7 +122,7 @@
   "filterConfig": {
     "filters": [
       {
-        "name": "6e96e5f380201802a0c8",
+        "name": "a7ebcb29d5d5a500b651",
         "field": {
           "Measure": {
             "Expression": {
@@ -124,7 +130,7 @@
                 "Entity": "_Measures"
               }
             },
-            "Property": "Second Term Credit Completion Rate"
+            "Property": "Tỉ lệ hoàn thành TC HK2"
           }
         },
         "type": "Advanced"

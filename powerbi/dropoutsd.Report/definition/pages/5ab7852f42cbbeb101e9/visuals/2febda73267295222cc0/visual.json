@@ -3,9 +3,9 @@
   "name": "2febda73267295222cc0",
   "position": {
     "x": 0,
-    "y": 34.285714285714285,
+    "y": 35,
     "z": 13000,
-    "height": 38.571428571428577,
+    "height": 55,
     "width": 1280,
     "tabOrder": 13000
   },
@@ -19,11 +19,11 @@
               {
                 "textRuns": [
                   {
-                    "value": "Academic Performance Dashboard",
+                    "value": "Kết quả học tập",
                     "textStyle": {
                       "fontWeight": "bold",
                       "fontFamily": "Arial",
-                      "fontSize": "24pt",
+                      "fontSize": "28pt",
                       "color": "#7f375b"
                     }
                   }

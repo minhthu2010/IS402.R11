@@ -4,10 +4,10 @@
   "position": {
     "x": 301.42857142857144,
     "y": 115.71428571428572,
-    "z": 7000,
+    "z": 6000,
     "height": 328.57142857142861,
     "width": 497.14285714285717,
-    "tabOrder": 7000
+    "tabOrder": 6000
   },
   "visual": {
     "visualType": "clusteredBarChart",
@@ -23,7 +23,7 @@
                       "Entity": "dim_faculty"
                     }
                   },
-                  "Property": "faculty_name"
+                  "Property": "Khoa"
                 }
               },
               "queryRef": "dim_faculty.faculty_name",
@@ -252,7 +252,7 @@
                 "Entity": "dim_faculty"
               }
             },
-            "Property": "faculty_name"
+            "Property": "Khoa"
           }
         },
         "type": "Categorical",
@@ -279,7 +279,7 @@
                                 "Source": "d"
                               }
                             },
-                            "Property": "faculty_name"
+                            "Property": "Khoa"
                           }
                         }
                       ],
@@ -314,20 +314,6 @@
             }
           ]
         }
-      },
-      {
-        "name": "b694390895bd0850d503",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "Pred"
-              }
-            },
-            "Property": "% rủi ro cao"
-          }
-        },
-        "type": "Advanced"
       }
     ]
   }

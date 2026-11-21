@@ -1,14 +1,14 @@
 table fact_enrollment
 	lineageTag: 79048dc9-2742-4385-bae1-f23b00ffa4b1
 
-	column student_id
+	column 'Mã SV'
 		dataType: int64
 		isNullable: false
 		formatString: 0
 		sourceProviderType: int
 		lineageTag: 4d544ce5-7287-4de4-9864-20bd476d53e5
 		summarizeBy: none
-		sourceColumn: student_id
+		sourceColumn: Mã SV
 
 		annotation SummarizationSetBy = Automatic
 
@@ -44,25 +44,25 @@ table fact_enrollment
 
 		annotation SummarizationSetBy = Automatic
 
-	column cohort_year
+	column Khóa
 		dataType: int64
 		isNullable: false
 		formatString: 0
 		sourceProviderType: int
 		lineageTag: 2d13604c-43dc-472a-8e6d-534ac7e37943
 		summarizeBy: sum
-		sourceColumn: cohort_year
+		sourceColumn: Khóa
 
 		annotation SummarizationSetBy = Automatic
 
-	column first_term
+	column 'Học kỳ nhập học'
 		dataType: int64
 		isNullable: false
 		formatString: 0
 		sourceProviderType: int
 		lineageTag: 9cb3ea95-1051-4800-86b6-5a9cb46c741c
 		summarizeBy: sum
-		sourceColumn: first_term
+		sourceColumn: Học kỳ nhập học
 
 		annotation SummarizationSetBy = Automatic
 
@@ -255,13 +255,7 @@ table fact_enrollment
 
 		annotation SummarizationSetBy = Automatic
 
-	column 'Student Status' =
-			
-			IF(
-			    'fact_enrollment'[returned_2nd_yr] = TRUE(),
-			    "Returned",
-			    "Dropout"
-			)
+	column 'Trạng thái' = IF ( fact_enrollment[returned_2nd_yr] = TRUE (), "Ở lại", "Bỏ học" )
 		lineageTag: bc2303f2-7572-4fb4-a277-7ba89ee47159
 		summarizeBy: none
 
@@ -272,7 +266,8 @@ table fact_enrollment
 		source =
 				let
 				    Source = Sql.Database("sql-dropout-thi.database.windows.net", "dropoutdb"),
-				    dbo_fact_enrollment = Source{[Schema="dbo",Item="fact_enrollment"]}[Data]
+				    dbo_fact_enrollment = Source{[Schema="dbo",Item="fact_enrollment"]}[Data],
+				    #"Renamed Columns" = Table.RenameColumns(dbo_fact_enrollment,{{"cohort_year", "Khóa"}, {"first_term", "Học kỳ nhập học"}, {"student_id", "Mã SV"}})
 				in
-				    dbo_fact_enrollment
+				    #"Renamed Columns"
 

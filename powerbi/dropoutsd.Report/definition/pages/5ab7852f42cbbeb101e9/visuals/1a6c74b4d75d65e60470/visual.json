@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
   "name": "1a6c74b4d75d65e60470",
   "position": {
-    "x": 330,
-    "y": 334.28571428571433,
+    "x": 953.691016599943,
+    "y": 161.92164022847956,
     "z": 7000,
-    "height": 191.42857142857144,
-    "width": 430,
+    "height": 263.46571969379721,
+    "width": 326.58771503710284,
     "tabOrder": 7000
   },
   "visual": {
@@ -23,7 +23,7 @@
                       "Entity": "fact_enrollment"
                     }
                   },
-                  "Property": "Student Status"
+                  "Property": "Trạng thái"
                 }
               },
               "queryRef": "fact_enrollment.Student Status",
@@ -42,7 +42,7 @@
                       "Entity": "_Measures"
                     }
                   },
-                  "Property": "Average Second Term Earned Hours"
+                  "Property": "Tín chỉ đạt HK2 TB"
                 }
               },
               "queryRef": "_Measures.Average Second Term Earned Hours",
@@ -61,7 +61,7 @@
                     "Entity": "_Measures"
                   }
                 },
-                "Property": "Average Second Term Earned Hours"
+                "Property": "Tín chỉ đạt HK2 TB"
               }
             },
             "direction": "Descending"
@@ -243,43 +243,18 @@
                   "Value": "'center'"
                 }
               }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Tín chỉ đạt HK2 trung bình theo trạng thái'"
+                }
+              }
             }
           }
         }
       ]
     },
     "drillFilterOtherVisuals": true
-  },
-  "filterConfig": {
-    "filters": [
-      {
-        "name": "23c2c763ae50ea9860dd",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "fact_enrollment"
-              }
-            },
-            "Property": "Student Status"
-          }
-        },
-        "type": "Categorical"
-      },
-      {
-        "name": "42334423acc7ad3cb432",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "_Measures"
-              }
-            },
-            "Property": "Average Second Term Earned Hours"
-          }
-        },
-        "type": "Advanced"
-      }
-    ]
   }
 }

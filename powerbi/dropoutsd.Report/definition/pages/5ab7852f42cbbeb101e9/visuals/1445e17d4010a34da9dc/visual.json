@@ -23,7 +23,7 @@
                       "Entity": "fact_enrollment"
                     }
                   },
-                  "Property": "Student Status"
+                  "Property": "Trạng thái"
                 }
               },
               "queryRef": "fact_enrollment.Student Status",
@@ -143,7 +143,7 @@
                 "Entity": "fact_enrollment"
               }
             },
-            "Property": "Student Status"
+            "Property": "Trạng thái"
           }
         },
         "type": "Categorical",
@@ -170,7 +170,7 @@
                                 "Source": "f"
                               }
                             },
-                            "Property": "Student Status"
+                            "Property": "Trạng thái"
                           }
                         }
                       ],

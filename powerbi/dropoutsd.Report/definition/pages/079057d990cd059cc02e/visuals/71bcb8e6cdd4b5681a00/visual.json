@@ -281,48 +281,6 @@
           ]
         },
         "howCreated": "User"
-      },
-      {
-        "name": "bf0b1ff35b1794b49e69",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "model_metrics"
-              }
-            },
-            "Property": "Tên model"
-          }
-        },
-        "type": "Categorical"
-      },
-      {
-        "name": "6652bcc270cd0c31bc77",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "model_metrics"
-              }
-            },
-            "Property": "Chỉ số"
-          }
-        },
-        "type": "Categorical"
-      },
-      {
-        "name": "a93f10a700d427092496",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "_Measures"
-              }
-            },
-            "Property": "Giá trị"
-          }
-        },
-        "type": "Advanced"
       }
     ]
   }

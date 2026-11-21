@@ -166,23 +166,5 @@
       ]
     },
     "drillFilterOtherVisuals": true
-  },
-  "filterConfig": {
-    "filters": [
-      {
-        "name": "2b1aea08b7b1d5a47e43",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "model_metrics"
-              }
-            },
-            "Property": "Ngưỡng"
-          }
-        },
-        "type": "Advanced"
-      }
-    ]
   }
 }

@@ -3,9 +3,9 @@
   "name": "4baabfd15b84b00a68c7",
   "position": {
     "x": 300,
-    "y": 107.14285714285715,
+    "y": 104.28571428571429,
     "z": 2000,
-    "height": 252.85714285714286,
+    "height": 274.28571428571428,
     "width": 980.00000000000011,
     "tabOrder": 2000
   },
@@ -23,7 +23,7 @@
                       "Entity": "fact_enrollment"
                     }
                   },
-                  "Property": "cohort_year"
+                  "Property": "Khóa"
                 }
               },
               "queryRef": "fact_enrollment.cohort_year",
@@ -42,13 +42,13 @@
                       "Entity": "dim_faculty"
                     }
                   },
-                  "Property": "faculty_name"
+                  "Property": "Khoa"
                 }
               },
               "queryRef": "dim_faculty.faculty_name",
-              "nativeQueryRef": "Faculty name",
+              "nativeQueryRef": "Khoa",
               "active": true,
-              "displayName": "Faculty name"
+              "displayName": "Khoa"
             }
           ]
         },
@@ -62,7 +62,7 @@
                       "Entity": "_Measures"
                     }
                   },
-                  "Property": "Dropout Rate"
+                  "Property": "Tỉ lệ bỏ học"
                 }
               },
               "queryRef": "_Measures.Dropout Rate",
@@ -113,7 +113,7 @@
                               "Entity": "_Measures"
                             }
                           },
-                          "Property": "Dropout Rate"
+                          "Property": "Tỉ lệ bỏ học"
                         }
                       },
                       "FillRule": {
@@ -237,6 +237,113 @@
         }
       ]
     },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Tỉ lệ bỏ học theo khoa và khóa'"
+                }
+              }
+            },
+            "fontFamily": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Arial'"
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "13D"
+                }
+              }
+            },
+            "bold": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#004949'"
+                    }
+                  }
+                }
+              }
+            },
+            "alignment": {
+              "expr": {
+                "Literal": {
+                  "Value": "'center'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
     "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "e92c6c0204e1005ce4e7",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "fact_enrollment"
+              }
+            },
+            "Property": "Khóa"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "6a5e4bcd71451ac98ba7",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "dim_faculty"
+              }
+            },
+            "Property": "Khoa"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "632240a74ebcc0e09813",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "_Measures"
+              }
+            },
+            "Property": "Tỉ lệ bỏ học"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
   }
 }

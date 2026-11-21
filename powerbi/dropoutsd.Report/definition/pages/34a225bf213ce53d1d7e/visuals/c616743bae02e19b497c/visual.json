@@ -3,9 +3,9 @@
   "name": "c616743bae02e19b497c",
   "position": {
     "x": 694.28571428571433,
-    "y": 360,
+    "y": 391.42857142857144,
     "z": 1000,
-    "height": 360,
+    "height": 328.57142857142861,
     "width": 585.71428571428578,
     "tabOrder": 1000
   },
@@ -20,14 +20,29 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "dim_faculty"
+                      "Entity": "dim_student"
                     }
                   },
-                  "Property": "faculty_name"
+                  "Property": "in_state"
                 }
               },
-              "queryRef": "dim_faculty.faculty_name",
-              "nativeQueryRef": "faculty_name1",
+              "queryRef": "dim_student.in_state",
+              "nativeQueryRef": "in_state",
+              "active": true
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dim_student"
+                    }
+                  },
+                  "Property": "housing"
+                }
+              },
+              "queryRef": "dim_student.housing",
+              "nativeQueryRef": "housing",
               "active": true
             }
           ]
@@ -42,7 +57,7 @@
                       "Entity": "_Measures"
                     }
                   },
-                  "Property": "Dropout Rate"
+                  "Property": "Tỉ lệ bỏ học"
                 }
               },
               "queryRef": "_Measures.Dropout Rate",
@@ -55,16 +70,29 @@
         "sort": [
           {
             "field": {
-              "Measure": {
+              "Column": {
                 "Expression": {
                   "SourceRef": {
-                    "Entity": "_Measures"
+                    "Entity": "dim_student"
                   }
                 },
-                "Property": "Dropout Rate"
+                "Property": "in_state"
               }
             },
-            "direction": "Descending"
+            "direction": "Ascending"
+          },
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "dim_student"
+                  }
+                },
+                "Property": "housing"
+              }
+            },
+            "direction": "Ascending"
           }
         ],
         "isDefaultSort": true
@@ -154,7 +182,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Dropout Rate by Faculty name'"
+                  "Value": "'Tỉ lệ bỏ học theo nơi ở'"
                 }
               }
             },
@@ -184,9 +212,16 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#070f25'"
+                      "Value": "'#004949'"
                     }
                   }
+                }
+              }
+            },
+            "alignment": {
+              "expr": {
+                "Literal": {
+                  "Value": "'center'"
                 }
               }
             }
@@ -195,5 +230,51 @@
       ]
     },
     "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "3d659aa139e23dd4a5d2",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "_Measures"
+              }
+            },
+            "Property": "Tỉ lệ bỏ học"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "41c22c7c2dbe65a434d0",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "dim_student"
+              }
+            },
+            "Property": "in_state"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "45d6f1ada1bbb45d6cb5",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "dim_student"
+              }
+            },
+            "Property": "housing"
+          }
+        },
+        "type": "Categorical"
+      }
+    ]
   }
 }

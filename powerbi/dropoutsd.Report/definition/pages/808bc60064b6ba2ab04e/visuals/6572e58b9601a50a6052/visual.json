@@ -2,7 +2,7 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
   "name": "6572e58b9601a50a6052",
   "position": {
-    "x": 281.42857142857144,
+    "x": 258.57142857142861,
     "y": 34.285714285714285,
     "z": 4000,
     "height": 468.57142857142861,
@@ -23,12 +23,12 @@
                       "Entity": "fact_enrollment"
                     }
                   },
-                  "Property": "student_id"
+                  "Property": "Mã SV"
                 }
               },
               "queryRef": "fact_enrollment.student_id",
-              "nativeQueryRef": "Student ID",
-              "displayName": "Student ID"
+              "nativeQueryRef": "Mã SV",
+              "displayName": "Mã SV"
             },
             {
               "field": {
@@ -38,12 +38,12 @@
                       "Entity": "dim_student"
                     }
                   },
-                  "Property": "age"
+                  "Property": "Tuổi"
                 }
               },
               "queryRef": "Sum(dim_student.age)",
-              "nativeQueryRef": "Age",
-              "displayName": "Age"
+              "nativeQueryRef": "Tuổi",
+              "displayName": "Tuổi"
             },
             {
               "field": {
@@ -57,8 +57,8 @@
                 }
               },
               "queryRef": "dim_student.gender",
-              "nativeQueryRef": "Gender",
-              "displayName": "Gender"
+              "nativeQueryRef": "Giới tính",
+              "displayName": "Giới tính"
             },
             {
               "field": {
@@ -68,12 +68,12 @@
                       "Entity": "dim_major"
                     }
                   },
-                  "Property": "major_name"
+                  "Property": "Ngành"
                 }
               },
               "queryRef": "dim_major.major_name",
-              "nativeQueryRef": "Major name",
-              "displayName": "Major name"
+              "nativeQueryRef": "Ngành",
+              "displayName": "Ngành"
             },
             {
               "field": {
@@ -83,12 +83,12 @@
                       "Entity": "fact_enrollment"
                     }
                   },
-                  "Property": "first_term"
+                  "Property": "Học kỳ nhập học"
                 }
               },
               "queryRef": "Sum(fact_enrollment.first_term)",
-              "nativeQueryRef": "First term",
-              "displayName": "First term"
+              "nativeQueryRef": "Học kỳ nhập học HK1",
+              "displayName": "Học kỳ nhập học HK1"
             },
             {
               "field": {
@@ -102,8 +102,8 @@
                 }
               },
               "queryRef": "Sum(fact_enrollment.second_term)",
-              "nativeQueryRef": "Second term",
-              "displayName": "Second term"
+              "nativeQueryRef": "Học kỳ nhập học HK2",
+              "displayName": "Học kỳ nhập học HK2"
             },
             {
               "field": {
@@ -113,12 +113,12 @@
                       "Entity": "dim_student"
                     }
                   },
-                  "Property": "high_school_gpa"
+                  "Property": "GPA THPT"
                 }
               },
               "queryRef": "Sum(dim_student.high_school_gpa)",
-              "nativeQueryRef": "High school GPA",
-              "displayName": "High school GPA"
+              "nativeQueryRef": "GPA THPT",
+              "displayName": "GPA THPT"
             },
             {
               "field": {
@@ -128,12 +128,12 @@
                       "Entity": "fact_enrollment"
                     }
                   },
-                  "Property": "Student Status"
+                  "Property": "Trạng thái"
                 }
               },
               "queryRef": "fact_enrollment.Student Status",
-              "nativeQueryRef": "Student status",
-              "displayName": "Student status"
+              "nativeQueryRef": "Trạng thái",
+              "displayName": "Trạng thái"
             },
             {
               "field": {
@@ -143,12 +143,12 @@
                       "Entity": "dim_faculty"
                     }
                   },
-                  "Property": "faculty_name"
+                  "Property": "Khoa"
                 }
               },
               "queryRef": "dim_faculty.faculty_name",
-              "nativeQueryRef": "Faculty name",
-              "displayName": "Faculty name"
+              "nativeQueryRef": "Khoa",
+              "displayName": "Khoa"
             }
           ]
         }
@@ -160,10 +160,10 @@
               "Column": {
                 "Expression": {
                   "SourceRef": {
-                    "Entity": "dim_student"
+                    "Entity": "fact_enrollment"
                   }
                 },
-                "Property": "gender"
+                "Property": "Mã SV"
               }
             },
             "direction": "Ascending"
@@ -236,13 +236,130 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "131.36635777321186D"
+                  "Value": "85.77822651847376D"
                 }
               }
             }
           },
           "selector": {
             "metadata": "Sum(dim_student.high_school_gpa)"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "103.42857221669229D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Sum(fact_enrollment.first_term)"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "99.1428579886454D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Sum(fact_enrollment.second_term)"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "145.72941520147054D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "dim_major.major_name"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "42.00000090826123D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "dim_student.gender"
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Danh sách sinh viên'"
+                }
+              }
+            },
+            "fontFamily": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Arial'"
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "13D"
+                }
+              }
+            },
+            "bold": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#111573'"
+                    }
+                  }
+                }
+              }
+            },
+            "alignment": {
+              "expr": {
+                "Literal": {
+                  "Value": "'center'"
+                }
+              }
+            }
           }
         }
       ]
@@ -306,7 +423,7 @@
         "howCreated": "User"
       },
       {
-        "name": "84503710c8193ba5ca90",
+        "name": "5a54c340cb1b30794ad0",
         "field": {
           "Column": {
             "Expression": {
@@ -314,13 +431,13 @@
                 "Entity": "fact_enrollment"
               }
             },
-            "Property": "student_id"
+            "Property": "Mã SV"
           }
         },
         "type": "Advanced"
       },
       {
-        "name": "14931fe5b1deb5d102c8",
+        "name": "e9bfec32cb238a885562",
         "field": {
           "Column": {
             "Expression": {
@@ -328,13 +445,13 @@
                 "Entity": "dim_student"
               }
             },
-            "Property": "age"
+            "Property": "Tuổi"
           }
         },
         "type": "Advanced"
       },
       {
-        "name": "41cc0e2047e61e81ab0b",
+        "name": "b8bf5b6db4b613bb3640",
         "field": {
           "Column": {
             "Expression": {
@@ -348,7 +465,7 @@
         "type": "Categorical"
       },
       {
-        "name": "b9b14f75b09cc06de200",
+        "name": "fe04edf2b854ca80ad07",
         "field": {
           "Column": {
             "Expression": {
@@ -356,13 +473,13 @@
                 "Entity": "dim_major"
               }
             },
-            "Property": "major_name"
+            "Property": "Ngành"
           }
         },
         "type": "Categorical"
       },
       {
-        "name": "2371bf7504101535cc6b",
+        "name": "80d54038a196d071915b",
         "field": {
           "Column": {
             "Expression": {
@@ -370,13 +487,13 @@
                 "Entity": "fact_enrollment"
               }
             },
-            "Property": "first_term"
+            "Property": "Học kỳ nhập học"
           }
         },
         "type": "Advanced"
       },
       {
-        "name": "f02cdf408b02bb017493",
+        "name": "27a770e8772b92646c42",
         "field": {
           "Column": {
             "Expression": {
@@ -390,7 +507,7 @@
         "type": "Advanced"
       },
       {
-        "name": "6862982a60be9ee89462",
+        "name": "a1ab0f784e80660b00a1",
         "field": {
           "Column": {
             "Expression": {
@@ -398,13 +515,13 @@
                 "Entity": "dim_student"
               }
             },
-            "Property": "high_school_gpa"
+            "Property": "GPA THPT"
           }
         },
         "type": "Advanced"
       },
       {
-        "name": "db4397ebdd8846ae759b",
+        "name": "1581639ed182275b9079",
         "field": {
           "Column": {
             "Expression": {
@@ -412,13 +529,13 @@
                 "Entity": "fact_enrollment"
               }
             },
-            "Property": "Student Status"
+            "Property": "Trạng thái"
           }
         },
         "type": "Categorical"
       },
       {
-        "name": "4c022a6c3709ac978608",
+        "name": "17703b099c415b086b5c",
         "field": {
           "Column": {
             "Expression": {
@@ -426,7 +543,7 @@
                 "Entity": "dim_faculty"
               }
             },
-            "Property": "faculty_name"
+            "Property": "Khoa"
           }
         },
         "type": "Categorical"

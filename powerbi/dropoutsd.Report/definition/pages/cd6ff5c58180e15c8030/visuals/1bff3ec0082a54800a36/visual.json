@@ -4,10 +4,10 @@
   "position": {
     "x": 0,
     "y": 121.42857142857143,
-    "z": 6000,
+    "z": 5000,
     "height": 134.28571428571431,
     "width": 301.42857142857144,
-    "tabOrder": 6000
+    "tabOrder": 5000
   },
   "visual": {
     "visualType": "donutChart",
@@ -285,37 +285,5 @@
       ]
     },
     "drillFilterOtherVisuals": true
-  },
-  "filterConfig": {
-    "filters": [
-      {
-        "name": "0a0de4f86b61bc94130e",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "Pred"
-              }
-            },
-            "Property": "risk_level"
-          }
-        },
-        "type": "Categorical"
-      },
-      {
-        "name": "259cd81c104b09445b3a",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "Pred"
-              }
-            },
-            "Property": "SV đã dự đoán"
-          }
-        },
-        "type": "Advanced"
-      }
-    ]
   }
 }

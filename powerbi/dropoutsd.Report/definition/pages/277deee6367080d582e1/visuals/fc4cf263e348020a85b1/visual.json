@@ -23,11 +23,11 @@
                       "Entity": "_Measures"
                     }
                   },
-                  "Property": "Total Students"
+                  "Property": "Tổng số SV"
                 }
               },
               "queryRef": "_Measures.Total Students",
-              "nativeQueryRef": "Total Students"
+              "nativeQueryRef": "Tổng số SV"
             }
           ]
         }
@@ -42,7 +42,7 @@
                     "Entity": "_Measures"
                   }
                 },
-                "Property": "Total Students"
+                "Property": "Tổng số SV"
               }
             },
             "direction": "Descending"
@@ -240,7 +240,7 @@
   "filterConfig": {
     "filters": [
       {
-        "name": "a5421c3905a5c28beab8",
+        "name": "3f01ef9acab490aba0cd",
         "field": {
           "Measure": {
             "Expression": {
@@ -248,7 +248,7 @@
                 "Entity": "_Measures"
               }
             },
-            "Property": "Total Students"
+            "Property": "Tổng số SV"
           }
         },
         "type": "Advanced"

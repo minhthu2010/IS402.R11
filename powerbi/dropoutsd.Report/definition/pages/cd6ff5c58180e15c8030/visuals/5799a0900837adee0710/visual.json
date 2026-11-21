@@ -4,10 +4,10 @@
   "position": {
     "x": 0,
     "y": 381.42857142857144,
-    "z": 11000,
+    "z": 10000,
     "height": 62.857142857142861,
     "width": 301.42857142857144,
-    "tabOrder": 11000
+    "tabOrder": 10000
   },
   "visual": {
     "visualType": "slicer",
@@ -108,7 +108,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Khoa'"
+                  "Value": "'Nguồn'"
                 }
               }
             },
@@ -170,7 +170,7 @@
   "filterConfig": {
     "filters": [
       {
-        "name": "a7a3c0f1be84b0d8eb6e",
+        "name": "a65ccea56b084a54b027",
         "field": {
           "Column": {
             "Expression": {

@@ -4,10 +4,10 @@
   "position": {
     "x": 0,
     "y": 444.28571428571433,
-    "z": 12000,
+    "z": 11000,
     "height": 275.71428571428572,
     "width": 830,
-    "tabOrder": 12000
+    "tabOrder": 11000
   },
   "visual": {
     "visualType": "tableEx",
@@ -27,7 +27,8 @@
                 }
               },
               "queryRef": "Sum(Pred.student_id)",
-              "nativeQueryRef": "student_id"
+              "nativeQueryRef": "Mã SV",
+              "displayName": "Mã SV"
             },
             {
               "field": {
@@ -41,7 +42,8 @@
                 }
               },
               "queryRef": "Pred.class_code",
-              "nativeQueryRef": "class_code"
+              "nativeQueryRef": "Mã lớp",
+              "displayName": "Mã lớp"
             },
             {
               "field": {
@@ -51,7 +53,7 @@
                       "Entity": "dim_faculty"
                     }
                   },
-                  "Property": "faculty_name"
+                  "Property": "Khoa"
                 }
               },
               "queryRef": "dim_faculty.faculty_name",
@@ -69,7 +71,8 @@
                 }
               },
               "queryRef": "Sum(Pred.probability)",
-              "nativeQueryRef": "probability"
+              "nativeQueryRef": "Xác xuất",
+              "displayName": "Xác xuất"
             },
             {
               "field": {
@@ -83,7 +86,8 @@
                 }
               },
               "queryRef": "Pred.risk_level",
-              "nativeQueryRef": "risk_level"
+              "nativeQueryRef": "Mức rủi ro",
+              "displayName": "Mức rủi ro"
             },
             {
               "field": {
@@ -97,7 +101,8 @@
                 }
               },
               "queryRef": "Pred.top_factors",
-              "nativeQueryRef": "top_factors"
+              "nativeQueryRef": "Yếu tố chính",
+              "displayName": "Yếu tố chính"
             },
             {
               "field": {
@@ -111,7 +116,8 @@
                 }
               },
               "queryRef": "Pred.source",
-              "nativeQueryRef": "source"
+              "nativeQueryRef": "Nguồn",
+              "displayName": "Nguồn"
             },
             {
               "field": {
@@ -125,7 +131,8 @@
                 }
               },
               "queryRef": "Pred.created_at_vn",
-              "nativeQueryRef": "created_at_vn"
+              "nativeQueryRef": "Thời gian tạo",
+              "displayName": "Thời gian tạo"
             }
           ]
         }
@@ -239,7 +246,7 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "79.42857136868608D"
+                  "Value": "86.53320933787991D"
                 }
               }
             }
@@ -575,7 +582,7 @@
   "filterConfig": {
     "filters": [
       {
-        "name": "b2b43425e0d8a0008736",
+        "name": "2007f0382e7a0b474502",
         "field": {
           "Column": {
             "Expression": {
@@ -589,7 +596,7 @@
         "type": "Advanced"
       },
       {
-        "name": "9f245b1030335b9002bd",
+        "name": "6fadf5e3900716542080",
         "field": {
           "Column": {
             "Expression": {
@@ -603,7 +610,7 @@
         "type": "Categorical"
       },
       {
-        "name": "e7e8aa07e7a8500c1502",
+        "name": "325ca66c042dbe0d2a62",
         "field": {
           "Column": {
             "Expression": {
@@ -611,13 +618,13 @@
                 "Entity": "dim_faculty"
               }
             },
-            "Property": "faculty_name"
+            "Property": "Khoa"
           }
         },
         "type": "Categorical"
       },
       {
-        "name": "6b926e3315b72371c224",
+        "name": "193ca86a8aa8b503b8a3",
         "field": {
           "Column": {
             "Expression": {
@@ -631,7 +638,7 @@
         "type": "Advanced"
       },
       {
-        "name": "79c11d666351cc2001a0",
+        "name": "edde5e6d0ec95a90ed61",
         "field": {
           "Column": {
             "Expression": {
@@ -645,7 +652,7 @@
         "type": "Categorical"
       },
       {
-        "name": "5e9a2ce000820aa559b3",
+        "name": "3963bef5e027258e8be5",
         "field": {
           "Column": {
             "Expression": {
@@ -659,7 +666,7 @@
         "type": "Categorical"
       },
       {
-        "name": "5bf24b9e10d7502870db",
+        "name": "203e1bf2bd0824086451",
         "field": {
           "Column": {
             "Expression": {
@@ -673,7 +680,7 @@
         "type": "Categorical"
       },
       {
-        "name": "4bcb16a474a86b08e7b0",
+        "name": "ee7a849569c076c4c0e9",
         "field": {
           "Column": {
             "Expression": {

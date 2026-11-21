@@ -23,11 +23,11 @@
                       "Entity": "fact_enrollment"
                     }
                   },
-                  "Property": "first_term"
+                  "Property": "Khóa"
                 }
               },
-              "queryRef": "fact_enrollment.first_term",
-              "nativeQueryRef": "first_term",
+              "queryRef": "fact_enrollment.Khóa",
+              "nativeQueryRef": "Khóa",
               "active": true
             }
           ]
@@ -42,11 +42,11 @@
                       "Entity": "_Measures"
                     }
                   },
-                  "Property": "Dropout Rate"
+                  "Property": "Tỉ lệ bỏ học"
                 }
               },
               "queryRef": "_Measures.Dropout Rate",
-              "nativeQueryRef": "Dropout Rate"
+              "nativeQueryRef": "Tỉ lệ bỏ học"
             }
           ]
         }
@@ -61,7 +61,7 @@
                     "Entity": "_Measures"
                   }
                 },
-                "Property": "Dropout Rate"
+                "Property": "Tỉ lệ bỏ học"
               }
             },
             "direction": "Descending"
@@ -107,6 +107,19 @@
             "metadata": "_Measures.Dropout Rate"
           }
         }
+      ],
+      "categoryAxis": [
+        {
+          "properties": {
+            "axisType": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Scalar'"
+                }
+              }
+            }
+          }
+        }
       ]
     },
     "visualContainerObjects": {
@@ -116,7 +129,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'First tern dropout rate'"
+                  "Value": "'Tỉ lệ bỏ học theo học kỳ nhập học'"
                 }
               }
             },
@@ -165,5 +178,37 @@
       ]
     },
     "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "f71db99d0ab13b540e4d",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "_Measures"
+              }
+            },
+            "Property": "Tỉ lệ bỏ học"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "7210d4100482ec5ee78e",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "fact_enrollment"
+              }
+            },
+            "Property": "Khóa"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
   }
 }

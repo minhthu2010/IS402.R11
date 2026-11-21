@@ -23,13 +23,12 @@
                       "Entity": "fact_enrollment"
                     }
                   },
-                  "Property": "cohort_year"
+                  "Property": "Khóa"
                 }
               },
-              "queryRef": "fact_enrollment.cohort_year",
-              "nativeQueryRef": "Cohort year",
-              "active": true,
-              "displayName": "Cohort year"
+              "queryRef": "fact_enrollment.Khóa",
+              "nativeQueryRef": "Khóa",
+              "active": true
             }
           ]
         }
@@ -152,7 +151,7 @@
                 "Entity": "fact_enrollment"
               }
             },
-            "Property": "cohort_year"
+            "Property": "Khóa"
           }
         },
         "type": "Categorical",
@@ -179,7 +178,7 @@
                                 "Source": "f"
                               }
                             },
-                            "Property": "cohort_year"
+                            "Property": "Khóa"
                           }
                         }
                       ],

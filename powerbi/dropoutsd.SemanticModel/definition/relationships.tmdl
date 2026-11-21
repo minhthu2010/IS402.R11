@@ -2,10 +2,6 @@ relationship 9d49a0c1-d0c8-ecc0-86c3-8488ac1d4094
 	fromColumn: dim_major.faculty_id
 	toColumn: dim_faculty.faculty_id
 
-relationship f6b2da3d-a4cf-1482-df86-b61d153a2dd7
-	fromColumn: dim_class.faculty_id
-	toColumn: dim_major.faculty_id
-
 relationship c1ce2d00-c226-5eed-8d98-5a62871d9d6c
 	fromColumn: fact_enrollment.class_code
 	toColumn: dim_class.class_code
@@ -14,7 +10,7 @@ relationship 354b7b5b-67a0-9c6c-60d8-52fff38e2f9a
 	crossFilteringBehavior: bothDirections
 	fromCardinality: one
 	fromColumn: dim_student.student_id
-	toColumn: fact_enrollment.student_id
+	toColumn: fact_enrollment.'Mã SV'
 
 relationship a6e24c6a-76d3-10c5-7c7c-0180de6a803d
 	fromColumn: fact_course_grade.student_id
@@ -40,11 +36,15 @@ relationship 53c2aeeb-e985-9aae-dabe-56b22bdd285d
 
 relationship c04eabcb-3cc5-3d96-31e4-4f78e131a21c
 	isActive: false
-	fromColumn: fact_enrollment.first_term
+	fromColumn: fact_enrollment.'Học kỳ nhập học'
 	toColumn: dim_term.term_code
 
 relationship 019789bc-8fb3-ea94-f0a5-5b594652ca16
 	isActive: false
 	fromColumn: fact_enrollment.second_term
 	toColumn: dim_term.term_code
+
+relationship fbb5b02a-a712-88f1-9423-b8c6c9941be3
+	fromColumn: dim_class.major_id
+	toColumn: dim_major.major_id
 

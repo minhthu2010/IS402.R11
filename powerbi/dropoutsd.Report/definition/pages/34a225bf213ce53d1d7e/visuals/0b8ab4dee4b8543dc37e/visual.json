@@ -23,13 +23,12 @@
                       "Entity": "dim_major"
                     }
                   },
-                  "Property": "major_name"
+                  "Property": "Ngành"
                 }
               },
-              "queryRef": "dim_major.major_name",
-              "nativeQueryRef": "Major name",
-              "active": true,
-              "displayName": "Major name"
+              "queryRef": "dim_major.Ngành",
+              "nativeQueryRef": "Ngành",
+              "active": true
             }
           ]
         }
@@ -60,7 +59,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Major name'"
+                  "Value": "'Ngành'"
                 }
               }
             },
@@ -94,6 +93,13 @@
                       "Percent": -0.5
                     }
                   }
+                }
+              }
+            },
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
                 }
               }
             }
@@ -146,7 +152,7 @@
                 "Entity": "dim_major"
               }
             },
-            "Property": "major_name"
+            "Property": "Ngành"
           }
         },
         "type": "Categorical",
@@ -173,7 +179,7 @@
                                 "Source": "d"
                               }
                             },
-                            "Property": "major_name"
+                            "Property": "Ngành"
                           }
                         }
                       ],

@@ -12,13 +12,13 @@ table dim_faculty
 
 		annotation SummarizationSetBy = Automatic
 
-	column faculty_name
+	column Khoa
 		dataType: string
 		isNullable: false
 		sourceProviderType: nvarchar(100)
 		lineageTag: 59deaac9-492b-4e20-b06b-f800139431e9
 		summarizeBy: none
-		sourceColumn: faculty_name
+		sourceColumn: Khoa
 
 		annotation SummarizationSetBy = Automatic
 
@@ -27,7 +27,8 @@ table dim_faculty
 		source =
 				let
 				    Source = Sql.Database("sql-dropout-thi.database.windows.net", "dropoutdb"),
-				    dbo_dim_faculty = Source{[Schema="dbo",Item="dim_faculty"]}[Data]
+				    dbo_dim_faculty = Source{[Schema="dbo",Item="dim_faculty"]}[Data],
+				    #"Renamed Columns" = Table.RenameColumns(dbo_dim_faculty,{{"faculty_name", "Khoa"}})
 				in
-				    dbo_dim_faculty
+				    #"Renamed Columns"
 
