@@ -23,12 +23,11 @@
                       "Entity": "_Measures"
                     }
                   },
-                  "Property": "First Term Credit Completion Rate"
+                  "Property": "Tỉ lệ hoàn thành TC HK1"
                 }
               },
-              "queryRef": "_Measures.First Term Credit Completion Rate",
-              "nativeQueryRef": "1st Term Credit Completion Rate",
-              "displayName": "1st Term Credit Completion Rate"
+              "queryRef": "_Measures.Tỉ lệ hoàn thành TC HK1",
+              "nativeQueryRef": "Tỉ lệ hoàn thành TC HK1"
             }
           ]
         }
@@ -43,7 +42,7 @@
                     "Entity": "_Measures"
                   }
                 },
-                "Property": "First Term Credit Completion Rate"
+                "Property": "Tỉ lệ hoàn thành TC HK1"
               }
             },
             "direction": "Descending"
@@ -72,6 +71,13 @@
                       "Percent": -0.5
                     }
                   }
+                }
+              }
+            },
+            "bold": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
                 }
               }
             }
@@ -116,7 +122,7 @@
   "filterConfig": {
     "filters": [
       {
-        "name": "908fee377e61648a5106",
+        "name": "5afcff2890150321965a",
         "field": {
           "Measure": {
             "Expression": {
@@ -124,7 +130,7 @@
                 "Entity": "_Measures"
               }
             },
-            "Property": "First Term Credit Completion Rate"
+            "Property": "Tỉ lệ hoàn thành TC HK1"
           }
         },
         "type": "Advanced"

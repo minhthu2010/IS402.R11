@@ -23,11 +23,11 @@
                       "Entity": "dim_faculty"
                     }
                   },
-                  "Property": "faculty_name"
+                  "Property": "Khoa"
                 }
               },
-              "queryRef": "dim_faculty.faculty_name",
-              "nativeQueryRef": "faculty_name1",
+              "queryRef": "dim_faculty.Khoa",
+              "nativeQueryRef": "Khoa",
               "active": true
             }
           ]
@@ -93,7 +93,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Faculty'"
+                  "Value": "'Khoa'"
                 }
               }
             },
@@ -165,7 +165,7 @@
                 "Entity": "dim_faculty"
               }
             },
-            "Property": "faculty_name"
+            "Property": "Khoa"
           }
         },
         "type": "Categorical",
@@ -192,7 +192,7 @@
                                 "Source": "d"
                               }
                             },
-                            "Property": "faculty_name"
+                            "Property": "Khoa"
                           }
                         }
                       ],

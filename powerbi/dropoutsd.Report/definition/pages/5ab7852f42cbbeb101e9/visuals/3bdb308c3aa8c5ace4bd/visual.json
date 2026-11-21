@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
   "name": "3bdb308c3aa8c5ace4bd",
   "position": {
-    "x": 760,
-    "y": 444.28571428571433,
+    "x": 730.01959831822978,
+    "y": 444.59840198328283,
     "z": 9000,
-    "height": 275.71428571428572,
-    "width": 520,
+    "height": 275.81567530444397,
+    "width": 550.25913331881611,
     "tabOrder": 9000
   },
   "visual": {
@@ -23,7 +23,7 @@
                       "Entity": "fact_enrollment"
                     }
                   },
-                  "Property": "cohort_year"
+                  "Property": "Khóa"
                 }
               },
               "queryRef": "fact_enrollment.cohort_year",
@@ -42,7 +42,7 @@
                       "Entity": "fact_enrollment"
                     }
                   },
-                  "Property": "Student Status"
+                  "Property": "Trạng thái"
                 }
               },
               "queryRef": "fact_enrollment.Student Status",
@@ -60,7 +60,7 @@
                       "Entity": "_Measures"
                     }
                   },
-                  "Property": "Average Second Term Earned Hours"
+                  "Property": "Tín chỉ đạt HK2 TB"
                 }
               },
               "queryRef": "_Measures.Average Second Term Earned Hours",
@@ -79,7 +79,7 @@
                     "Entity": "_Measures"
                   }
                 },
-                "Property": "Average Second Term Earned Hours"
+                "Property": "Tín chỉ đạt HK2 TB"
               }
             },
             "direction": "Descending"
@@ -115,6 +115,13 @@
                       "Percent": -0.5
                     }
                   }
+                }
+              }
+            },
+            "axisType": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Categorical'"
                 }
               }
             }
@@ -200,7 +207,7 @@
                             "Entity": "fact_enrollment"
                           }
                         },
-                        "Property": "Student Status"
+                        "Property": "Trạng thái"
                       }
                     },
                     "Right": {
@@ -242,12 +249,95 @@
                             "Entity": "fact_enrollment"
                           }
                         },
-                        "Property": "Student Status"
+                        "Property": "Trạng thái"
                       }
                     },
                     "Right": {
                       "Literal": {
                         "Value": "'Returned'"
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        },
+        {
+          "properties": {
+            "fill": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 1,
+                      "Percent": 0.6
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "selector": {
+            "data": [
+              {
+                "scopeId": {
+                  "Comparison": {
+                    "ComparisonKind": 0,
+                    "Left": {
+                      "Column": {
+                        "Expression": {
+                          "SourceRef": {
+                            "Entity": "fact_enrollment"
+                          }
+                        },
+                        "Property": "Trạng thái"
+                      }
+                    },
+                    "Right": {
+                      "Literal": {
+                        "Value": "'Ở lại'"
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        },
+        {
+          "properties": {
+            "fill": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#7f375b'"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "selector": {
+            "data": [
+              {
+                "scopeId": {
+                  "Comparison": {
+                    "ComparisonKind": 0,
+                    "Left": {
+                      "Column": {
+                        "Expression": {
+                          "SourceRef": {
+                            "Entity": "fact_enrollment"
+                          }
+                        },
+                        "Property": "Trạng thái"
+                      }
+                    },
+                    "Right": {
+                      "Literal": {
+                        "Value": "'Bỏ học'"
                       }
                     }
                   }
@@ -344,7 +434,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Avg 2nd Term Earned Hours by Cohort year and Student status'"
+                  "Value": "'Tín chỉ đạt HK2 trung bình theo khóa'"
                 }
               }
             }
@@ -357,7 +447,7 @@
   "filterConfig": {
     "filters": [
       {
-        "name": "82b1a1126bca57691eca",
+        "name": "4fdaf62018d269a64b1a",
         "field": {
           "Column": {
             "Expression": {
@@ -365,13 +455,13 @@
                 "Entity": "fact_enrollment"
               }
             },
-            "Property": "cohort_year"
+            "Property": "Khóa"
           }
         },
         "type": "Advanced"
       },
       {
-        "name": "9b3c26677ae4294b1614",
+        "name": "87eb10c7a2a7568c2460",
         "field": {
           "Column": {
             "Expression": {
@@ -379,13 +469,13 @@
                 "Entity": "fact_enrollment"
               }
             },
-            "Property": "Student Status"
+            "Property": "Trạng thái"
           }
         },
         "type": "Categorical"
       },
       {
-        "name": "8c54a3058ecdd3978c4d",
+        "name": "8de5c700410107009c7e",
         "field": {
           "Measure": {
             "Expression": {
@@ -393,7 +483,7 @@
                 "Entity": "_Measures"
               }
             },
-            "Property": "Average Second Term Earned Hours"
+            "Property": "Tín chỉ đạt HK2 TB"
           }
         },
         "type": "Advanced"

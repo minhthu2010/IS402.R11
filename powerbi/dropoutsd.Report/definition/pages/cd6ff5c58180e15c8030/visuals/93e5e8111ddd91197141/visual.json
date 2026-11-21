@@ -4,10 +4,10 @@
   "position": {
     "x": 830,
     "y": 444.28571428571433,
-    "z": 13000,
+    "z": 12000,
     "height": 275.71428571428572,
     "width": 448.57142857142861,
-    "tabOrder": 13000
+    "tabOrder": 12000
   },
   "visual": {
     "visualType": "tableEx",
@@ -27,7 +27,8 @@
                 }
               },
               "queryRef": "Sum(Pred.student_id)",
-              "nativeQueryRef": "student_id"
+              "nativeQueryRef": "Mã SV",
+              "displayName": "Mã SV"
             },
             {
               "field": {
@@ -41,7 +42,8 @@
                 }
               },
               "queryRef": "Sum(Pred.probability)",
-              "nativeQueryRef": "probability"
+              "nativeQueryRef": "Xác xuất",
+              "displayName": "Xác xuất"
             },
             {
               "field": {
@@ -55,7 +57,8 @@
                 }
               },
               "queryRef": "Pred.risk_level",
-              "nativeQueryRef": "risk_level"
+              "nativeQueryRef": "Mức rủi ro",
+              "displayName": "Mức rủi ro"
             },
             {
               "field": {
@@ -69,7 +72,8 @@
                 }
               },
               "queryRef": "Pred.source",
-              "nativeQueryRef": "source"
+              "nativeQueryRef": "Nguồn",
+              "displayName": "Nguồn"
             },
             {
               "field": {
@@ -83,7 +87,8 @@
                 }
               },
               "queryRef": "Pred.created_at_vn",
-              "nativeQueryRef": "created_at_vn"
+              "nativeQueryRef": "Thời gian tạo",
+              "displayName": "Thời gian tạo"
             }
           ]
         }
@@ -98,7 +103,7 @@
                     "Entity": "Pred"
                   }
                 },
-                "Property": "created_at_vn"
+                "Property": "student_id"
               }
             },
             "direction": "Ascending"
@@ -368,7 +373,7 @@
         }
       },
       {
-        "name": "839d216a3640592b37dc",
+        "name": "9dec052ac95e7ec3a840",
         "field": {
           "Column": {
             "Expression": {
@@ -382,7 +387,7 @@
         "type": "Advanced"
       },
       {
-        "name": "a0cc6a1c009d30e98221",
+        "name": "7b339ab57061710aa9dd",
         "field": {
           "Column": {
             "Expression": {
@@ -396,7 +401,7 @@
         "type": "Advanced"
       },
       {
-        "name": "d48b76b6341e4c3e4090",
+        "name": "021bdc1c33295abb0c42",
         "field": {
           "Column": {
             "Expression": {
@@ -410,7 +415,7 @@
         "type": "Categorical"
       },
       {
-        "name": "c8824984cb02c6c6a302",
+        "name": "2935052a6711057ac4aa",
         "field": {
           "Column": {
             "Expression": {

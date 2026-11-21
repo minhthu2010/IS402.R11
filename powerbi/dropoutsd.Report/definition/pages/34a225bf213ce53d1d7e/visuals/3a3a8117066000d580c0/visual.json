@@ -23,7 +23,7 @@
                       "Entity": "_Measures"
                     }
                   },
-                  "Property": "Dropout Rate"
+                  "Property": "Tỉ lệ bỏ học"
                 }
               },
               "queryRef": "_Measures.Dropout Rate",
@@ -42,7 +42,7 @@
                     "Entity": "_Measures"
                   }
                 },
-                "Property": "Dropout Rate"
+                "Property": "Tỉ lệ bỏ học"
               }
             },
             "direction": "Descending"
@@ -67,9 +67,23 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#070f25'"
+                      "Value": "'#004949'"
                     }
                   }
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "13D"
+                }
+              }
+            },
+            "bold": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
                 }
               }
             }
@@ -82,14 +96,14 @@
             "fontFamily": {
               "expr": {
                 "Literal": {
-                  "Value": "'''Arial Black'''"
+                  "Value": "'Arial'"
                 }
               }
             },
             "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "25D"
+                  "Value": "29D"
                 }
               }
             },
@@ -102,6 +116,13 @@
                       "Percent": -0.5
                     }
                   }
+                }
+              }
+            },
+            "bold": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
                 }
               }
             }

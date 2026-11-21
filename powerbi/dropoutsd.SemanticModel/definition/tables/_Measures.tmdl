@@ -1,78 +1,78 @@
 table _Measures
 	lineageTag: 4a3901da-2c4d-49b5-bb7d-bfedcb98bbb3
 
-	measure 'Total Students' =
+	measure 'Tổng số SV' =
 			
 			CALCULATE(
-			    DISTINCTCOUNT(fact_enrollment[student_id]),
+			    DISTINCTCOUNT(fact_enrollment[Mã SV]),
 			    fact_enrollment[is_synthetic] = FALSE()
 			)
 		formatString: 0
 		lineageTag: c543e64f-e4db-40d0-8652-55ed2d59eb8e
 
-	measure 'Returned Students' =
+	measure 'SV ở lại' =
 			
 			CALCULATE(
-			    DISTINCTCOUNT(fact_enrollment[student_id]),
+			    DISTINCTCOUNT(fact_enrollment[Mã SV]),
 			    fact_enrollment[returned_2nd_yr] = TRUE(),
 			    fact_enrollment[is_synthetic] = FALSE()
 			)
 		formatString: 0
 		lineageTag: bb00c350-93f4-48f7-b030-b35f3ca725b0
 
-	measure 'Retention Rate' =
+	measure 'Tỉ lệ ở lại' =
 			
 			DIVIDE(
-			    [Returned Students],
-			    [Total Students],
+			    [SV ở lại],
+			    [Tổng số SV],
 			    0
 			)
 		lineageTag: 8144e69e-549f-4f70-b8bc-aa40e8fff751
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
-	measure 'Dropout Students' =
+	measure 'SV bỏ học' =
 			
 			CALCULATE(
-			    DISTINCTCOUNT(fact_enrollment[student_id]),
+			    DISTINCTCOUNT(fact_enrollment[Mã SV]),
 			    fact_enrollment[dropout] = TRUE(),
 			    fact_enrollment[is_synthetic] = FALSE()
 			)
 		formatString: 0
 		lineageTag: ea626903-bea6-422d-bfc6-6db3b1bb0f7d
 
-	measure 'Dropout Rate' =
+	measure 'Tỉ lệ bỏ học' =
 			
 			DIVIDE(
-			    [Dropout Students],
-			    [Total Students],
+			    [SV bỏ học],
+			    [Tổng số SV],
 			    0
 			)
 		formatString: 0.00%;-0.00%;0.00%
 		lineageTag: 98c80fe6-e7bb-468f-8ee4-9ef49e032222
 
-	measure 'Average High School GPA' =
+	measure 'GPA THPT TB' =
 			
-			AVERAGE(dim_student[high_school_gpa])
+			AVERAGE(dim_student[GPA THPT])
 		lineageTag: eda628b1-1c42-4a24-8ddc-1a076be89474
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
-	measure 'Average First Term Earned Hours' =
+	measure 'Tín chỉ đạt HK1 TB' =
 			
 			AVERAGE(fact_enrollment[first_term_earned_hrs])
 		lineageTag: 359d984d-d82f-4ebb-9a4d-083f9efe2684
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
-	measure 'Average Second Term Earned Hours' =
+	measure 'Tín chỉ đạt HK2 TB' =
 			
 			AVERAGE(fact_enrollment[second_term_earned_hrs])
 		lineageTag: 1cd0b4d2-04bd-48a6-94e7-31d22230fe74
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
-	measure 'First Term Credit Completion Rate' =
+	measure 'Tỉ lệ hoàn thành TC HK1' =
 			
 			DIVIDE(
 			    SUM(fact_enrollment[first_term_earned_hrs]),
@@ -82,7 +82,7 @@ table _Measures
 		formatString: 0.00%;-0.00%;0.00%
 		lineageTag: f5cefabc-eec2-4a58-8864-6260bc4f6303
 
-	measure 'Second Term Credit Completion Rate' =
+	measure 'Tỉ lệ hoàn thành TC HK2' =
 			
 			DIVIDE(
 			    SUM(fact_enrollment[second_term_earned_hrs]),
@@ -96,9 +96,6 @@ table _Measures
 		lineageTag: 2ee20f17-2807-4ec0-be81-73bdb6262597
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
-
-	measure 'Màu model' = IF ( MAX ( model_metrics[Model chọn] ) = 1, "#5B2C8F", "#CBBFE0" )
-		lineageTag: 640edccf-f440-474e-9546-cb1e43d570a0
 
 	measure 'Model đang dùng' = CALCULATE ( MAX ( model_metrics[Tên model] ), REMOVEFILTERS ( model_metrics ), model_metrics[Model chọn] = 1 )
 		lineageTag: e78dfa53-01de-43fd-86b1-1d2891499080

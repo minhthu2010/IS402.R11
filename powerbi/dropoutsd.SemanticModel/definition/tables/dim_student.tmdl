@@ -12,13 +12,13 @@ table dim_student
 
 		annotation SummarizationSetBy = Automatic
 
-	column age
+	column Tuổi
 		dataType: int64
 		formatString: 0
 		sourceProviderType: int
 		lineageTag: 93c7898c-e4a1-4025-a436-c9625304760d
 		summarizeBy: none
-		sourceColumn: age
+		sourceColumn: Tuổi
 
 		annotation SummarizationSetBy = Automatic
 
@@ -87,12 +87,12 @@ table dim_student
 
 		annotation SummarizationSetBy = Automatic
 
-	column high_school_gpa
+	column 'GPA THPT'
 		dataType: double
 		sourceProviderType: float
 		lineageTag: e7766f23-816b-4df0-ab21-01f9a274ff75
 		summarizeBy: none
-		sourceColumn: high_school_gpa
+		sourceColumn: GPA THPT
 
 		annotation SummarizationSetBy = Automatic
 
@@ -138,12 +138,19 @@ table dim_student
 
 		annotation SummarizationSetBy = Automatic
 
+	column 'Giới tính' = IF ( dim_student[gender] = "F", "Nữ", "Nam" )
+		lineageTag: c3df9143-fe5f-4396-9aed-3aeaf9377908
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
 	partition dim_student = m
 		mode: directQuery
 		source =
 				let
 				    Source = Sql.Database("sql-dropout-thi.database.windows.net", "dropoutdb"),
-				    dbo_dim_student = Source{[Schema="dbo",Item="dim_student"]}[Data]
+				    dbo_dim_student = Source{[Schema="dbo",Item="dim_student"]}[Data],
+				    #"Renamed Columns" = Table.RenameColumns(dbo_dim_student,{{"gender", "gender"}, {"age", "Tuổi"}, {"high_school_gpa", "GPA THPT"}})
 				in
-				    dbo_dim_student
+				    #"Renamed Columns"
 

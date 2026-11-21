@@ -46,7 +46,8 @@
                 }
               },
               "queryRef": "Sweep.n_estimators",
-              "nativeQueryRef": "n_estimators"
+              "nativeQueryRef": "Số cây",
+              "displayName": "Số cây"
             }
           ]
         },
@@ -134,8 +135,9 @@
                 }
               },
               "queryRef": "Sweep.learning_rate",
-              "nativeQueryRef": "Average of learning_rate",
-              "active": true
+              "nativeQueryRef": "Learning rate",
+              "active": true,
+              "displayName": "Learning rate"
             }
           ]
         },
@@ -158,7 +160,8 @@
                 }
               },
               "queryRef": "Sum(Sweep.cv_auc)",
-              "nativeQueryRef": "Average of cv_auc"
+              "nativeQueryRef": "AUC (CV)1",
+              "displayName": "AUC (CV)"
             }
           ]
         }
@@ -330,6 +333,19 @@
             ]
           }
         }
+      ],
+      "bubbles": [
+        {
+          "properties": {
+            "bubbleSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "-6L"
+                }
+              }
+            }
+          }
+        }
       ]
     },
     "visualContainerObjects": {
@@ -391,7 +407,7 @@
   "filterConfig": {
     "filters": [
       {
-        "name": "7a0a35326899062be981",
+        "name": "d9c5907c10097cdc907e",
         "field": {
           "Column": {
             "Expression": {
@@ -405,7 +421,7 @@
         "type": "Categorical"
       },
       {
-        "name": "1a2ff48cb1c07022cbe6",
+        "name": "fd6a8db60e46e8e18e8a",
         "field": {
           "Column": {
             "Expression": {
@@ -419,7 +435,7 @@
         "type": "Advanced"
       },
       {
-        "name": "58265ee7ed137437444c",
+        "name": "84e6c2d5d402c6ec3335",
         "field": {
           "Aggregation": {
             "Expression": {
@@ -438,7 +454,7 @@
         "type": "Advanced"
       },
       {
-        "name": "cb658b744c1336e2284b",
+        "name": "d70abecab386a0da3105",
         "field": {
           "Aggregation": {
             "Expression": {
@@ -457,7 +473,7 @@
         "type": "Advanced"
       },
       {
-        "name": "7a4d5d90c71c1d488d49",
+        "name": "2a8a206eb350db7d5c84",
         "field": {
           "Aggregation": {
             "Expression": {
@@ -476,7 +492,7 @@
         "type": "Advanced"
       },
       {
-        "name": "6e98b3e11c9ae75c5559",
+        "name": "207200f6e0c0ab063da7",
         "field": {
           "Aggregation": {
             "Expression": {
@@ -495,7 +511,7 @@
         "type": "Advanced"
       },
       {
-        "name": "80b3933ba9a004d1004b",
+        "name": "5b383a30e04da084c40a",
         "field": {
           "Aggregation": {
             "Expression": {

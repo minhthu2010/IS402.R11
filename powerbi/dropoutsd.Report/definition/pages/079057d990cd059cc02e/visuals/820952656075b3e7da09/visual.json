@@ -166,23 +166,5 @@
       ]
     },
     "drillFilterOtherVisuals": true
-  },
-  "filterConfig": {
-    "filters": [
-      {
-        "name": "f665bd975ad5de422175",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "model_metrics"
-              }
-            },
-            "Property": "AUC test"
-          }
-        },
-        "type": "Advanced"
-      }
-    ]
   }
 }

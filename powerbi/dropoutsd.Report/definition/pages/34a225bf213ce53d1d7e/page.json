@@ -1,47 +1,8 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/2.0.0/schema.json",
   "name": "34a225bf213ce53d1d7e",
-  "displayName": "Faculty & Cohort",
+  "displayName": "Khoa & khóa học",
   "displayOption": "FitToPage",
   "height": 720,
-  "width": 1280,
-  "filterConfig": {
-    "filters": [
-      {
-        "name": "1e1f8520ed09817d0442",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "_Measures"
-              }
-            },
-            "Property": "Total Students"
-          }
-        },
-        "type": "Categorical",
-        "howCreated": "Drillthrough"
-      }
-    ]
-  },
-  "pageBinding": {
-    "name": "767ef033de3d03c2cb04",
-    "type": "Drillthrough",
-    "parameters": [
-      {
-        "name": "64c8008616350d4a3156",
-        "boundFilter": "1e1f8520ed09817d0442",
-        "fieldExpr": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "_Measures"
-              }
-            },
-            "Property": "Total Students"
-          }
-        }
-      }
-    ]
-  }
+  "width": 1280
 }

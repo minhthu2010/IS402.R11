@@ -23,11 +23,11 @@
                       "Entity": "dim_student"
                     }
                   },
-                  "Property": "gender"
+                  "Property": "Giới tính"
                 }
               },
-              "queryRef": "dim_student.gender",
-              "nativeQueryRef": "gender",
+              "queryRef": "dim_student.Giới tính",
+              "nativeQueryRef": "Giới tính",
               "active": true
             }
           ]
@@ -54,7 +54,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Gender'"
+                  "Value": "'Giới tính'"
                 }
               }
             },
@@ -212,6 +212,7 @@
             }
           ]
         },
+        "howCreated": "User",
         "objects": {
           "general": [
             {
@@ -227,6 +228,20 @@
             }
           ]
         }
+      },
+      {
+        "name": "c418f4c5aa940d871d59",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "dim_student"
+              }
+            },
+            "Property": "Giới tính"
+          }
+        },
+        "type": "Categorical"
       }
     ]
   }

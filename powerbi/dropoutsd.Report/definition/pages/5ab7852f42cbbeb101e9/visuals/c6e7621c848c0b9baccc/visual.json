@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
   "name": "c6e7621c848c0b9baccc",
   "position": {
-    "x": 330,
-    "y": 161.42857142857144,
+    "x": 316.9821940065998,
+    "y": 161.92164022847956,
     "z": 5000,
-    "height": 172.85714285714286,
-    "width": 430,
+    "height": 263.46571969379721,
+    "width": 310.12110755624047,
     "tabOrder": 5000
   },
   "visual": {
@@ -23,7 +23,7 @@
                       "Entity": "fact_enrollment"
                     }
                   },
-                  "Property": "Student Status"
+                  "Property": "Trạng thái"
                 }
               },
               "queryRef": "fact_enrollment.Student Status",
@@ -42,7 +42,7 @@
                       "Entity": "_Measures"
                     }
                   },
-                  "Property": "Average High School GPA"
+                  "Property": "GPA THPT TB"
                 }
               },
               "queryRef": "_Measures.Average_High School GPA",
@@ -61,7 +61,7 @@
                     "Entity": "_Measures"
                   }
                 },
-                "Property": "Average High School GPA"
+                "Property": "GPA THPT TB"
               }
             },
             "direction": "Descending"
@@ -243,43 +243,18 @@
                   "Value": "'center'"
                 }
               }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'GPA THPT trung bình: ở lại và bỏ học'"
+                }
+              }
             }
           }
         }
       ]
     },
     "drillFilterOtherVisuals": true
-  },
-  "filterConfig": {
-    "filters": [
-      {
-        "name": "77c2c617d83ab3b09c4e",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "fact_enrollment"
-              }
-            },
-            "Property": "Student Status"
-          }
-        },
-        "type": "Categorical"
-      },
-      {
-        "name": "e8273b6803094c6e0dde",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "_Measures"
-              }
-            },
-            "Property": "Average High School GPA"
-          }
-        },
-        "type": "Advanced"
-      }
-    ]
   }
 }

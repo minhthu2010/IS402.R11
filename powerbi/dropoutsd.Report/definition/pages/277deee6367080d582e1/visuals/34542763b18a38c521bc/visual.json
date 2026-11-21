@@ -3,9 +3,9 @@
   "name": "34542763b18a38c521bc",
   "position": {
     "x": 314.28571428571428,
-    "y": 458.57142857142861,
+    "y": 452.85714285714289,
     "z": 5000,
-    "height": 261.42857142857144,
+    "height": 267.14285714285717,
     "width": 611.42857142857144,
     "tabOrder": 1000
   },
@@ -23,11 +23,11 @@
                       "Entity": "dim_faculty"
                     }
                   },
-                  "Property": "faculty_name"
+                  "Property": "Khoa"
                 }
               },
               "queryRef": "dim_faculty.faculty_name",
-              "nativeQueryRef": "faculty_name",
+              "nativeQueryRef": "Khoa",
               "active": true
             }
           ]
@@ -42,11 +42,11 @@
                       "Entity": "_Measures"
                     }
                   },
-                  "Property": "Total Students"
+                  "Property": "Tổng số SV"
                 }
               },
               "queryRef": "_Measures.Total Students",
-              "nativeQueryRef": "Total Students1"
+              "nativeQueryRef": "Tổng số SV"
             }
           ]
         }
@@ -61,7 +61,7 @@
                     "Entity": "_Measures"
                   }
                 },
-                "Property": "Total Students"
+                "Property": "Tổng số SV"
               }
             },
             "direction": "Descending"
@@ -121,7 +121,7 @@
             "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "10D"
+                  "Value": "8D"
                 }
               }
             }
@@ -153,7 +153,7 @@
             "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "10D"
+                  "Value": "8D"
                 }
               }
             }
@@ -200,7 +200,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Total students by faculty'"
+                  "Value": "'Số sinh viên theo khoa'"
                 }
               }
             },
@@ -224,7 +224,7 @@
                   "expr": {
                     "ThemeDataColor": {
                       "ColorId": 6,
-                      "Percent": 0.2
+                      "Percent": -0.25
                     }
                   }
                 }
@@ -262,5 +262,37 @@
       ]
     },
     "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "94b96050c0a03ab263d5",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "dim_faculty"
+              }
+            },
+            "Property": "Khoa"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "f0ee84746e90bc8559e3",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "_Measures"
+              }
+            },
+            "Property": "Tổng số SV"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
   }
 }

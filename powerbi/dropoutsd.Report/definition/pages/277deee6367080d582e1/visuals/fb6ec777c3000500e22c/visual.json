@@ -23,11 +23,11 @@
                       "Entity": "_Measures"
                     }
                   },
-                  "Property": "Dropout Students"
+                  "Property": "SV bỏ học"
                 }
               },
               "queryRef": "_Measures.Dropout Students",
-              "nativeQueryRef": "Dropout Students"
+              "nativeQueryRef": "SV bỏ học"
             }
           ]
         }
@@ -42,7 +42,7 @@
                     "Entity": "_Measures"
                   }
                 },
-                "Property": "Dropout Students"
+                "Property": "SV bỏ học"
               }
             },
             "direction": "Descending"

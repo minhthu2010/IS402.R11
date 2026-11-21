@@ -19,11 +19,11 @@
               {
                 "textRuns": [
                   {
-                    "value": "Student Details",
+                    "value": "Chi tiết sinh viên",
                     "textStyle": {
                       "fontWeight": "bold",
                       "fontFamily": "Arial",
-                      "fontSize": "28pt",
+                      "fontSize": "24pt",
                       "color": "#022996"
                     }
                   }

@@ -23,11 +23,11 @@
                       "Entity": "fact_enrollment"
                     }
                   },
-                  "Property": "first_term"
+                  "Property": "Khóa"
                 }
               },
-              "queryRef": "fact_enrollment.first_term",
-              "nativeQueryRef": "first_term",
+              "queryRef": "fact_enrollment.Khóa",
+              "nativeQueryRef": "Khóa",
               "active": true
             }
           ]
@@ -177,7 +177,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'First term'"
+                  "Value": "'Khóa'"
                 }
               }
             }
@@ -213,7 +213,7 @@
                 "Entity": "fact_enrollment"
               }
             },
-            "Property": "first_term"
+            "Property": "Học kỳ nhập học"
           }
         },
         "type": "Categorical",
@@ -238,7 +238,7 @@
                             "Source": "f"
                           }
                         },
-                        "Property": "first_term"
+                        "Property": "Học kỳ nhập học"
                       }
                     }
                   ],
@@ -290,7 +290,22 @@
               }
             }
           ]
-        }
+        },
+        "howCreated": "User"
+      },
+      {
+        "name": "3e455d3ee1cabcba1bbb",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "fact_enrollment"
+              }
+            },
+            "Property": "Khóa"
+          }
+        },
+        "type": "Advanced"
       }
     ]
   }

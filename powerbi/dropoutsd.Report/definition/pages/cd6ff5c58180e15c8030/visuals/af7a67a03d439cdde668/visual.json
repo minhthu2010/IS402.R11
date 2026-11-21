@@ -4,10 +4,10 @@
   "position": {
     "x": 5.7142857142857144,
     "y": 258.57142857142861,
-    "z": 9000,
+    "z": 8000,
     "height": 51.428571428571431,
     "width": 295.71428571428572,
-    "tabOrder": 9000
+    "tabOrder": 8000
   },
   "visual": {
     "visualType": "slicer",
@@ -147,23 +147,5 @@
       ]
     },
     "drillFilterOtherVisuals": true
-  },
-  "filterConfig": {
-    "filters": [
-      {
-        "name": "7c2c1f7a97e88406004a",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "Pred"
-              }
-            },
-            "Property": "risk_level"
-          }
-        },
-        "type": "Categorical"
-      }
-    ]
   }
 }

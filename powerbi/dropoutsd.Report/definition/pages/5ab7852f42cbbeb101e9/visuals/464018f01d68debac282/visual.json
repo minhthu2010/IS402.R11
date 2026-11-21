@@ -3,10 +3,10 @@
   "name": "464018f01d68debac282",
   "position": {
     "x": 0,
-    "y": 180,
+    "y": 179.76046499941373,
     "z": 10000,
-    "height": 245.71428571428572,
-    "width": 330,
+    "height": 245.62689492286304,
+    "width": 316.9821940065998,
     "tabOrder": 10000
   },
   "visual": {
@@ -23,11 +23,11 @@
                       "Entity": "dim_faculty"
                     }
                   },
-                  "Property": "faculty_name"
+                  "Property": "Khoa"
                 }
               },
-              "queryRef": "dim_faculty.faculty_name",
-              "nativeQueryRef": "faculty_name1",
+              "queryRef": "dim_faculty.Khoa",
+              "nativeQueryRef": "Khoa",
               "active": true
             }
           ]
@@ -59,7 +59,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Faculty name'"
+                  "Value": "'Khoa'"
                 }
               }
             },
@@ -120,9 +120,8 @@
               "solid": {
                 "color": {
                   "expr": {
-                    "ThemeDataColor": {
-                      "ColorId": 4,
-                      "Percent": -0.5
+                    "Literal": {
+                      "Value": "'#7F375B'"
                     }
                   }
                 }
@@ -150,7 +149,7 @@
                 "Entity": "dim_faculty"
               }
             },
-            "Property": "faculty_name"
+            "Property": "Khoa"
           }
         },
         "type": "Categorical",
@@ -177,7 +176,7 @@
                                 "Source": "d"
                               }
                             },
-                            "Property": "faculty_name"
+                            "Property": "Khoa"
                           }
                         }
                       ],

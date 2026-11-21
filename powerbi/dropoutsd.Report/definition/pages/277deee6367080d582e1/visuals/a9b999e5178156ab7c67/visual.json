@@ -23,11 +23,11 @@
                       "Entity": "_Measures"
                     }
                   },
-                  "Property": "Dropout Rate"
+                  "Property": "Tỉ lệ bỏ học"
                 }
               },
               "queryRef": "_Measures.Dropout Rate",
-              "nativeQueryRef": "Dropout Rate"
+              "nativeQueryRef": "Tỉ lệ bỏ học"
             }
           ]
         }
@@ -42,7 +42,7 @@
                     "Entity": "_Measures"
                   }
                 },
-                "Property": "Dropout Rate"
+                "Property": "Tỉ lệ bỏ học"
               }
             },
             "direction": "Descending"
@@ -176,5 +176,23 @@
       ]
     },
     "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "67f4ae30009e13583203",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "_Measures"
+              }
+            },
+            "Property": "Tỉ lệ bỏ học"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
   }
 }

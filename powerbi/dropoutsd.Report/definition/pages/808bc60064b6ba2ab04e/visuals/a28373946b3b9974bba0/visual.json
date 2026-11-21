@@ -3,10 +3,10 @@
   "name": "a28373946b3b9974bba0",
   "position": {
     "x": 0,
-    "y": 537.14285714285722,
+    "y": 336.12409306980237,
     "z": 1000,
-    "height": 88.571428571428584,
-    "width": 282.85714285714289,
+    "height": 88.813276624134772,
+    "width": 282.8361270953215,
     "tabOrder": 1000
   },
   "visual": {
@@ -23,11 +23,11 @@
                       "Entity": "dim_student"
                     }
                   },
-                  "Property": "gender"
+                  "Property": "Giới tính"
                 }
               },
-              "queryRef": "dim_student.gender",
-              "nativeQueryRef": "gender",
+              "queryRef": "dim_student.Giới tính",
+              "nativeQueryRef": "Giới tính",
               "active": true
             }
           ]
@@ -97,7 +97,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Student gender'"
+                  "Value": "'Giới tính'"
                 }
               }
             },
@@ -208,6 +208,7 @@
             }
           ]
         },
+        "howCreated": "User",
         "objects": {
           "general": [
             {

@@ -12,13 +12,13 @@ table dim_major
 
 		annotation SummarizationSetBy = Automatic
 
-	column major_name
+	column Ngành
 		dataType: string
 		isNullable: false
 		sourceProviderType: nvarchar(100)
 		lineageTag: 1a4a41a4-573a-4627-bddf-9dee2355222c
 		summarizeBy: none
-		sourceColumn: major_name
+		sourceColumn: Ngành
 
 		annotation SummarizationSetBy = Automatic
 
@@ -38,7 +38,8 @@ table dim_major
 		source =
 				let
 				    Source = Sql.Database("sql-dropout-thi.database.windows.net", "dropoutdb"),
-				    dbo_dim_major = Source{[Schema="dbo",Item="dim_major"]}[Data]
+				    dbo_dim_major = Source{[Schema="dbo",Item="dim_major"]}[Data],
+				    #"Renamed Columns" = Table.RenameColumns(dbo_dim_major,{{"major_name", "Ngành"}})
 				in
-				    dbo_dim_major
+				    #"Renamed Columns"
 

@@ -23,11 +23,11 @@
                       "Entity": "_Measures"
                     }
                   },
-                  "Property": "Returned Students"
+                  "Property": "SV ở lại"
                 }
               },
               "queryRef": "_Measures.Returned Students",
-              "nativeQueryRef": "Returned Students"
+              "nativeQueryRef": "SV ở lại"
             }
           ]
         }
@@ -42,7 +42,7 @@
                     "Entity": "_Measures"
                   }
                 },
-                "Property": "Returned Students"
+                "Property": "SV ở lại"
               }
             },
             "direction": "Descending"

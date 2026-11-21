@@ -23,7 +23,7 @@
                       "Entity": "dim_student"
                     }
                   },
-                  "Property": "age"
+                  "Property": "Tuổi"
                 }
               },
               "queryRef": "dim_student.age",
@@ -42,7 +42,7 @@
                       "Entity": "_Measures"
                     }
                   },
-                  "Property": "Dropout Rate"
+                  "Property": "Tỉ lệ bỏ học"
                 }
               },
               "queryRef": "_Measures.Dropout Rate",
@@ -61,7 +61,7 @@
                     "Entity": "_Measures"
                   }
                 },
-                "Property": "Dropout Rate"
+                "Property": "Tỉ lệ bỏ học"
               }
             },
             "direction": "Descending"
@@ -149,6 +149,60 @@
               "expr": {
                 "Literal": {
                   "Value": "9D"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Tỉ lệ bỏ học theo tuổi'"
+                }
+              }
+            },
+            "fontFamily": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Arial'"
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "13D"
+                }
+              }
+            },
+            "bold": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#111573'"
+                    }
+                  }
+                }
+              }
+            },
+            "alignment": {
+              "expr": {
+                "Literal": {
+                  "Value": "'center'"
                 }
               }
             }

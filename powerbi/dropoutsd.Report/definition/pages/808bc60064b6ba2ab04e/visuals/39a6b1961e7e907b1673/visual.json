@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
   "name": "39a6b1961e7e907b1673",
   "position": {
-    "x": 1044.2857142857144,
+    "x": 1021.4285714285714,
     "y": 34.285714285714285,
     "z": 5000,
     "height": 468.57142857142861,
-    "width": 235.71428571428572,
+    "width": 258.57142857142861,
     "tabOrder": 5000
   },
   "visual": {
@@ -42,7 +42,7 @@
                       "Entity": "_Measures"
                     }
                   },
-                  "Property": "Total Students"
+                  "Property": "Tổng số SV"
                 }
               },
               "queryRef": "_Measures.Total Students",
@@ -61,7 +61,7 @@
                     "Entity": "_Measures"
                   }
                 },
-                "Property": "Total Students"
+                "Property": "Tổng số SV"
               }
             },
             "direction": "Descending"
@@ -89,6 +89,92 @@
         }
       ]
     },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Số sinh viên theo giới tính'"
+                }
+              }
+            },
+            "fontFamily": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Arial'"
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "13D"
+                }
+              }
+            },
+            "bold": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#111573'"
+                    }
+                  }
+                }
+              }
+            },
+            "alignment": {
+              "expr": {
+                "Literal": {
+                  "Value": "'center'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
     "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "1cfdeaa00d4e890cac6c",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "dim_student"
+              }
+            },
+            "Property": "gender"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "42fa3fca941797b42610",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "_Measures"
+              }
+            },
+            "Property": "Tổng số SV"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
   }
 }

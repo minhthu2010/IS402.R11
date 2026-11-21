@@ -18,10 +18,10 @@ table Pred
 		lineageTag: 5a47c545-ad01-4137-9fe8-6832571eb0f1
 
 	measure 'Cập nhật lúc' = MAX ( Pred[created_at_vn] )
-		formatString: yyyy-mm-dd hh:nn:ss
+		formatString: dd/MM/yyyy HH:mm
 		lineageTag: 72e19a7b-e757-474a-aa22-df6876d17aab
 
-		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+		annotation PBI_FormatHint = {"isCustom":true}
 
 	column id
 		dataType: int64
@@ -137,13 +137,13 @@ table Pred
 		annotation SummarizationSetBy = Automatic
 
 	column created_at_vn = Pred[created_at] + 7 / 24
-		formatString: yyyy-mm-dd hh:nn:ss
+		formatString: dd/MM/yyyy HH:mm
 		lineageTag: 5f1a43aa-b7b3-4e4e-8aaf-a3a5910abc43
 		summarizeBy: none
 
 		annotation SummarizationSetBy = Automatic
 
-		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+		annotation PBI_FormatHint = {"isCustom":true}
 
 	partition Pred = m
 		mode: directQuery

@@ -17,7 +17,7 @@ table dim_class
 		formatString: 0
 		sourceProviderType: int
 		lineageTag: 35ca2ca3-20af-42ee-a737-55c6d8392b61
-		summarizeBy: sum
+		summarizeBy: none
 		sourceColumn: major_id
 
 		annotation SummarizationSetBy = Automatic
@@ -39,7 +39,7 @@ table dim_class
 		formatString: 0
 		sourceProviderType: int
 		lineageTag: 7846469b-2c44-40fe-8043-51aabfa5791b
-		summarizeBy: none
+		summarizeBy: sum
 		sourceColumn: faculty_id
 
 		annotation SummarizationSetBy = Automatic

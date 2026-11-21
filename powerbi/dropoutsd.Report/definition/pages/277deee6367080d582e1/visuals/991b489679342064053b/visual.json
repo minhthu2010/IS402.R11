@@ -23,11 +23,11 @@
                       "Entity": "fact_enrollment"
                     }
                   },
-                  "Property": "dropout"
+                  "Property": "Trạng thái"
                 }
               },
-              "queryRef": "fact_enrollment.dropout",
-              "nativeQueryRef": "dropout",
+              "queryRef": "fact_enrollment.Trạng thái",
+              "nativeQueryRef": "Trạng thái",
               "active": true
             }
           ]
@@ -42,11 +42,11 @@
                       "Entity": "_Measures"
                     }
                   },
-                  "Property": "Total Students"
+                  "Property": "Tổng số SV"
                 }
               },
               "queryRef": "_Measures.Total Students",
-              "nativeQueryRef": "Total Students"
+              "nativeQueryRef": "Tổng số SV"
             }
           ]
         }
@@ -61,7 +61,7 @@
                     "Entity": "_Measures"
                   }
                 },
-                "Property": "Total Students"
+                "Property": "Tổng số SV"
               }
             },
             "direction": "Descending"
@@ -155,6 +155,142 @@
               }
             ]
           }
+        },
+        {
+          "properties": {
+            "fill": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 7,
+                      "Percent": -0.25
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "selector": {
+            "data": [
+              {
+                "scopeId": {
+                  "Comparison": {
+                    "ComparisonKind": 0,
+                    "Left": {
+                      "Column": {
+                        "Expression": {
+                          "SourceRef": {
+                            "Entity": "fact_enrollment"
+                          }
+                        },
+                        "Property": "Trạng thái"
+                      }
+                    },
+                    "Right": {
+                      "Literal": {
+                        "Value": "'Ở lại'"
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        },
+        {
+          "properties": {
+            "fill": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 6,
+                      "Percent": -0.25
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "selector": {
+            "data": [
+              {
+                "scopeId": {
+                  "Comparison": {
+                    "ComparisonKind": 0,
+                    "Left": {
+                      "Column": {
+                        "Expression": {
+                          "SourceRef": {
+                            "Entity": "fact_enrollment"
+                          }
+                        },
+                        "Property": "Trạng thái"
+                      }
+                    },
+                    "Right": {
+                      "Literal": {
+                        "Value": "'Bỏ học'"
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "labels": [
+        {
+          "properties": {
+            "fontFamily": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Arial'"
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "11D"
+                }
+              }
+            },
+            "labelStyle": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Category, percent of total'"
+                }
+              }
+            }
+          }
+        },
+        {
+          "properties": {
+            "color": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 6,
+                      "Percent": -0.5
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "selector": {
+            "data": [
+              {
+                "dataViewWildcard": {
+                  "matchingOption": 1
+                }
+              }
+            ]
+          }
         }
       ]
     },
@@ -201,11 +337,50 @@
                   "Value": "'center'"
                 }
               }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Cơ cấu sinh viên ở lại / bỏ học'"
+                }
+              }
             }
           }
         }
       ]
     },
     "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "827280a50027e248104d",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "_Measures"
+              }
+            },
+            "Property": "Tổng số SV"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "cf938fb4956659b55967",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "fact_enrollment"
+              }
+            },
+            "Property": "Trạng thái"
+          }
+        },
+        "type": "Categorical"
+      }
+    ]
   }
 }

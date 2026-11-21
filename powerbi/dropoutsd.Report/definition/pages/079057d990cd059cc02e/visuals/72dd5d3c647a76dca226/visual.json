@@ -155,23 +155,5 @@
       ]
     },
     "drillFilterOtherVisuals": true
-  },
-  "filterConfig": {
-    "filters": [
-      {
-        "name": "597093740cc30084b898",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "_Measures"
-              }
-            },
-            "Property": "Model đang dùng"
-          }
-        },
-        "type": "Advanced"
-      }
-    ]
   }
 }

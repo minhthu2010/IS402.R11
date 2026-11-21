@@ -187,23 +187,5 @@
       ]
     },
     "drillFilterOtherVisuals": true
-  },
-  "filterConfig": {
-    "filters": [
-      {
-        "name": "5f88cff0d407619783c7",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "model_metrics"
-              }
-            },
-            "Property": "Ghi chú accuracy"
-          }
-        },
-        "type": "Advanced"
-      }
-    ]
   }
 }

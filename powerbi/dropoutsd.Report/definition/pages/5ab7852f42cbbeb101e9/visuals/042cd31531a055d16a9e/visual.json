@@ -23,12 +23,11 @@
                       "Entity": "_Measures"
                     }
                   },
-                  "Property": "Average Second Term Earned Hours"
+                  "Property": "Tín chỉ đạt HK2 TB"
                 }
               },
-              "queryRef": "_Measures.Average Second Term Earned Hours",
-              "nativeQueryRef": "Avg 2nd Term Earned Hours",
-              "displayName": "Avg 2nd Term Earned Hours"
+              "queryRef": "_Measures.Tín chỉ đạt HK2 TB",
+              "nativeQueryRef": "Tín chỉ đạt HK2 TB"
             }
           ]
         }
@@ -43,7 +42,7 @@
                     "Entity": "_Measures"
                   }
                 },
-                "Property": "Average Second Term Earned Hours"
+                "Property": "Tín chỉ đạt HK2 TB"
               }
             },
             "direction": "Descending"
@@ -106,6 +105,13 @@
                   }
                 }
               }
+            },
+            "bold": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
             }
           }
         }
@@ -138,7 +144,7 @@
   "filterConfig": {
     "filters": [
       {
-        "name": "4a7aff0b01c59d1a83b6",
+        "name": "a2b62d79b0a998e7908c",
         "field": {
           "Measure": {
             "Expression": {
@@ -146,7 +152,7 @@
                 "Entity": "_Measures"
               }
             },
-            "Property": "Average Second Term Earned Hours"
+            "Property": "Tín chỉ đạt HK2 TB"
           }
         },
         "type": "Advanced"

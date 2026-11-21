@@ -4,13 +4,13 @@
   "position": {
     "x": 798.57142857142867,
     "y": 121.42857142857143,
-    "z": 8000,
+    "z": 7000,
     "height": 322.85714285714289,
     "width": 481.42857142857144,
-    "tabOrder": 8000
+    "tabOrder": 7000
   },
   "visual": {
-    "visualType": "hundredPercentStackedColumnChart",
+    "visualType": "columnChart",
     "query": {
       "queryState": {
         "Category": {
@@ -270,7 +270,7 @@
   "filterConfig": {
     "filters": [
       {
-        "name": "93f86a270594d1880461",
+        "name": "190f1120dd03c2dcbc13",
         "field": {
           "Column": {
             "Expression": {
@@ -284,21 +284,7 @@
         "type": "Advanced"
       },
       {
-        "name": "8ff1c3f0a44b5c5e0089",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "Pred"
-              }
-            },
-            "Property": "SV đã dự đoán"
-          }
-        },
-        "type": "Advanced"
-      },
-      {
-        "name": "510cfc504315c9d536a8",
+        "name": "c7f11d0673bc7cb02159",
         "field": {
           "Column": {
             "Expression": {
@@ -310,6 +296,20 @@
           }
         },
         "type": "Categorical"
+      },
+      {
+        "name": "def72e400ea47500b33a",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Pred"
+              }
+            },
+            "Property": "SV đã dự đoán"
+          }
+        },
+        "type": "Advanced"
       }
     ]
   }

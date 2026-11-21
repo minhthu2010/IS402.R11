@@ -3,9 +3,9 @@
   "name": "2b2aaf8e67cb1eeaa504",
   "position": {
     "x": 311.42857142857144,
-    "y": 360,
+    "y": 378.57142857142861,
     "z": 0,
-    "height": 360,
+    "height": 341.42857142857144,
     "width": 382.85714285714289,
     "tabOrder": 0
   },
@@ -23,7 +23,7 @@
                       "Entity": "fact_enrollment"
                     }
                   },
-                  "Property": "cohort_year"
+                  "Property": "Khóa"
                 }
               },
               "queryRef": "fact_enrollment.cohort_year",
@@ -42,7 +42,7 @@
                       "Entity": "_Measures"
                     }
                   },
-                  "Property": "Dropout Rate"
+                  "Property": "Tỉ lệ bỏ học"
                 }
               },
               "queryRef": "_Measures.Dropout Rate",
@@ -61,7 +61,7 @@
                     "Entity": "_Measures"
                   }
                 },
-                "Property": "Dropout Rate"
+                "Property": "Tỉ lệ bỏ học"
               }
             },
             "direction": "Descending"
@@ -96,6 +96,13 @@
                       "Value": "'#070f25'"
                     }
                   }
+                }
+              }
+            },
+            "axisType": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Categorical'"
                 }
               }
             }
@@ -156,7 +163,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#070f25'"
+                      "Value": "'#004949'"
                     }
                   }
                 }
@@ -186,7 +193,14 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Dropout Rate by Cohort year'"
+                  "Value": "'Tỉ lệ bỏ học theo khóa'"
+                }
+              }
+            },
+            "alignment": {
+              "expr": {
+                "Literal": {
+                  "Value": "'center'"
                 }
               }
             }
@@ -195,5 +209,37 @@
       ]
     },
     "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "f6050a928ebc685055b3",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "fact_enrollment"
+              }
+            },
+            "Property": "Khóa"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "81b6ac2d354e093ec0b9",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "_Measures"
+              }
+            },
+            "Property": "Tỉ lệ bỏ học"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
   }
 }
