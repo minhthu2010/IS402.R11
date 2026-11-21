@@ -1,0 +1,19 @@
+$kind: http-request
+url: ""
+method: POST
+headers:
+  Authorization: Bearer {{scoring_key}}
+  Content-Type: application/json
+body:
+  type: json
+  content: |-
+    {
+     "data": []
+    }
+scripts:
+  - type: afterResponse
+    code: |-
+      const b = pm.response.json();
+      pm.test('bao khong co dong du lieu', () => pm.expect(b.error).to.include('Không có dòng dữ liệu'));
+    language: text/javascript
+order: 4000
