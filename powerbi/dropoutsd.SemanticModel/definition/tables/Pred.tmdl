@@ -1,0 +1,156 @@
+table Pred
+	lineageTag: e3e361a1-09ac-4573-8510-d6887e57d36f
+
+	measure 'SV đã dự đoán' = DISTINCTCOUNT ( Pred[student_id] )
+		formatString: 0
+		lineageTag: 909f6a47-9fd2-43db-90f0-49581d1c97bb
+
+	measure 'SV rủi ro cao' = CALCULATE ( [SV đã dự đoán], Pred[risk_level] = "Cao" )
+		formatString: 0
+		lineageTag: 9e4efe22-ada3-49c8-9186-6089d2bb472b
+
+	measure '% rủi ro cao' = DIVIDE ( [SV rủi ro cao], [SV đã dự đoán] )
+		formatString: 0.0%;-0.0%;0.0%
+		lineageTag: a0a44531-8073-4929-bb34-4f19d2d6d958
+
+	measure 'Xác suất TB' = AVERAGE ( Pred[probability] )
+		formatString: 0.0%;-0.0%;0.0%
+		lineageTag: 5a47c545-ad01-4137-9fe8-6832571eb0f1
+
+	measure 'Cập nhật lúc' = MAX ( Pred[created_at_vn] )
+		formatString: yyyy-mm-dd hh:nn:ss
+		lineageTag: 72e19a7b-e757-474a-aa22-df6876d17aab
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column id
+		dataType: int64
+		isHidden
+		isNullable: false
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: aaada366-da49-4310-82e3-66fdb8564cf1
+		summarizeBy: sum
+		sourceColumn: id
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column student_id
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: a7680f24-db47-40e8-9309-a7e0aff9aa1c
+		summarizeBy: sum
+		sourceColumn: student_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column class_code
+		dataType: string
+		sourceProviderType: varchar(12)
+		lineageTag: cd68ef81-1119-4fba-b6d8-574f5251902b
+		summarizeBy: none
+		sourceColumn: class_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column probability
+		dataType: double
+		isNullable: false
+		formatString: 0.0%;-0.0%;0.0%
+		sourceProviderType: float
+		lineageTag: 4cba4f3c-be9b-4903-9c42-0152dbfdcb89
+		summarizeBy: sum
+		sourceColumn: probability
+
+		annotation SummarizationSetBy = Automatic
+
+	column risk_level
+		dataType: string
+		isNullable: false
+		sourceProviderType: nvarchar(12)
+		lineageTag: c9c1d744-4ddb-4fd8-80d1-48c9dfc22805
+		summarizeBy: none
+		sourceColumn: risk_level
+		sortByColumn: risk_order
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column top_factors
+		dataType: string
+		sourceProviderType: nvarchar(400)
+		lineageTag: 2d8734f5-6a03-4e87-8e75-d670d188abc6
+		summarizeBy: none
+		sourceColumn: top_factors
+
+		annotation SummarizationSetBy = Automatic
+
+	column model_version
+		dataType: string
+		sourceProviderType: varchar(50)
+		lineageTag: 15dad945-06ed-421b-8075-5df78a6db3b7
+		summarizeBy: none
+		sourceColumn: model_version
+
+		annotation SummarizationSetBy = Automatic
+
+	column source
+		dataType: string
+		sourceProviderType: varchar(20)
+		lineageTag: d75f8a71-647f-48f0-a217-61a30b14c6f1
+		summarizeBy: none
+		sourceColumn: source
+
+		annotation SummarizationSetBy = Automatic
+
+	column created_at
+		dataType: dateTime
+		isNullable: false
+		formatString: General Date
+		sourceProviderType: datetime2
+		lineageTag: 04dab4ad-abb7-490e-af5c-47e42318be32
+		summarizeBy: none
+		sourceColumn: created_at
+
+		annotation SummarizationSetBy = Automatic
+
+	column risk_order = IF ( Pred[probability] >= 0.23, 3, IF ( Pred[probability] >= 0.115, 2, 1 ) )
+		isHidden
+		formatString: 0
+		lineageTag: 547e36b7-835c-4629-842f-9b4285fe1624
+		summarizeBy: sum
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column prob_bin = ROUNDDOWN ( Pred[probability] * 20, 0 ) / 20
+		formatString: 0%;-0%;0%
+		lineageTag: d95ef1b0-9486-4a28-af7d-55951df86f3d
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column created_at_vn = Pred[created_at] + 7 / 24
+		formatString: yyyy-mm-dd hh:nn:ss
+		lineageTag: 5f1a43aa-b7b3-4e4e-8aaf-a3a5910abc43
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	partition Pred = m
+		mode: directQuery
+		source =
+				let
+				    Source = Sql.Database("sql-dropout-thi.database.windows.net", "dropoutdb"),
+				    dbo_predictions = Source{[Schema="dbo",Item="predictions"]}[Data]
+				in
+				    dbo_predictions
+

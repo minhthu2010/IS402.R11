@@ -1,0 +1,86 @@
+table Sweep
+	lineageTag: ea4e518a-8df4-4987-a517-1e2285a7be0b
+
+	column num_leaves
+		dataType: int64
+		formatString: 0
+		lineageTag: 9247b7d0-436d-4ebd-ae2b-2a97645a23b6
+		summarizeBy: none
+		sourceColumn: num_leaves
+
+		annotation SummarizationSetBy = User
+
+	column learning_rate
+		dataType: double
+		lineageTag: bfaf8a6a-129f-47e1-98c9-9f4ea7b6969c
+		summarizeBy: none
+		sourceColumn: learning_rate
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column n_estimators
+		dataType: int64
+		formatString: 0
+		lineageTag: b01e1c65-9d5e-41ab-b09e-0190ffe26173
+		summarizeBy: none
+		sourceColumn: n_estimators
+
+		annotation SummarizationSetBy = User
+
+	column min_samples_leaf
+		dataType: int64
+		formatString: 0
+		lineageTag: db59fd82-885f-47cf-a5d7-b5c5dff51da7
+		summarizeBy: none
+		sourceColumn: min_samples_leaf
+
+		annotation SummarizationSetBy = User
+
+	column cv_auc
+		dataType: double
+		lineageTag: 60ae017b-3da5-4de5-9858-169201ec066c
+		summarizeBy: sum
+		sourceColumn: cv_auc
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column cv_recall
+		dataType: double
+		lineageTag: df944167-24ce-4bb6-badc-56db1899cebf
+		summarizeBy: sum
+		sourceColumn: cv_recall
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column run_id
+		dataType: string
+		lineageTag: 4d89e857-d9e8-45e0-a6e3-4991db590310
+		summarizeBy: none
+		sourceColumn: run_id
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Sweep = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("D:\MyDownload\sweep_runs.csv"),[Delimiter=",", Columns=7, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"params.num_leaves", Int64.Type}, {"params.learning_rate", type number}, {"params.n_estimators", Int64.Type}, {"params.min_samples_leaf", Int64.Type}, {"metrics.cv_auc", type number}, {"metrics.cv_recall", type number}, {"run_id", type text}}),
+				    #"Changed Type with Locale" = Table.TransformColumnTypes(#"Changed Type", {{"params.learning_rate", type number}}, "en-US"),
+				    #"Changed Type with Locale1" = Table.TransformColumnTypes(#"Changed Type with Locale", {{"metrics.cv_auc", type number}}, "en-US"),
+				    #"Changed Type with Locale2" = Table.TransformColumnTypes(#"Changed Type with Locale1", {{"metrics.cv_recall", type number}}, "en-US"),
+				    #"Renamed Columns" = Table.RenameColumns(#"Changed Type with Locale2",{{"params.num_leaves", "num_leaves"}, {"params.learning_rate", "learning_rate"}, {"params.n_estimators", "n_estimators"}, {"params.min_samples_leaf", "min_samples_leaf"}, {"metrics.cv_auc", "cv_auc"}, {"metrics.cv_recall", "cv_recall"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

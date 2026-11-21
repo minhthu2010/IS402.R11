@@ -1,0 +1,404 @@
+table student_features
+	lineageTag: 12155e77-1dbd-49f5-bc2a-f9797ea6361b
+
+	column student_id
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: b31e66db-9106-44b8-a106-27992bb6d51e
+		summarizeBy: none
+		sourceColumn: student_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column age
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: f6a09641-ebb2-4c3d-9c0a-b93e8ab32099
+		summarizeBy: sum
+		sourceColumn: age
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_female
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		sourceProviderType: bit
+		lineageTag: 3b517b83-4fbd-470a-b44f-860bbe1fb913
+		summarizeBy: none
+		sourceColumn: is_female
+
+		annotation SummarizationSetBy = Automatic
+
+	column background
+		dataType: string
+		sourceProviderType: varchar(10)
+		lineageTag: 173480ae-a168-4fe3-8f5f-6d499363ece4
+		summarizeBy: none
+		sourceColumn: background
+
+		annotation SummarizationSetBy = Automatic
+
+	column in_state
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		sourceProviderType: bit
+		lineageTag: 0e036e4d-78fb-4a48-ba4d-f1d8ed1eaa97
+		summarizeBy: none
+		sourceColumn: in_state
+
+		annotation SummarizationSetBy = Automatic
+
+	column international
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		sourceProviderType: bit
+		lineageTag: 88272086-87d2-4087-b873-6d2606707407
+		summarizeBy: none
+		sourceColumn: international
+
+		annotation SummarizationSetBy = Automatic
+
+	column on_campus
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		sourceProviderType: bit
+		lineageTag: 6a692a07-d02d-43d3-8830-2cf00982f481
+		summarizeBy: none
+		sourceColumn: on_campus
+
+		annotation SummarizationSetBy = Automatic
+
+	column distance_from_home
+		dataType: double
+		sourceProviderType: float
+		lineageTag: 2fdfd4b1-4f68-4a14-80a2-6047ac8623ee
+		summarizeBy: sum
+		sourceColumn: distance_from_home
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column high_school_gpa
+		dataType: double
+		sourceProviderType: float
+		lineageTag: 0f47274c-df6b-42b0-bc23-d0e173eb3292
+		summarizeBy: sum
+		sourceColumn: high_school_gpa
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column entrance_comb
+		dataType: double
+		sourceProviderType: float
+		lineageTag: db298007-cd4b-4f9b-8a8c-c0c0cee1e449
+		summarizeBy: sum
+		sourceColumn: entrance_comb
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column father_edu_cd
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 3ec9cfbe-2cdf-475c-a3bf-69d2d3f6b44d
+		summarizeBy: sum
+		sourceColumn: father_edu_cd
+
+		annotation SummarizationSetBy = Automatic
+
+	column mother_edu_cd
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 334d24d1-560d-43f4-9428-9eb4edb52f13
+		summarizeBy: sum
+		sourceColumn: mother_edu_cd
+
+		annotation SummarizationSetBy = Automatic
+
+	column faculty_id
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: e9594791-e2d4-48ee-8ce5-c1a5d8f7a0e0
+		summarizeBy: sum
+		sourceColumn: faculty_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column major_id
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 74037dca-e3d3-4e44-af45-c20f4720dd30
+		summarizeBy: sum
+		sourceColumn: major_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_undeclared
+		dataType: boolean
+		isNullable: false
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		sourceProviderType: bit
+		lineageTag: 0beb5b12-aeb7-4f4f-9012-a3a82bbfa631
+		summarizeBy: none
+		sourceColumn: is_undeclared
+
+		annotation SummarizationSetBy = Automatic
+
+	column has_minor
+		dataType: boolean
+		isNullable: false
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		sourceProviderType: bit
+		lineageTag: 33549ccc-fa88-4fc8-8c97-f612277bd8b4
+		summarizeBy: none
+		sourceColumn: has_minor
+
+		annotation SummarizationSetBy = Automatic
+
+	column first_term_attempt_hrs
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 103c0884-4892-4e9c-8687-3c41a1ad6c98
+		summarizeBy: sum
+		sourceColumn: first_term_attempt_hrs
+
+		annotation SummarizationSetBy = Automatic
+
+	column first_term_earned_hrs
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: ecac9051-d922-4bd2-bf10-3d8aae5b0e7c
+		summarizeBy: sum
+		sourceColumn: first_term_earned_hrs
+
+		annotation SummarizationSetBy = Automatic
+
+	column earned_ratio_t1
+		dataType: double
+		sourceProviderType: float
+		lineageTag: 603f28c3-737b-4816-bc43-c9fa12d6ae6b
+		summarizeBy: sum
+		sourceColumn: earned_ratio_t1
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column gpa_t1
+		dataType: double
+		sourceProviderType: float
+		lineageTag: 144c9697-44a7-4106-9b16-bbc42717b7c1
+		summarizeBy: sum
+		sourceColumn: gpa_t1
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column n_courses_t1
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 0ea9b0ef-cba3-4de4-98a6-e946b0fef095
+		summarizeBy: sum
+		sourceColumn: n_courses_t1
+
+		annotation SummarizationSetBy = Automatic
+
+	column n_df_t1
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 5d862a69-8ae4-4fa0-993d-c3d4fec92058
+		summarizeBy: sum
+		sourceColumn: n_df_t1
+
+		annotation SummarizationSetBy = Automatic
+
+	column has_second_term
+		dataType: boolean
+		isNullable: false
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		sourceProviderType: bit
+		lineageTag: 31941246-bb32-4487-8516-ec9b7adc01b6
+		summarizeBy: none
+		sourceColumn: has_second_term
+
+		annotation SummarizationSetBy = Automatic
+
+	column second_term_attempt_hrs
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: f007142e-e3ec-44b6-b7d5-a995fb13230c
+		summarizeBy: sum
+		sourceColumn: second_term_attempt_hrs
+
+		annotation SummarizationSetBy = Automatic
+
+	column second_term_earned_hrs
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: abec70a9-af8e-4d71-82d2-77cab63be497
+		summarizeBy: sum
+		sourceColumn: second_term_earned_hrs
+
+		annotation SummarizationSetBy = Automatic
+
+	column earned_ratio_t2
+		dataType: double
+		sourceProviderType: float
+		lineageTag: 634fe1f6-44a6-4245-88a8-cbe98e934f08
+		summarizeBy: sum
+		sourceColumn: earned_ratio_t2
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column gpa_t2
+		dataType: double
+		sourceProviderType: float
+		lineageTag: 293ffe88-1753-484b-bdd1-9b264d7e5503
+		summarizeBy: sum
+		sourceColumn: gpa_t2
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column n_df_t2
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 8b1122d3-b158-41e6-b5e8-80257ba9d24c
+		summarizeBy: sum
+		sourceColumn: n_df_t2
+
+		annotation SummarizationSetBy = Automatic
+
+	column gross_fin_need
+		dataType: double
+		sourceProviderType: float
+		lineageTag: ce405001-781c-4977-a802-f2327471b2da
+		summarizeBy: sum
+		sourceColumn: gross_fin_need
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column unmet_need
+		dataType: double
+		sourceProviderType: float
+		lineageTag: 687e0e7e-2948-4450-b930-5a3a05481685
+		summarizeBy: sum
+		sourceColumn: unmet_need
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column fam_contribution_ratio
+		dataType: double
+		sourceProviderType: float
+		lineageTag: 1652f7ed-0950-42d7-a35e-4c89e3296194
+		summarizeBy: sum
+		sourceColumn: fam_contribution_ratio
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column dropout
+		dataType: boolean
+		isNullable: false
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		sourceProviderType: bit
+		lineageTag: ed99e9d1-3dd1-438b-be61-f400a66d33ac
+		summarizeBy: none
+		sourceColumn: dropout
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_synthetic
+		dataType: boolean
+		isNullable: false
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		sourceProviderType: bit
+		lineageTag: df64f047-89f7-4b56-8039-2de2c6b68dc8
+		summarizeBy: none
+		sourceColumn: is_synthetic
+
+		annotation SummarizationSetBy = Automatic
+
+	column block
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 201f9a94-6643-4e4d-8a49-db710673b44d
+		summarizeBy: sum
+		sourceColumn: block
+
+		annotation SummarizationSetBy = Automatic
+
+	column entrance_missing
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		sourceProviderType: bit
+		lineageTag: 45cc4caa-aa03-49f5-b9bc-5ab412facfed
+		summarizeBy: none
+		sourceColumn: entrance_missing
+
+		annotation SummarizationSetBy = Automatic
+
+	column gpa_change
+		dataType: double
+		sourceProviderType: float
+		lineageTag: 1ac9f070-279f-4e06-a078-62cdd71701f1
+		summarizeBy: sum
+		sourceColumn: gpa_change
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column fin_data_missing
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		sourceProviderType: bit
+		lineageTag: a373d883-d09b-4e15-9f7f-43fa352ea0c7
+		summarizeBy: none
+		sourceColumn: fin_data_missing
+
+		annotation SummarizationSetBy = Automatic
+
+	partition student_features = m
+		mode: directQuery
+		source =
+				let
+				    Source = Sql.Database("sql-dropout-thi.database.windows.net", "dropoutdb"),
+				    dbo_student_features = Source{[Schema="dbo",Item="student_features"]}[Data]
+				in
+				    dbo_student_features
+

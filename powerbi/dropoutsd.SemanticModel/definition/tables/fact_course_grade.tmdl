@@ -1,0 +1,127 @@
+table fact_course_grade
+	lineageTag: f4c7542b-6ec4-4e21-814c-d08768ddda4d
+
+	column student_id
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: db998c7a-06ae-4e39-b88d-a1e209bef023
+		summarizeBy: none
+		sourceColumn: student_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column term_code
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 42916cb8-79e8-4be5-abba-f83bb66bb324
+		summarizeBy: none
+		sourceColumn: term_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column term_seq
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 27e91163-92e0-4ccd-abb6-afa949c89d61
+		summarizeBy: sum
+		sourceColumn: term_seq
+
+		annotation SummarizationSetBy = Automatic
+
+	column slot
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 0e7e02c6-dad0-4a11-b064-f51ef4ed0534
+		summarizeBy: sum
+		sourceColumn: slot
+
+		annotation SummarizationSetBy = Automatic
+
+	column course_code
+		dataType: string
+		isNullable: false
+		sourceProviderType: varchar(12)
+		lineageTag: c052f270-94b1-483d-b1b8-f4f26efbf50d
+		summarizeBy: none
+		sourceColumn: course_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column dept
+		dataType: string
+		isNullable: false
+		sourceProviderType: varchar(6)
+		lineageTag: b8bbed67-e95b-45de-9530-1f56e0e1a07a
+		summarizeBy: none
+		sourceColumn: dept
+
+		annotation SummarizationSetBy = Automatic
+
+	column grade
+		dataType: string
+		sourceProviderType: varchar(8)
+		lineageTag: 5b111b9e-1f5e-4180-a4f1-4b0c89037968
+		summarizeBy: none
+		sourceColumn: grade
+
+		annotation SummarizationSetBy = Automatic
+
+	column grade_points
+		dataType: double
+		sourceProviderType: float
+		lineageTag: 38f59a1c-4c85-4744-b88d-46eff3fbc862
+		summarizeBy: sum
+		sourceColumn: grade_points
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column is_pass
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		sourceProviderType: bit
+		lineageTag: 48de2e00-cdd9-46d0-9f68-2ae040130221
+		summarizeBy: none
+		sourceColumn: is_pass
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_synthetic
+		dataType: boolean
+		isNullable: false
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		sourceProviderType: bit
+		lineageTag: fa4912e6-cf21-4f80-8e41-bfb15aea1693
+		summarizeBy: none
+		sourceColumn: is_synthetic
+
+		annotation SummarizationSetBy = Automatic
+
+	column block
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 9d6e788b-f398-443a-b6f9-71fe61040e0f
+		summarizeBy: sum
+		sourceColumn: block
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fact_course_grade = m
+		mode: directQuery
+		source =
+				let
+				    Source = Sql.Database("sql-dropout-thi.database.windows.net", "dropoutdb"),
+				    dbo_fact_course_grade = Source{[Schema="dbo",Item="fact_course_grade"]}[Data]
+				in
+				    dbo_fact_course_grade
+

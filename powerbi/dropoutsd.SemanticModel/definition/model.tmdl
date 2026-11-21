@@ -1,0 +1,34 @@
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-US
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_QueryOrder = ["dim_faculty","dim_student","dim_major","dim_term","dim_class","student_features","agg_cohort_major","model_metrics","Pred","rls_user_scope","fact_enrollment","fact_course_grade","etl_log","_Measures","Sweep"]
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table dim_faculty
+ref table dim_student
+ref table dim_major
+ref table dim_term
+ref table dim_class
+ref table student_features
+ref table agg_cohort_major
+ref table model_metrics
+ref table Pred
+ref table rls_user_scope
+ref table fact_enrollment
+ref table fact_course_grade
+ref table etl_log
+ref table _Measures
+ref table Sweep
+
+ref role Dynamic_RLS
+
+ref cultureInfo en-US
+

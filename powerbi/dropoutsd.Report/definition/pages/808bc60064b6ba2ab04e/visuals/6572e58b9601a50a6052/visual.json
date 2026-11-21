@@ -1,0 +1,436 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
+  "name": "6572e58b9601a50a6052",
+  "position": {
+    "x": 281.42857142857144,
+    "y": 34.285714285714285,
+    "z": 4000,
+    "height": 468.57142857142861,
+    "width": 762.85714285714289,
+    "tabOrder": 4000
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fact_enrollment"
+                    }
+                  },
+                  "Property": "student_id"
+                }
+              },
+              "queryRef": "fact_enrollment.student_id",
+              "nativeQueryRef": "Student ID",
+              "displayName": "Student ID"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dim_student"
+                    }
+                  },
+                  "Property": "age"
+                }
+              },
+              "queryRef": "Sum(dim_student.age)",
+              "nativeQueryRef": "Age",
+              "displayName": "Age"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dim_student"
+                    }
+                  },
+                  "Property": "gender"
+                }
+              },
+              "queryRef": "dim_student.gender",
+              "nativeQueryRef": "Gender",
+              "displayName": "Gender"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dim_major"
+                    }
+                  },
+                  "Property": "major_name"
+                }
+              },
+              "queryRef": "dim_major.major_name",
+              "nativeQueryRef": "Major name",
+              "displayName": "Major name"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fact_enrollment"
+                    }
+                  },
+                  "Property": "first_term"
+                }
+              },
+              "queryRef": "Sum(fact_enrollment.first_term)",
+              "nativeQueryRef": "First term",
+              "displayName": "First term"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fact_enrollment"
+                    }
+                  },
+                  "Property": "second_term"
+                }
+              },
+              "queryRef": "Sum(fact_enrollment.second_term)",
+              "nativeQueryRef": "Second term",
+              "displayName": "Second term"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dim_student"
+                    }
+                  },
+                  "Property": "high_school_gpa"
+                }
+              },
+              "queryRef": "Sum(dim_student.high_school_gpa)",
+              "nativeQueryRef": "High school GPA",
+              "displayName": "High school GPA"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fact_enrollment"
+                    }
+                  },
+                  "Property": "Student Status"
+                }
+              },
+              "queryRef": "fact_enrollment.Student Status",
+              "nativeQueryRef": "Student status",
+              "displayName": "Student status"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dim_faculty"
+                    }
+                  },
+                  "Property": "faculty_name"
+                }
+              },
+              "queryRef": "dim_faculty.faculty_name",
+              "nativeQueryRef": "Faculty name",
+              "displayName": "Faculty name"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "dim_student"
+                  }
+                },
+                "Property": "gender"
+              }
+            },
+            "direction": "Ascending"
+          }
+        ]
+      }
+    },
+    "objects": {
+      "values": [
+        {
+          "properties": {
+            "fontFamily": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Arial'"
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "11D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "columnHeaders": [
+        {
+          "properties": {
+            "fontFamily": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Arial'"
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "11D"
+                }
+              }
+            },
+            "bold": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#061D5C'"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "columnWidth": [
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "131.36635777321186D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Sum(dim_student.high_school_gpa)"
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "661bf44d8a7b9d80c894",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "fact_enrollment"
+              }
+            },
+            "Property": "is_synthetic"
+          }
+        },
+        "type": "Categorical",
+        "filter": {
+          "Version": 2,
+          "From": [
+            {
+              "Name": "f",
+              "Entity": "fact_enrollment",
+              "Type": 0
+            }
+          ],
+          "Where": [
+            {
+              "Condition": {
+                "In": {
+                  "Expressions": [
+                    {
+                      "Column": {
+                        "Expression": {
+                          "SourceRef": {
+                            "Source": "f"
+                          }
+                        },
+                        "Property": "is_synthetic"
+                      }
+                    }
+                  ],
+                  "Values": [
+                    [
+                      {
+                        "Literal": {
+                          "Value": "false"
+                        }
+                      }
+                    ]
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        "howCreated": "User"
+      },
+      {
+        "name": "84503710c8193ba5ca90",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "fact_enrollment"
+              }
+            },
+            "Property": "student_id"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "14931fe5b1deb5d102c8",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "dim_student"
+              }
+            },
+            "Property": "age"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "41cc0e2047e61e81ab0b",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "dim_student"
+              }
+            },
+            "Property": "gender"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "b9b14f75b09cc06de200",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "dim_major"
+              }
+            },
+            "Property": "major_name"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "2371bf7504101535cc6b",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "fact_enrollment"
+              }
+            },
+            "Property": "first_term"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "f02cdf408b02bb017493",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "fact_enrollment"
+              }
+            },
+            "Property": "second_term"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "6862982a60be9ee89462",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "dim_student"
+              }
+            },
+            "Property": "high_school_gpa"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "db4397ebdd8846ae759b",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "fact_enrollment"
+              }
+            },
+            "Property": "Student Status"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "4c022a6c3709ac978608",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "dim_faculty"
+              }
+            },
+            "Property": "faculty_name"
+          }
+        },
+        "type": "Categorical"
+      }
+    ]
+  }
+}

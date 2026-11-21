@@ -1,0 +1,316 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
+  "name": "ef740f152cdc1a750676",
+  "position": {
+    "x": 798.57142857142867,
+    "y": 121.42857142857143,
+    "z": 8000,
+    "height": 322.85714285714289,
+    "width": 481.42857142857144,
+    "tabOrder": 8000
+  },
+  "visual": {
+    "visualType": "hundredPercentStackedColumnChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Pred"
+                    }
+                  },
+                  "Property": "prob_bin"
+                }
+              },
+              "queryRef": "Pred.prob_bin",
+              "nativeQueryRef": "prob_bin",
+              "active": true
+            }
+          ]
+        },
+        "Series": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Pred"
+                    }
+                  },
+                  "Property": "risk_level"
+                }
+              },
+              "queryRef": "Pred.risk_level",
+              "nativeQueryRef": "Mức rủi ro",
+              "displayName": "Mức rủi ro"
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Pred"
+                    }
+                  },
+                  "Property": "SV đã dự đoán"
+                }
+              },
+              "queryRef": "Pred.SV đã dự đoán",
+              "nativeQueryRef": "SV đã dự đoán"
+            }
+          ]
+        }
+      }
+    },
+    "objects": {
+      "dataPoint": [
+        {
+          "properties": {
+            "fill": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#A0AEC0'"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "selector": {
+            "data": [
+              {
+                "scopeId": {
+                  "Comparison": {
+                    "ComparisonKind": 0,
+                    "Left": {
+                      "Column": {
+                        "Expression": {
+                          "SourceRef": {
+                            "Entity": "Pred"
+                          }
+                        },
+                        "Property": "risk_level"
+                      }
+                    },
+                    "Right": {
+                      "Literal": {
+                        "Value": "'Thấp'"
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        },
+        {
+          "properties": {
+            "fill": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#F2A541'"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "selector": {
+            "data": [
+              {
+                "scopeId": {
+                  "Comparison": {
+                    "ComparisonKind": 0,
+                    "Left": {
+                      "Column": {
+                        "Expression": {
+                          "SourceRef": {
+                            "Entity": "Pred"
+                          }
+                        },
+                        "Property": "risk_level"
+                      }
+                    },
+                    "Right": {
+                      "Literal": {
+                        "Value": "'Trung bình'"
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        },
+        {
+          "properties": {
+            "fill": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#C0392B'"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "selector": {
+            "data": [
+              {
+                "scopeId": {
+                  "Comparison": {
+                    "ComparisonKind": 0,
+                    "Left": {
+                      "Column": {
+                        "Expression": {
+                          "SourceRef": {
+                            "Entity": "Pred"
+                          }
+                        },
+                        "Property": "risk_level"
+                      }
+                    },
+                    "Right": {
+                      "Literal": {
+                        "Value": "'Cao'"
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "categoryAxis": [
+        {
+          "properties": {
+            "axisType": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Categorical'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Phân bố xác suất bỏ học'"
+                }
+              }
+            },
+            "fontFamily": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Arial'"
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "13D"
+                }
+              }
+            },
+            "bold": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#4B0700'"
+                    }
+                  }
+                }
+              }
+            },
+            "alignment": {
+              "expr": {
+                "Literal": {
+                  "Value": "'center'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "93f86a270594d1880461",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Pred"
+              }
+            },
+            "Property": "prob_bin"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "8ff1c3f0a44b5c5e0089",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Pred"
+              }
+            },
+            "Property": "SV đã dự đoán"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "510cfc504315c9d536a8",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Pred"
+              }
+            },
+            "Property": "risk_level"
+          }
+        },
+        "type": "Categorical"
+      }
+    ]
+  }
+}
