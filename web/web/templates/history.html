@@ -1,8 +1,0 @@
-{% extends "base.html" %}{% block body %}
-<h1>Lịch sử dự đoán (200 lượt gần nhất)</h1>
-{% if error %}<div class="card err">{{ error }}</div>{% endif %}
-<div class="card tbl"><table><tr><th>Thời gian (VN)</th><th>Mã SV</th><th>Lớp</th><th>Xác suất</th><th>Mức rủi ro</th><th>Yếu tố chính</th><th>Nguồn</th></tr>
-{% for r in rows %}{% set cls = 'Cao' if r.risk_level == 'Cao' else 'TB' if r.risk_level == 'Trung bình' else 'Thap' %}
-<tr><td>{{ r.created_at }}</td><td>{{ r.student_id }}</td><td>{{ r.class_code }}</td><td>{{ (r.probability * 100) | round(1) }}%</td>
-<td><span class="badge {{ cls }}">{{ r.risk_level }}</span></td><td>{{ r.top_factors }}</td><td>{{ r.source }}</td></tr>
-{% else %}<tr><td colspan="7" class="mute">Chưa có dự đoán nào.</td></tr>{% endfor %}</table></div>{% endblock %}
