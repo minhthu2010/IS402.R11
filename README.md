@@ -5,18 +5,18 @@ Trường Đại học Công nghệ Thông tin – ĐHQG-HCM
 
 | | |
 |---|---|
-| Giảng viên hướng dẫn | `Hà Lê Hoài Trung` |
-| Học kỳ | `HK1 năm học 2026–2027` |
+| Giảng viên hướng dẫn | Hà Lê Hoài Trung |
+| Học kỳ | HK1 năm học 2026–2027 |
 | Đề tài | Bài tập 03 – Phân tích và trực quan dữ liệu sinh viên bỏ học |
 
 ## Thành viên nhóm
 
 | | Họ và tên | MSSV | Phụ trách |
 |---|---|---|---|
-| TV1 | `Nguyễn Minh Thi` | 23521474 | Data Platform: thu thập, Data Lake, ETL (Data Factory + Synapse), mô hình dữ liệu Azure SQL, benchmark và tối ưu lưu trữ |
-| TV2 | `Nguyễn Minh Thư` | `23521542` | Analytics & Model: EDA, feature engineering, huấn luyện và so sánh mô hình trên Azure ML |
-| TV3 | `Phạm Thị Phương Anh` | 22520070 | Serving & App: triển khai endpoint, web dự đoán (App Service), Azure Function, kiểm thử tích hợp |
-| TV4 | `Đinh Nguyễn Khánh Quỳnh` | `23521331` | Insight & Quản trị: Power BI (RLS, cập nhật tức thời, mobile), đo độ trễ giữa các region, chi phí và quota |
+| TV1 | Nguyễn Minh Thi | 23521474 | Data Platform: thu thập, Data Lake, ETL (Data Factory + Synapse), mô hình dữ liệu Azure SQL, benchmark và tối ưu lưu trữ |
+| TV2 | Nguyễn Minh Thư | 23521542 | Analytics & Model: EDA, feature engineering, huấn luyện và so sánh mô hình trên Azure ML |
+| TV3 | Phạm Thị Phương Anh | 22520070 | Serving & App: triển khai endpoint, web dự đoán (App Service), Azure Function, kiểm thử tích hợp |
+| TV4 | Đinh Nguyễn Khánh Quỳnh | 23521331 | Insight & Quản trị: Power BI (RLS, cập nhật tức thời, mobile), đo độ trễ giữa các region, chi phí và quota |
 
 ## Bài toán
 
