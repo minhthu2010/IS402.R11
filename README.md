@@ -75,25 +75,6 @@ flowchart LR
 | `powerbi/` | Report Power BI (định dạng PBIP) | TV4 |
 | `infra/` | File export cấu hình tài nguyên Azure (JSON) theo từng buổi làm | Cả nhóm |
 
-## Kết quả chính (phần Data Platform)
-
-| Hạng mục | Kết quả |
-|---|---|
-| Dung lượng dữ liệu | 4,36 GB (3.400 sinh viên thật + 17,6 triệu mô phỏng) |
-| ETL tự động | Pipeline `pl_dropout_etl` chạy khoảng 9 phút, kích hoạt khi có file mới |
-| CSV → Parquet | Dung lượng giảm 64%; Synapse quét ít hơn khoảng 84 lần |
-| Columnstore index | Truy vấn nhanh hơn khoảng 5,7 lần, bảng nhỏ hơn khoảng 18 lần |
-| Incremental load | 88 giây → 19 giây khi không có dữ liệu mới |
-
-Số đo chi tiết: [`etl/results/benchmark.csv`](etl/results/benchmark.csv). Kết quả mô hình và độ trễ: xem `ml/` và [`perf/ket_luan.md`](perf/ket_luan.md).
-
-## Chạy lại
-
-1. Sinh dữ liệu: `python data/generate_data.py --xlsx UnivData1.xlsx --out out` (cần `pandas`, `numpy`, `openpyxl`).
-2. Tạo bảng trên Azure SQL bằng [`etl/sql/ddl.sql`](etl/sql/ddl.sql).
-3. Trên Synapse (database `dropout_lake`) chạy lần lượt `synapse/00` → `01` → `02`.
-4. Chạy pipeline `pl_dropout_etl` trong Data Factory.
-5. Web, Function và mô hình: xem hướng dẫn trong từng thư mục `web/`, `function/`, `ml/`.
 
 
 
