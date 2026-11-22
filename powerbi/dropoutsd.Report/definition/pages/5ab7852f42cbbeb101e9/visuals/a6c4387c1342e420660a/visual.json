@@ -118,23 +118,5 @@
       ]
     },
     "drillFilterOtherVisuals": true
-  },
-  "filterConfig": {
-    "filters": [
-      {
-        "name": "c28f7705e444703be92b",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "_Measures"
-              }
-            },
-            "Property": "GPA THPT TB"
-          }
-        },
-        "type": "Advanced"
-      }
-    ]
   }
 }

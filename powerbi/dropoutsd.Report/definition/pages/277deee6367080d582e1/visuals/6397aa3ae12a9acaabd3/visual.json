@@ -276,37 +276,5 @@
       ]
     },
     "drillFilterOtherVisuals": true
-  },
-  "filterConfig": {
-    "filters": [
-      {
-        "name": "e785ea0e0b47dd095ea8",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "dim_faculty"
-              }
-            },
-            "Property": "Khoa"
-          }
-        },
-        "type": "Categorical"
-      },
-      {
-        "name": "905fb04b041247588755",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "_Measures"
-              }
-            },
-            "Property": "Tỉ lệ bỏ học"
-          }
-        },
-        "type": "Advanced"
-      }
-    ]
   }
 }

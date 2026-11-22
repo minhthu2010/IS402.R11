@@ -53,12 +53,11 @@
                       "Entity": "Pred"
                     }
                   },
-                  "Property": "risk_level"
+                  "Property": "Mức rủi ro"
                 }
               },
-              "queryRef": "Pred.risk_level",
-              "nativeQueryRef": "Mức rủi ro",
-              "displayName": "Mức rủi ro"
+              "queryRef": "Pred.Mức rủi ro",
+              "nativeQueryRef": "Mức rủi ro"
             },
             {
               "field": {
@@ -103,10 +102,10 @@
                     "Entity": "Pred"
                   }
                 },
-                "Property": "student_id"
+                "Property": "created_at_vn"
               }
             },
-            "direction": "Ascending"
+            "direction": "Descending"
           }
         ]
       }
@@ -371,62 +370,6 @@
             }
           ]
         }
-      },
-      {
-        "name": "9dec052ac95e7ec3a840",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "Pred"
-              }
-            },
-            "Property": "student_id"
-          }
-        },
-        "type": "Advanced"
-      },
-      {
-        "name": "7b339ab57061710aa9dd",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "Pred"
-              }
-            },
-            "Property": "probability"
-          }
-        },
-        "type": "Advanced"
-      },
-      {
-        "name": "021bdc1c33295abb0c42",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "Pred"
-              }
-            },
-            "Property": "risk_level"
-          }
-        },
-        "type": "Categorical"
-      },
-      {
-        "name": "2935052a6711057ac4aa",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "Pred"
-              }
-            },
-            "Property": "source"
-          }
-        },
-        "type": "Categorical"
       }
     ]
   }

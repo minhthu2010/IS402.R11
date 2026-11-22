@@ -176,23 +176,5 @@
       ]
     },
     "drillFilterOtherVisuals": true
-  },
-  "filterConfig": {
-    "filters": [
-      {
-        "name": "67f4ae30009e13583203",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "_Measures"
-              }
-            },
-            "Property": "Tỉ lệ bỏ học"
-          }
-        },
-        "type": "Advanced"
-      }
-    ]
   }
 }

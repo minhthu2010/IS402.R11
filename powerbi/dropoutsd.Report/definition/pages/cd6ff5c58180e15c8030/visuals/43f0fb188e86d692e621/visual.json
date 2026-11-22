@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
   "name": "43f0fb188e86d692e621",
   "position": {
-    "x": 940.00000000000011,
-    "y": 42.857142857142861,
+    "x": 985.252014271596,
+    "y": 42.538735992227679,
     "z": 4000,
-    "height": 78.571428571428569,
-    "width": 340,
+    "height": 78.216385534096048,
+    "width": 295.02671736545005,
     "tabOrder": 4000
   },
   "visual": {
@@ -173,23 +173,5 @@
       ]
     },
     "drillFilterOtherVisuals": true
-  },
-  "filterConfig": {
-    "filters": [
-      {
-        "name": "754d1803675831724650",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "Pred"
-              }
-            },
-            "Property": "Cập nhật lúc"
-          }
-        },
-        "type": "Advanced"
-      }
-    ]
   }
 }

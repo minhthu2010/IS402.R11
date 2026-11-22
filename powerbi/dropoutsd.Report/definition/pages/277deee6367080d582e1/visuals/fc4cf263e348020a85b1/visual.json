@@ -236,23 +236,5 @@
       ]
     },
     "drillFilterOtherVisuals": true
-  },
-  "filterConfig": {
-    "filters": [
-      {
-        "name": "3f01ef9acab490aba0cd",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "_Measures"
-              }
-            },
-            "Property": "Tổng số SV"
-          }
-        },
-        "type": "Advanced"
-      }
-    ]
   }
 }

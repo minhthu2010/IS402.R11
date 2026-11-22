@@ -23,6 +23,10 @@ table Pred
 
 		annotation PBI_FormatHint = {"isCustom":true}
 
+	measure 'Lượt dự đoán' = COUNTROWS ( Pred )
+		formatString: 0
+		lineageTag: 460d4f65-1e21-485f-bfcf-bbe2dca72c84
+
 	column id
 		dataType: int64
 		isHidden
@@ -75,7 +79,6 @@ table Pred
 		lineageTag: c9c1d744-4ddb-4fd8-80d1-48c9dfc22805
 		summarizeBy: none
 		sourceColumn: risk_level
-		sortByColumn: risk_order
 
 		changedProperty = SortByColumn
 
@@ -119,16 +122,6 @@ table Pred
 
 		annotation SummarizationSetBy = Automatic
 
-	column risk_order = IF ( Pred[probability] >= 0.23, 3, IF ( Pred[probability] >= 0.115, 2, 1 ) )
-		isHidden
-		formatString: 0
-		lineageTag: 547e36b7-835c-4629-842f-9b4285fe1624
-		summarizeBy: sum
-
-		changedProperty = IsHidden
-
-		annotation SummarizationSetBy = Automatic
-
 	column prob_bin = ROUNDDOWN ( Pred[probability] * 20, 0 ) / 20
 		formatString: 0%;-0%;0%
 		lineageTag: d95ef1b0-9486-4a28-af7d-55951df86f3d
@@ -144,6 +137,22 @@ table Pred
 		annotation SummarizationSetBy = Automatic
 
 		annotation PBI_FormatHint = {"isCustom":true}
+
+	column risk_order = SWITCH ( Pred[risk_level], "Cao", 3, "Trung bình", 2, 1 )
+		formatString: 0
+		lineageTag: 92615580-b0bc-4d2e-a93d-b317ded95142
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Mức rủi ro' = Pred[risk_level]
+		lineageTag: 34bab81a-de56-450b-9e18-9cb419fb8bac
+		summarizeBy: none
+		sortByColumn: risk_order
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
 
 	partition Pred = m
 		mode: directQuery

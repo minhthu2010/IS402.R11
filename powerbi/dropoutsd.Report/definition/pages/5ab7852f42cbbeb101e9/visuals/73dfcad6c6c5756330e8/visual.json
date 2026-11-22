@@ -443,51 +443,5 @@
       ]
     },
     "drillFilterOtherVisuals": true
-  },
-  "filterConfig": {
-    "filters": [
-      {
-        "name": "5b8bd1733c78ab27c4ad",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "fact_enrollment"
-              }
-            },
-            "Property": "Khóa"
-          }
-        },
-        "type": "Advanced"
-      },
-      {
-        "name": "d0423823dec390676517",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "fact_enrollment"
-              }
-            },
-            "Property": "Trạng thái"
-          }
-        },
-        "type": "Categorical"
-      },
-      {
-        "name": "e4e21a410c0309e0a444",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "_Measures"
-              }
-            },
-            "Property": "Tín chỉ đạt HK1 TB"
-          }
-        },
-        "type": "Advanced"
-      }
-    ]
   }
 }

@@ -82,12 +82,11 @@
                       "Entity": "Pred"
                     }
                   },
-                  "Property": "risk_level"
+                  "Property": "Mức rủi ro"
                 }
               },
-              "queryRef": "Pred.risk_level",
-              "nativeQueryRef": "Mức rủi ro",
-              "displayName": "Mức rủi ro"
+              "queryRef": "Pred.Mức rủi ro",
+              "nativeQueryRef": "Mức rủi ro"
             },
             {
               "field": {
@@ -240,20 +239,6 @@
           "selector": {
             "metadata": "Sum(Pred.probability)"
           }
-        },
-        {
-          "properties": {
-            "value": {
-              "expr": {
-                "Literal": {
-                  "Value": "86.53320933787991D"
-                }
-              }
-            }
-          },
-          "selector": {
-            "metadata": "Pred.risk_level"
-          }
         }
       ],
       "columnFormatting": [
@@ -386,7 +371,7 @@
                                           "Entity": "Pred"
                                         }
                                       },
-                                      "Property": "risk_level"
+                                      "Property": "Mức rủi ro"
                                     }
                                   },
                                   "Function": 3
@@ -422,7 +407,7 @@
                                           "Entity": "Pred"
                                         }
                                       },
-                                      "Property": "risk_level"
+                                      "Property": "Mức rủi ro"
                                     }
                                   },
                                   "Function": 3
@@ -441,7 +426,7 @@
                           },
                           "Value": {
                             "Literal": {
-                              "Value": "'#E8A39B'"
+                              "Value": "'#F6D5D1'"
                             }
                           }
                         }
@@ -460,7 +445,7 @@
                 }
               }
             ],
-            "metadata": "Pred.risk_level"
+            "metadata": "Pred.Mức rủi ro"
           }
         }
       ],
@@ -578,121 +563,5 @@
       ]
     },
     "drillFilterOtherVisuals": true
-  },
-  "filterConfig": {
-    "filters": [
-      {
-        "name": "2007f0382e7a0b474502",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "Pred"
-              }
-            },
-            "Property": "student_id"
-          }
-        },
-        "type": "Advanced"
-      },
-      {
-        "name": "6fadf5e3900716542080",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "Pred"
-              }
-            },
-            "Property": "class_code"
-          }
-        },
-        "type": "Categorical"
-      },
-      {
-        "name": "325ca66c042dbe0d2a62",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "dim_faculty"
-              }
-            },
-            "Property": "Khoa"
-          }
-        },
-        "type": "Categorical"
-      },
-      {
-        "name": "193ca86a8aa8b503b8a3",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "Pred"
-              }
-            },
-            "Property": "probability"
-          }
-        },
-        "type": "Advanced"
-      },
-      {
-        "name": "edde5e6d0ec95a90ed61",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "Pred"
-              }
-            },
-            "Property": "risk_level"
-          }
-        },
-        "type": "Categorical"
-      },
-      {
-        "name": "3963bef5e027258e8be5",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "Pred"
-              }
-            },
-            "Property": "top_factors"
-          }
-        },
-        "type": "Categorical"
-      },
-      {
-        "name": "203e1bf2bd0824086451",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "Pred"
-              }
-            },
-            "Property": "source"
-          }
-        },
-        "type": "Categorical"
-      },
-      {
-        "name": "ee7a849569c076c4c0e9",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "Pred"
-              }
-            },
-            "Property": "created_at_vn"
-          }
-        },
-        "type": "Categorical"
-      }
-    ]
   }
 }

@@ -230,51 +230,5 @@
       ]
     },
     "drillFilterOtherVisuals": true
-  },
-  "filterConfig": {
-    "filters": [
-      {
-        "name": "3d659aa139e23dd4a5d2",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "_Measures"
-              }
-            },
-            "Property": "Tỉ lệ bỏ học"
-          }
-        },
-        "type": "Advanced"
-      },
-      {
-        "name": "41c22c7c2dbe65a434d0",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "dim_student"
-              }
-            },
-            "Property": "in_state"
-          }
-        },
-        "type": "Categorical"
-      },
-      {
-        "name": "45d6f1ada1bbb45d6cb5",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "dim_student"
-              }
-            },
-            "Property": "housing"
-          }
-        },
-        "type": "Categorical"
-      }
-    ]
   }
 }

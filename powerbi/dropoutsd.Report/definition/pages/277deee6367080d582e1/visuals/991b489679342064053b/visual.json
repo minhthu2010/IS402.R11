@@ -350,37 +350,5 @@
       ]
     },
     "drillFilterOtherVisuals": true
-  },
-  "filterConfig": {
-    "filters": [
-      {
-        "name": "827280a50027e248104d",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "_Measures"
-              }
-            },
-            "Property": "Tổng số SV"
-          }
-        },
-        "type": "Advanced"
-      },
-      {
-        "name": "cf938fb4956659b55967",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "fact_enrollment"
-              }
-            },
-            "Property": "Trạng thái"
-          }
-        },
-        "type": "Categorical"
-      }
-    ]
   }
 }

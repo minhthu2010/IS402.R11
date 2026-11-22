@@ -70,7 +70,7 @@ table Sweep
 		mode: import
 		source =
 				let
-				    Source = Csv.Document(File.Contents("D:\MyDownload\sweep_runs.csv"),[Delimiter=",", Columns=7, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    Source = Csv.Document(Web.Contents("https://raw.githubusercontent.com/minhthu2010/IS402.R11/main/ml/figures/sweep_runs.csv"),[Delimiter=",", Columns=7, Encoding=1252, QuoteStyle=QuoteStyle.None]),
 				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
 				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"params.num_leaves", Int64.Type}, {"params.learning_rate", type number}, {"params.n_estimators", Int64.Type}, {"params.min_samples_leaf", Int64.Type}, {"metrics.cv_auc", type number}, {"metrics.cv_recall", type number}, {"run_id", type text}}),
 				    #"Changed Type with Locale" = Table.TransformColumnTypes(#"Changed Type", {{"params.learning_rate", type number}}, "en-US"),
