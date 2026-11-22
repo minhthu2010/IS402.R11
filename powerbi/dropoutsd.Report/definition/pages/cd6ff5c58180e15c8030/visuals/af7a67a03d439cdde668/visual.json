@@ -23,11 +23,11 @@
                       "Entity": "Pred"
                     }
                   },
-                  "Property": "risk_level"
+                  "Property": "Mức rủi ro"
                 }
               },
-              "queryRef": "Pred.risk_level",
-              "nativeQueryRef": "risk_level",
+              "queryRef": "Pred.Mức rủi ro",
+              "nativeQueryRef": "Mức rủi ro",
               "active": true
             }
           ]

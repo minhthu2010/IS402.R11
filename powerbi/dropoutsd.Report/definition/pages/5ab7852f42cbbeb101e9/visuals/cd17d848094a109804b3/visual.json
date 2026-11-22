@@ -118,23 +118,5 @@
       ]
     },
     "drillFilterOtherVisuals": true
-  },
-  "filterConfig": {
-    "filters": [
-      {
-        "name": "5afcff2890150321965a",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "_Measures"
-              }
-            },
-            "Property": "Tỉ lệ hoàn thành TC HK1"
-          }
-        },
-        "type": "Advanced"
-      }
-    ]
   }
 }

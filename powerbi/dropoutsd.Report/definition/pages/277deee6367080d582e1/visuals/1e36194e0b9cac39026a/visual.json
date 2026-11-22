@@ -228,20 +228,6 @@
             }
           ]
         }
-      },
-      {
-        "name": "c418f4c5aa940d871d59",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "dim_student"
-              }
-            },
-            "Property": "Giới tính"
-          }
-        },
-        "type": "Categorical"
       }
     ]
   }

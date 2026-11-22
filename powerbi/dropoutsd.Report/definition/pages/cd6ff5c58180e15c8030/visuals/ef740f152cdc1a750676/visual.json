@@ -42,12 +42,11 @@
                       "Entity": "Pred"
                     }
                   },
-                  "Property": "risk_level"
+                  "Property": "Mức rủi ro"
                 }
               },
-              "queryRef": "Pred.risk_level",
-              "nativeQueryRef": "Mức rủi ro",
-              "displayName": "Mức rủi ro"
+              "queryRef": "Pred.Mức rủi ro",
+              "nativeQueryRef": "Mức rủi ro"
             }
           ]
         },
@@ -195,6 +194,129 @@
               }
             ]
           }
+        },
+        {
+          "properties": {
+            "fill": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#A0AEC0'"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "selector": {
+            "data": [
+              {
+                "scopeId": {
+                  "Comparison": {
+                    "ComparisonKind": 0,
+                    "Left": {
+                      "Column": {
+                        "Expression": {
+                          "SourceRef": {
+                            "Entity": "Pred"
+                          }
+                        },
+                        "Property": "Mức rủi ro"
+                      }
+                    },
+                    "Right": {
+                      "Literal": {
+                        "Value": "'Thấp'"
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        },
+        {
+          "properties": {
+            "fill": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#F2A541'"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "selector": {
+            "data": [
+              {
+                "scopeId": {
+                  "Comparison": {
+                    "ComparisonKind": 0,
+                    "Left": {
+                      "Column": {
+                        "Expression": {
+                          "SourceRef": {
+                            "Entity": "Pred"
+                          }
+                        },
+                        "Property": "Mức rủi ro"
+                      }
+                    },
+                    "Right": {
+                      "Literal": {
+                        "Value": "'Trung bình'"
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        },
+        {
+          "properties": {
+            "fill": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#C0392B'"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "selector": {
+            "data": [
+              {
+                "scopeId": {
+                  "Comparison": {
+                    "ComparisonKind": 0,
+                    "Left": {
+                      "Column": {
+                        "Expression": {
+                          "SourceRef": {
+                            "Entity": "Pred"
+                          }
+                        },
+                        "Property": "Mức rủi ro"
+                      }
+                    },
+                    "Right": {
+                      "Literal": {
+                        "Value": "'Cao'"
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          }
         }
       ],
       "categoryAxis": [
@@ -266,51 +388,5 @@
       ]
     },
     "drillFilterOtherVisuals": true
-  },
-  "filterConfig": {
-    "filters": [
-      {
-        "name": "190f1120dd03c2dcbc13",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "Pred"
-              }
-            },
-            "Property": "prob_bin"
-          }
-        },
-        "type": "Advanced"
-      },
-      {
-        "name": "c7f11d0673bc7cb02159",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "Pred"
-              }
-            },
-            "Property": "risk_level"
-          }
-        },
-        "type": "Categorical"
-      },
-      {
-        "name": "def72e400ea47500b33a",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "Pred"
-              }
-            },
-            "Property": "SV đã dự đoán"
-          }
-        },
-        "type": "Advanced"
-      }
-    ]
   }
 }

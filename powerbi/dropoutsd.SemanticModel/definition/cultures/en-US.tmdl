@@ -246,19 +246,7 @@ cultureInfo en-US
 			          "ConceptualProperty": "risk_level"
 			        }
 			      },
-			      "State": "Generated",
-			      "Terms": [
-			        {
-			          "Mức rủi ro": {
-			            "State": "Suggested",
-			            "Source": {
-			              "Type": "External",
-			              "Agent": "PowerBI.VisualColumnRename"
-			            },
-			            "Weight": 0.9
-			          }
-			        }
-			      ]
+			      "State": "Generated"
 			    },
 			    "pred.student_id": {
 			      "Definition": {
@@ -397,6 +385,27 @@ cultureInfo en-US
 			      "Terms": [
 			        {
 			          "Số cây": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "fact_enrollment.class_code": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "fact_enrollment",
+			          "ConceptualProperty": "class_code"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Mã lớp": {
 			            "State": "Suggested",
 			            "Source": {
 			              "Type": "External",

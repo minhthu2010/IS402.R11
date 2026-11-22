@@ -262,37 +262,5 @@
       ]
     },
     "drillFilterOtherVisuals": true
-  },
-  "filterConfig": {
-    "filters": [
-      {
-        "name": "94b96050c0a03ab263d5",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "dim_faculty"
-              }
-            },
-            "Property": "Khoa"
-          }
-        },
-        "type": "Categorical"
-      },
-      {
-        "name": "f0ee84746e90bc8559e3",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "_Measures"
-              }
-            },
-            "Property": "Tổng số SV"
-          }
-        },
-        "type": "Advanced"
-      }
-    ]
   }
 }

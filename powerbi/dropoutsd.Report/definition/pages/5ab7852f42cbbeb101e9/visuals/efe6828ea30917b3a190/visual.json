@@ -118,23 +118,5 @@
       ]
     },
     "drillFilterOtherVisuals": true
-  },
-  "filterConfig": {
-    "filters": [
-      {
-        "name": "fce450210627b79909ca",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "_Measures"
-              }
-            },
-            "Property": "Tín chỉ đạt HK1 TB"
-          }
-        },
-        "type": "Advanced"
-      }
-    ]
   }
 }

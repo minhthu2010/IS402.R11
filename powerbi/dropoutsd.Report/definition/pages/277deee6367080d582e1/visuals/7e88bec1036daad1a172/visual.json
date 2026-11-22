@@ -178,37 +178,5 @@
       ]
     },
     "drillFilterOtherVisuals": true
-  },
-  "filterConfig": {
-    "filters": [
-      {
-        "name": "f71db99d0ab13b540e4d",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "_Measures"
-              }
-            },
-            "Property": "Tỉ lệ bỏ học"
-          }
-        },
-        "type": "Advanced"
-      },
-      {
-        "name": "7210d4100482ec5ee78e",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "fact_enrollment"
-              }
-            },
-            "Property": "Khóa"
-          }
-        },
-        "type": "Advanced"
-      }
-    ]
   }
 }

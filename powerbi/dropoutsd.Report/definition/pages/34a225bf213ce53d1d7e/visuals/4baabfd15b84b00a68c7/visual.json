@@ -299,51 +299,5 @@
       ]
     },
     "drillFilterOtherVisuals": true
-  },
-  "filterConfig": {
-    "filters": [
-      {
-        "name": "e92c6c0204e1005ce4e7",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "fact_enrollment"
-              }
-            },
-            "Property": "Khóa"
-          }
-        },
-        "type": "Advanced"
-      },
-      {
-        "name": "6a5e4bcd71451ac98ba7",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "dim_faculty"
-              }
-            },
-            "Property": "Khoa"
-          }
-        },
-        "type": "Categorical"
-      },
-      {
-        "name": "632240a74ebcc0e09813",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "_Measures"
-              }
-            },
-            "Property": "Tỉ lệ bỏ học"
-          }
-        },
-        "type": "Advanced"
-      }
-    ]
   }
 }

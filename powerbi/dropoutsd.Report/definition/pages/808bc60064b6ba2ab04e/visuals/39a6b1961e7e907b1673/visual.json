@@ -144,37 +144,5 @@
       ]
     },
     "drillFilterOtherVisuals": true
-  },
-  "filterConfig": {
-    "filters": [
-      {
-        "name": "1cfdeaa00d4e890cac6c",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "dim_student"
-              }
-            },
-            "Property": "gender"
-          }
-        },
-        "type": "Categorical"
-      },
-      {
-        "name": "42fa3fca941797b42610",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "_Measures"
-              }
-            },
-            "Property": "Tổng số SV"
-          }
-        },
-        "type": "Advanced"
-      }
-    ]
   }
 }
