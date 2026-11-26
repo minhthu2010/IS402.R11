@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainerMobileState/2.2.0/schema.json",
   "position": {
     "x": 0,
-    "y": 0,
-    "z": 4000,
-    "height": 50.702290076335878,
-    "width": 324,
-    "tabOrder": 4000
+    "y": 90,
+    "z": 3000,
+    "height": 67.304347826086968,
+    "width": 324.00000000000006,
+    "tabOrder": 3000
   },
   "objects": {
     "general": [
@@ -16,11 +16,11 @@
             {
               "textRuns": [
                 {
-                  "value": "Student Details",
+                  "value": "Chi tiết sinh viên",
                   "textStyle": {
                     "fontWeight": "bold",
                     "fontFamily": "Arial",
-                    "fontSize": "20pt",
+                    "fontSize": "24pt",
                     "color": "#022996"
                   }
                 }
