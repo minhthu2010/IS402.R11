@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
   "name": "39a6b1961e7e907b1673",
   "position": {
-    "x": 1021.4285714285714,
-    "y": 34.285714285714285,
+    "x": 1039.7985155533318,
+    "y": 34.158952547744143,
     "z": 5000,
-    "height": 468.57142857142861,
-    "width": 258.57142857142861,
+    "height": 468.66082895504962,
+    "width": 240.47902593611875,
     "tabOrder": 5000
   },
   "visual": {
@@ -144,5 +144,37 @@
       ]
     },
     "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "39419995b363fc4e88b3",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "dim_student"
+              }
+            },
+            "Property": "gender"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "445cf3fe3a7d4aac3552",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "_Measures"
+              }
+            },
+            "Property": "Tổng số SV"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
   }
 }

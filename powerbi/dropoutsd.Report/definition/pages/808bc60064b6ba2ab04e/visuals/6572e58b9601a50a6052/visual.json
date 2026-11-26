@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
   "name": "6572e58b9601a50a6052",
   "position": {
-    "x": 258.57142857142861,
-    "y": 34.285714285714285,
+    "x": 282.8361270953215,
+    "y": 34.158952547744143,
     "z": 4000,
-    "height": 468.57142857142861,
-    "width": 762.85714285714289,
+    "height": 468.66082895504962,
+    "width": 756.9623884580102,
     "tabOrder": 4000
   },
   "visual": {
@@ -436,6 +436,146 @@
           ]
         },
         "howCreated": "User"
+      },
+      {
+        "name": "901bbd0a33601b063e89",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "fact_enrollment"
+              }
+            },
+            "Property": "Mã SV"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "1bbf403130e83c63a887",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "fact_enrollment"
+              }
+            },
+            "Property": "class_code"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "c31ecdfe8b0122a5d8ff",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "dim_student"
+              }
+            },
+            "Property": "Tuổi"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "b45b562fd29e6561493c",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "dim_student"
+              }
+            },
+            "Property": "gender"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "70d584cfac6bcfaa2b09",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "dim_major"
+              }
+            },
+            "Property": "Ngành"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "32f3abeff5c06a469d46",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "fact_enrollment"
+              }
+            },
+            "Property": "Học kỳ nhập học"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "c82c49eaffcc426553f1",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "fact_enrollment"
+              }
+            },
+            "Property": "second_term"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "6b015354d3a64d79262b",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "dim_student"
+              }
+            },
+            "Property": "GPA THPT"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "30fcde3d605fda4e7b51",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "fact_enrollment"
+              }
+            },
+            "Property": "Trạng thái"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "11702fdb12be9fa537cf",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "dim_faculty"
+              }
+            },
+            "Property": "Khoa"
+          }
+        },
+        "type": "Categorical"
       }
     ]
   }
